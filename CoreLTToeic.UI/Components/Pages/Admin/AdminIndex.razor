@@ -12,60 +12,64 @@
 
 <Row Gutter="(16, 16)" Style="margin-bottom:24px;">
     <AntDesign.Col Xs="24" Sm="12" Md="6">
-        <Card Hoverable Bordered Style="border-radius:12px; cursor:pointer;"
-              OnClick='() => Nav.NavigateTo("/admin/quan-li-de-thi")'>
-            <div style="display:flex; align-items:center; gap:16px;">
-                <div style="width:48px; height:48px; border-radius:10px; background:#e6f4ff; display:flex; align-items:center; justify-content:center;">
-                    <Icon Type="file-text" Theme="IconThemeType.Outline" Style="font-size:24px; color:#1677ff;" />
+        <div @onclick='() => Nav.NavigateTo("/admin/quan-li-de-thi")' style="cursor:pointer;">
+            <Card Hoverable Bordered Style="border-radius:12px;">
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <div style="width:48px; height:48px; border-radius:10px; background:#e6f4ff; display:flex; align-items:center; justify-content:center;">
+                        <Icon Type="file-text" Theme="IconThemeType.Outline" Style="font-size:24px; color:#1677ff;" />
+                    </div>
+                    <div>
+                        <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
+                        <div style="font-size:1rem; font-weight:600;">Đề thi</div>
+                    </div>
                 </div>
-                <div>
-                    <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
-                    <div style="font-size:1rem; font-weight:600;">Đề thi</div>
-                </div>
-            </div>
-        </Card>
+            </Card>
+        </div>
     </AntDesign.Col>
     <AntDesign.Col Xs="24" Sm="12" Md="6">
-        <Card Hoverable Bordered Style="border-radius:12px; cursor:pointer;"
-              OnClick='() => Nav.NavigateTo("/admin/quan-li-danh-muc")'>
-            <div style="display:flex; align-items:center; gap:16px;">
-                <div style="width:48px; height:48px; border-radius:10px; background:#f6ffed; display:flex; align-items:center; justify-content:center;">
-                    <Icon Type="appstore" Theme="IconThemeType.Outline" Style="font-size:24px; color:#52c41a;" />
+        <div @onclick='() => Nav.NavigateTo("/admin/quan-li-danh-muc")' style="cursor:pointer;">
+            <Card Hoverable Bordered Style="border-radius:12px;">
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <div style="width:48px; height:48px; border-radius:10px; background:#f6ffed; display:flex; align-items:center; justify-content:center;">
+                        <Icon Type="appstore" Theme="IconThemeType.Outline" Style="font-size:24px; color:#52c41a;" />
+                    </div>
+                    <div>
+                        <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
+                        <div style="font-size:1rem; font-weight:600;">Danh mục</div>
+                    </div>
                 </div>
-                <div>
-                    <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
-                    <div style="font-size:1rem; font-weight:600;">Danh mục</div>
-                </div>
-            </div>
-        </Card>
+            </Card>
+        </div>
     </AntDesign.Col>
     <AntDesign.Col Xs="24" Sm="12" Md="6">
-        <Card Hoverable Bordered Style="border-radius:12px; cursor:pointer;"
-              OnClick='() => Nav.NavigateTo("/admin/quan-li-tai-khoan")'>
-            <div style="display:flex; align-items:center; gap:16px;">
-                <div style="width:48px; height:48px; border-radius:10px; background:#fff7e6; display:flex; align-items:center; justify-content:center;">
-                    <Icon Type="team" Theme="IconThemeType.Outline" Style="font-size:24px; color:#fa8c16;" />
+        <div @onclick='() => Nav.NavigateTo("/admin/quan-li-tai-khoan")' style="cursor:pointer;">
+            <Card Hoverable Bordered Style="border-radius:12px;">
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <div style="width:48px; height:48px; border-radius:10px; background:#fff7e6; display:flex; align-items:center; justify-content:center;">
+                        <Icon Type="team" Theme="IconThemeType.Outline" Style="font-size:24px; color:#fa8c16;" />
+                    </div>
+                    <div>
+                        <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
+                        <div style="font-size:1rem; font-weight:600;">Tài khoản</div>
+                    </div>
                 </div>
-                <div>
-                    <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
-                    <div style="font-size:1rem; font-weight:600;">Tài khoản</div>
-                </div>
-            </div>
-        </Card>
+            </Card>
+        </div>
     </AntDesign.Col>
     <AntDesign.Col Xs="24" Sm="12" Md="6">
-        <Card Hoverable Bordered Style="border-radius:12px; cursor:pointer;"
-              OnClick='() => Nav.NavigateTo("/admin/quan-li-khoa-hoc")'>
-            <div style="display:flex; align-items:center; gap:16px;">
-                <div style="width:48px; height:48px; border-radius:10px; background:#f9f0ff; display:flex; align-items:center; justify-content:center;">
-                    <Icon Type="book" Theme="IconThemeType.Outline" Style="font-size:24px; color:#722ed1;" />
+        <div @onclick='() => Nav.NavigateTo("/admin/quan-li-khoa-hoc")' style="cursor:pointer;">
+            <Card Hoverable Bordered Style="border-radius:12px;">
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <div style="width:48px; height:48px; border-radius:10px; background:#f9f0ff; display:flex; align-items:center; justify-content:center;">
+                        <Icon Type="book" Theme="IconThemeType.Outline" Style="font-size:24px; color:#722ed1;" />
+                    </div>
+                    <div>
+                        <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
+                        <div style="font-size:1rem; font-weight:600;">Khóa học</div>
+                    </div>
                 </div>
-                <div>
-                    <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
-                    <div style="font-size:1rem; font-weight:600;">Khóa học</div>
-                </div>
-            </div>
-        </Card>
+            </Card>
+        </div>
     </AntDesign.Col>
 </Row>
 
