@@ -105,7 +105,8 @@
 
 <Drawer Visible="_historyDrawerOpen"
         Title="@("Lịch sử thi")"
-        Width="900"
+        Width="1400"
+        MaskClosable="false"
         OnClose="CloseDrawers">
     @if (_historyLoading)
     {
@@ -115,11 +116,12 @@
     }
     else
     {
-        <ExamHistoryTable Results="_historyResults" />
+        <ExamHistoryTable Results="_historyResults" OnNavigateTo="NavigateFromHistory" />
     }
 </Drawer>
 
-@code {
+    @code {
+
     private bool _isLoggedIn;
     private string _displayName = "";
     private string _userId = "";
@@ -260,6 +262,12 @@
         {
             _saving = false;
         }
+    }
+
+    private void NavigateFromHistory(string url)
+    {
+        Nav.NavigateTo(url);
+        _historyDrawerOpen = false;
     }
 
     private void Logout()

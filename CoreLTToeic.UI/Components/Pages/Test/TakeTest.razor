@@ -26,7 +26,7 @@ else if (_test == null)
 }
 else if (!_testStarted)
 {
-    <TestStartScreen Test="_test" OnStart="HandleStart" />
+    <TestStartScreen Test="_test" Parts="_parts" OnStart="HandleStart" />
 }
 else
 {
@@ -84,16 +84,22 @@ else
                     <span class="tt-score-label">TỔNG ĐIỂM</span>
                 </div>
                 <div class="tt-result-details">
-                    <div class="tt-result-item">
-                        <span class="tt-result-val">@_result.ListeningScore</span>
-                        <span class="tt-result-key">Listening</span>
-                    </div>
-                    <div class="tt-result-divider"></div>
-                    <div class="tt-result-item">
-                        <span class="tt-result-val">@_result.ReadingScore</span>
-                        <span class="tt-result-key">Reading</span>
-                    </div>
-                    <div class="tt-result-divider"></div>
+                    @if (_result.TotalListeningQuestions > 0)
+                    {
+                        <div class="tt-result-item">
+                            <span class="tt-result-val">@_result.ListeningScore</span>
+                            <span class="tt-result-key">Listening</span>
+                        </div>
+                        <div class="tt-result-divider"></div>
+                    }
+                    @if (_result.TotalReadingQuestions > 0)
+                    {
+                        <div class="tt-result-item">
+                            <span class="tt-result-val">@_result.ReadingScore</span>
+                            <span class="tt-result-key">Reading</span>
+                        </div>
+                        <div class="tt-result-divider"></div>
+                    }
                     <div class="tt-result-item tt-correct">
                         <span class="tt-result-val">@_result.CorrectAnswers</span>
                         <span class="tt-result-key">Đúng</span>
@@ -460,7 +466,7 @@ else
         }
     }
 
-    private void HandleStart((TestMode Mode, int DurationMinutes) args)
+    private void HandleStart((TestMode Mode, int DurationMinutes, HashSet<ToeicLRPart> SelectedParts) args)
     {
         _selectedMode = args.Mode;
         if (args.Mode == TestMode.Simulation)
@@ -481,6 +487,18 @@ else
             _elapsedSeconds   = 0;
             _countUp          = true;
         }
+
+        // Filter to selected parts (Practice mode with partial selection)
+        if (args.Mode == TestMode.Practice && args.SelectedParts.Count < _parts.Count)
+        {
+            _parts = _parts.Where(p => args.SelectedParts.Contains(p.PartNum)).ToList();
+            var selectedPartIds = _parts.Select(p => p.Id).ToHashSet();
+            _questionIndex = _questionIndex
+                .Where(qi => _questionPartId.TryGetValue(qi.QuestionId, out var pid) && selectedPartIds.Contains(pid))
+                .ToList();
+        }
+
+        if (_parts.Any()) _activePartId = _parts.First().Id;
         _testStarted = true;
         StartTimer();
     }

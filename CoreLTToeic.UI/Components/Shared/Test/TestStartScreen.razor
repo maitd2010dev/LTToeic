@@ -25,7 +25,7 @@
                     <Radio Value="@TestMode.Practice">
                         <Icon Type="book" Theme="@IconThemeType.Outline" Style="color:#52c41a; margin-right:6px;" />
                         <strong>Luyện tập</strong>
-                        <span style="color:#8c8c8c; font-size:0.85rem; display:block; padding-left:22px;">Tự chọn thời gian hoặc không giới hạn</span>
+                        <span style="color:#8c8c8c; font-size:0.85rem; display:block; padding-left:22px;">Tự chọn thời gian và Part muốn luyện</span>
                     </Radio>
                 </div>
             </div>
@@ -56,10 +56,39 @@
                     </div>
                 </div>
             </RadioGroup>
+
+            @if (Parts.Any())
+            {
+                <Divider>Chọn Part luyện tập</Divider>
+                <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom:10px;">
+                    <Button Size="@ButtonSize.Small" OnClick="SelectAll">Chọn tất cả</Button>
+                    <Button Size="@ButtonSize.Small" OnClick="DeselectAll">Bỏ chọn tất cả</Button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                    @foreach (var part in Parts.OrderBy(p => p.PartNum))
+                    {
+                        var isChecked = _selectedParts.Contains(part.PartNum);
+                        <div style="border:1px solid @(isChecked ? "#1B527A" : "#d9d9d9"); border-radius:8px; padding:10px 14px; cursor:pointer; background:@(isChecked ? "#f0f7ff" : "transparent"); transition:all 0.15s;"
+                             @onclick="() => TogglePart(part.PartNum)">
+                            <Checkbox Value="isChecked" ValueChanged="(bool v) => SetPart(part.PartNum, v)" @onclick:stopPropagation>
+                                <strong>Part @((int)part.PartNum)</strong>
+                                <span style="color:#8c8c8c; font-size:0.85rem; margin-left:6px;">— @ToeicPartHelper.GetPartLabel(part.PartNum)</span>
+                            </Checkbox>
+                        </div>
+                    }
+                </div>
+                @if (!_selectedParts.Any())
+                {
+                    <div style="color:#ff4d4f; font-size:0.85rem; margin-top:8px; text-align:center;">
+                        Vui lòng chọn ít nhất một Part để luyện tập.
+                    </div>
+                }
+            }
         }
 
         <div style="text-align:center; margin-top:28px;">
             <Button Type="@ButtonType.Primary" OnClick="HandleStart"
+                    Disabled="@(_mode == TestMode.Practice && Parts.Any() && !_selectedParts.Any())"
                     Style="min-width:160px; height:48px; font-size:1rem; border-radius:8px;">
                 Bắt đầu thi &nbsp;
                 <Icon Type="arrow-right" Theme="@IconThemeType.Outline" />
@@ -70,14 +99,41 @@
 
 @code {
     [Parameter, EditorRequired] public TestViewModel? Test { get; set; }
-    [Parameter] public EventCallback<(TestMode Mode, int DurationMinutes)> OnStart { get; set; }
+    [Parameter] public List<PartViewModel> Parts { get; set; } = [];
+    [Parameter] public EventCallback<(TestMode Mode, int DurationMinutes, HashSet<ToeicLRPart> SelectedParts)> OnStart { get; set; }
 
     private TestMode _mode = TestMode.Simulation;
     private int _duration = 0;
+    private HashSet<ToeicLRPart> _selectedParts = [];
+
+    protected override void OnParametersSet()
+    {
+        if (_selectedParts.Count == 0 && Parts.Any())
+            _selectedParts = Parts.Select(p => p.PartNum).ToHashSet();
+    }
+
+    private void TogglePart(ToeicLRPart part)
+    {
+        if (!_selectedParts.Remove(part))
+            _selectedParts.Add(part);
+    }
+
+    private void SetPart(ToeicLRPart part, bool value)
+    {
+        if (value) _selectedParts.Add(part);
+        else _selectedParts.Remove(part);
+    }
+
+    private void SelectAll() => _selectedParts = Parts.Select(p => p.PartNum).ToHashSet();
+    private void DeselectAll() => _selectedParts = [];
 
     private async Task HandleStart()
     {
         var minutes = _mode == TestMode.Simulation ? 120 : _duration;
-        await OnStart.InvokeAsync((_mode, minutes));
+        var parts = _mode == TestMode.Simulation
+            ? Parts.Select(p => p.PartNum).ToHashSet()
+            : new HashSet<ToeicLRPart>(_selectedParts);
+        await OnStart.InvokeAsync((_mode, minutes, parts));
     }
+
 }

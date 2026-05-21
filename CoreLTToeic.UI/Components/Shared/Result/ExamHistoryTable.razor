@@ -6,48 +6,48 @@
 }
 else
 {
-    <Table DataSource="Results" TItem="UserResultViewModel" Bordered PageSize="@(Compact ? Results.Count : 20)">
+    <Table DataSource="Results" TItem="UserResultViewModel" ScrollX="1400" Bordered PageSize="@(Compact ? Results.Count : 20)">
         @if (!Compact)
         {
-            <ActionColumn Title="STT" Width="60">
+            <PropertyColumn Property="c => c.Id" Title="STT" Width="60">
                 @(Results.IndexOf(context) + 1)
-            </ActionColumn>
+            </PropertyColumn>
         }
-        <ActionColumn Title="Tên đề thi">
+        <PropertyColumn Property="c => c.TestTitle" Title="Tên đề thi">
             <span style="font-weight:500;">@context.TestTitle</span>
-        </ActionColumn>
-        <ActionColumn Title="Chế độ" Width="130">
+        </PropertyColumn>
+        <PropertyColumn Property="c => c.TestMode" Title="Chế độ" Width="130">
             <Tag Color="@(context.TestMode == TestMode.Simulation ? "gold" : "green")">
                 @(context.TestMode == TestMode.Simulation ? "Thi thử" : "Luyện tập")
             </Tag>
-        </ActionColumn>
-        <ActionColumn Title="Ngày thi" Width="150">
+        </PropertyColumn>
+        <PropertyColumn Property="c => c.CompletedAt" Title="Ngày thi" Width="150">
             @context.CompletedAt?.ToString("dd/MM/yyyy HH:mm")
-        </ActionColumn>
-        <ActionColumn Title="Nghe / Đọc" Width="120">
+        </PropertyColumn>
+        <PropertyColumn Property="c => c.ListeningScore" Title="Nghe / Đọc" Width="120">
             <span style="color:#1B527A; font-weight:600;">@context.ListeningScore</span>
             <span style="color:#bfbfbf;"> / </span>
             <span style="color:#2471A3; font-weight:600;">@context.ReadingScore</span>
-        </ActionColumn>
-        <ActionColumn Title="Tổng điểm" Width="110">
+        </PropertyColumn>
+        <PropertyColumn Property="c => c.TotalScore" Title="Tổng điểm" Width="110">
             <Tag Color="@ScoreColor(context.TotalScore)" Style="font-size:0.95rem; font-weight:700; padding:2px 10px;">
                 @context.TotalScore
             </Tag>
-        </ActionColumn>
+        </PropertyColumn>
         @if (!Compact)
         {
-            <ActionColumn Title="Chính xác" Width="100">
+            <PropertyColumn Property="c => c.Accuracy" Title="Chính xác" Width="100">
                 @context.Accuracy.ToString("0.#")%
-            </ActionColumn>
-            <ActionColumn Title="Thời gian" Width="100">
+            </PropertyColumn>
+            <PropertyColumn Property="c => c.CompletionTime" Title="Thời gian" Width="100">
                 @FormatTime(context.CompletionTime)
-            </ActionColumn>
+            </PropertyColumn>
         }
-        <ActionColumn Title="Thao tác" Width="@(Compact ? "90" : "160")">
+        <ActionColumn Title="Thao tác" Width="@(Compact ? "120" : "240")">
             <Space>
                 <SpaceItem>
                     <Button Size="ButtonSize.Small" Icon="eye"
-                            OnClick='() => Nav.NavigateTo($"/ket-qua/{context.Id}")'>
+                            OnClick='async () => await NavigateTo($"/ket-qua/{context.Id}")'>
                         Xem
                     </Button>
                 </SpaceItem>
@@ -55,7 +55,7 @@ else
                 {
                     <SpaceItem>
                         <Button Size="ButtonSize.Small" Icon="reload"
-                                OnClick='() => Nav.NavigateTo($"/luyen-thi/{context.TestId}")'>
+                                OnClick='async () => await NavigateTo($"/luyen-thi/{context.TestId}")'>
                             Làm lại
                         </Button>
                     </SpaceItem>
@@ -68,6 +68,15 @@ else
 @code {
     [Parameter] public List<UserResultViewModel> Results { get; set; } = [];
     [Parameter] public bool Compact { get; set; } = false;
+    [Parameter] public EventCallback<string> OnNavigateTo { get; set; }
+
+    private async Task NavigateTo(string url)
+    {
+        if (OnNavigateTo.HasDelegate)
+            await OnNavigateTo.InvokeAsync(url);
+        else
+            Nav.NavigateTo(url);
+    }
 
     private static string ScoreColor(int score) => score >= 800 ? "success" : score >= 500 ? "warning" : "error";
 

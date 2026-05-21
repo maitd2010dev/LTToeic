@@ -1,6 +1,6 @@
 # LTToeic — Bảng Theo Dõi Chức Năng
 
-> Cập nhật lần cuối: 2026-05-17 (session 3)
+> Cập nhật lần cuối: 2026-05-20 (session 4)
 > Đánh dấu `[x]` khi hoàn thành, thêm ngày hoàn thành vào cuối dòng.
 
 ---
@@ -39,7 +39,7 @@
 | 3.4 | Trang kết quả sau khi nộp bài | ✅ Hoàn thành | `TestResult.razor` `/ket-qua/{ResultId}` — 2026-05-17 |
 | 3.5 | Xem lại đáp án chi tiết sau thi | ✅ Hoàn thành | `QuestionReviewItem.razor` — màu đúng/sai/bỏ qua, nhóm theo Part — 2026-05-17 |
 | 3.6 | Lịch sử các lần thi của người dùng | ❌ Chưa làm | `UserResultRepository.GetByUserIdAsync` đã có |
-| 3.7 | Chế độ luyện tập từng Part | ❌ Chưa làm | Enum `TestMode.Practice` đã có |
+| 3.7 | Chế độ luyện tập từng Part | ✅ Hoàn thành | `TestStartScreen` checkbox chọn Part; `TakeTest` filter `_parts` + `_questionIndex` giữ nguyên số câu theo DB — 2026-05-20 |
 | 3.8 | Chế độ thi thử toàn bài (120 phút cố định) | ✅ Hoàn thành | `TestMode.Simulation`, màn hình chọn chế độ — 2026-05-17 |
 | 3.9 | Lọc/tìm kiếm đề thi theo danh mục | ⚠️ Một phần | UI có filter, backend cần kiểm tra |
 | 3.10 | Bảng quy đổi điểm Listening/Reading | ✅ Hoàn thành | Seeder 101 dòng (0–100→5–495), `ScoreConversionRepository` lookup — 2026-05-17 |
@@ -119,6 +119,7 @@
 | 8.6 | Endpoint `GET /api/auth/confirmemail` | ✅ Hoàn thành | Minimal API trong `Program.cs`; sửa double-decode token — 2026-05-17 |
 | 8.7 | Seed data bảng quy đổi điểm | ✅ Hoàn thành | `ScoreConversionSeeder` — 101 dòng mỗi bảng, idempotent — 2026-05-17 |
 | 8.8 | Components tái sử dụng kết quả thi | ✅ Hoàn thành | `TestScoreCard`, `TestResultStats`, `QuestionReviewItem`, `TestStartScreen` — 2026-05-17 |
+| 8.9 | Hiệu suất trang kết quả | ✅ Hoàn thành | `Virtualize` lazy-render danh sách câu hỏi; `scrollTo(0,0)` khi load; ẩn điểm Nghe/Đọc khi không có Part tương ứng — 2026-05-20 |
 
 ---
 
@@ -127,7 +128,7 @@
 | Layer | Đã làm | Chưa làm |
 |-------|--------|----------|
 | Authentication | Đăng ký, đăng nhập, đăng xuất, xác nhận email, đổi mật khẩu | Quên MK / đặt lại MK |
-| Test | Làm bài, nộp bài, admin CRUD, kết quả sau thi, xem lại đáp án, chọn chế độ thi, quy đổi điểm | Lịch sử thi, luyện từng Part riêng |
+| Test | Làm bài, nộp bài, admin CRUD, kết quả sau thi, xem lại đáp án, chọn chế độ thi, quy đổi điểm, luyện từng Part | Lịch sử thi |
 | Course | Admin CRUD đầy đủ | Toàn bộ UI phía user |
 | User Profile | Chỉnh sửa thông tin (Drawer NavMenu), đổi mật khẩu | Trang hồ sơ riêng, dashboard, ảnh đại diện |
 | Admin | Quản lý đề thi, khóa học, phân quyền, seed admin, trang AccessDenied | Dashboard, user management |
@@ -142,3 +143,4 @@
 | 2026-05-17 | Khởi tạo file tracking, khảo sát toàn bộ codebase |
 | 2026-05-17 | **Ưu tiên 2 hoàn thành:** Trang kết quả `/ket-qua/{ResultId}`, xem lại đáp án theo Part, màn hình chọn chế độ thi (`TestStartScreen`), timer đếm lên cho luyện tập không giới hạn, seeder bảng quy đổi điểm TOEIC chuẩn, 4 shared components mới |
 | 2026-05-17 | **Session 3 — Auth & Admin hoàn thành:** Sửa toàn bộ luồng đăng ký/đăng nhập Blazor Server (hidden form POST, auth cookie đúng cách); sửa SMTP config (`MailSettings` DI, key `Username`, `From`); sửa xác nhận email (endpoint + double-decode token); đăng xuất qua `HttpContext.SignOutAsync`; profile dropdown + Drawer đổi thông tin/mật khẩu; `AdminSeeder` tạo role + user `admin/admin`; `[Authorize(Roles="Admin")]` toàn bộ admin; `AuthorizeRouteView` + trang `AccessDenied.razor` (`/khong-co-quyen`) |
+| 2026-05-20 | **Session 4 — Luyện Part + Hiệu suất kết quả:** 3.7 luyện từng Part (checkbox chọn Part trong `TestStartScreen`, filter `_parts`/`_questionIndex` trong `TakeTest`); `TestResult.razor` dùng `Virtualize` thay `@foreach`, `scrollTo(0,0)` khi render, ẩn điểm nghe/đọc khi không luyện Part đó (`TestScoreCard` + banner `TakeTest`) |

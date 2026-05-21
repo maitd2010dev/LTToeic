@@ -7,6 +7,7 @@
 @inject IUserResultService UserResultService
 @inject NavigationManager Nav
 @inject IMessageService Message
+@inject IJSRuntime JS
 
 <PageTitle>Kết quả thi — LTToeic</PageTitle>
 
@@ -62,24 +63,21 @@ else
             <strong style="font-size:1.1rem;">Xem lại đáp án</strong>
         </Divider>
 
-        @foreach (var partGroup in _partGroups)
-        {
-            int startNum2 = _partStartNumbers.GetValueOrDefault(partGroup.Key, 1);
-            var orderedAnswers = partGroup.OrderBy(a => a.OrderNumber).ToList();
-            int idx = 0;
-            <div style="margin-top:20px; margin-bottom:8px;">
-                <Tag Color="@("blue")" Style="font-size:0.95rem; padding:4px 12px;">
-                    @GetPartLabel(partGroup.Key)
-                </Tag>
-                <span style="color:#8c8c8c; margin-left:8px; font-size:0.9rem;">@partGroup.Count() câu</span>
-            </div>
-            @foreach (var answer in orderedAnswers)
+        <Virtualize Items="_flatItems" Context="item" ItemSize="160">
+            @if (item.IsHeader)
             {
-                int qNum = startNum2 + idx;
-                idx++;
-                <QuestionReviewItem Answer="answer" QuestionNumber="qNum" />
+                <div style="margin-top:20px; margin-bottom:8px;">
+                    <Tag Color="@("blue")" Style="font-size:0.95rem; padding:4px 12px;">
+                        @ToeicPartHelper.GetPartLabel(item.PartNum)
+                    </Tag>
+                    <span style="color:#8c8c8c; margin-left:8px; font-size:0.9rem;">@item.QuestionCount câu</span>
+                </div>
             }
-        }
+            else
+            {
+                <QuestionReviewItem Answer="item.Answer!" QuestionNumber="item.QuestionNumber" />
+            }
+        </Virtualize>
 
         <div style="display:flex; justify-content:center; gap:16px; margin-top:32px; margin-bottom:16px; flex-wrap:wrap;">
             <Button OnClick='() => Nav.NavigateTo($"/luyen-thi/{_result.TestId}")'>
@@ -99,6 +97,9 @@ else
     private bool _loading = true;
     private List<IGrouping<int, UserAnswerViewModel>> _partGroups = [];
     private Dictionary<int, int> _partStartNumbers = [];
+    private List<FlatItem> _flatItems = [];
+
+    private record struct FlatItem(bool IsHeader, int PartNum, int QuestionCount, UserAnswerViewModel? Answer, int QuestionNumber);
 
     protected override async Task OnInitializedAsync()
     {
@@ -118,6 +119,12 @@ else
         }
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+
     private void BuildPartGroups()
     {
         _partGroups = _result!.Answers
@@ -133,17 +140,19 @@ else
             _partStartNumbers[group.Key] = counter;
             counter += group.Count();
         }
+
+        _flatItems = [];
+        foreach (var group in _partGroups)
+        {
+            int startNum = _partStartNumbers[group.Key];
+            _flatItems.Add(new FlatItem(true, group.Key, group.Count(), null, 0));
+            int idx = 0;
+            foreach (var answer in group.OrderBy(a => a.OrderNumber))
+            {
+                _flatItems.Add(new FlatItem(false, group.Key, 0, answer, startNum + idx));
+                idx++;
+            }
+        }
     }
 
-    private static string GetPartLabel(int partNum) => partNum switch
-    {
-        1 => "Part 1 — Photographs",
-        2 => "Part 2 — Question-Response",
-        3 => "Part 3 — Conversations",
-        4 => "Part 4 — Talks",
-        5 => "Part 5 — Incomplete Sentences",
-        6 => "Part 6 — Text Completion",
-        7 => "Part 7 — Reading Comprehension",
-        _ => $"Part {partNum}"
-    };
 }

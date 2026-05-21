@@ -350,7 +350,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f0f4f8;
+    background: #fff;
     padding: 24px;
 }
 
@@ -957,6 +957,15 @@ html, body {
 .ant-input-focused {
     border-color: var(--primary) !important;
     box-shadow: 0 0 0 2px rgba(27,82,122,0.12) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+    box-shadow: 0 0 0 1000px #fff inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
 }
 
 .ant-select-focused .ant-select-selector {
