@@ -51,8 +51,10 @@ namespace CoreLTToeic.Application.Mapping
                 .ForMember(d => d.QuestionGroupId,    o => o.MapFrom(s => s.Question != null ? s.Question.QuestionGroupId : null));
 
             CreateMap<UserResult, UserResultViewModel>()
-                .ForMember(d => d.TestTitle, o => o.MapFrom(s => s.Test != null ? s.Test.Title : string.Empty))
-                .ForMember(d => d.Answers, o => o.MapFrom(s => s.UserAnswers));
+                .ForMember(d => d.TestTitle,    o => o.MapFrom(s => s.Test != null ? s.Test.Title : string.Empty))
+                .ForMember(d => d.Answers,      o => o.MapFrom(s => s.UserAnswers))
+                .ForMember(d => d.UserFullName, o => o.MapFrom(s => s.User != null ? s.User.FullName : null))
+                .ForMember(d => d.UserEmail,    o => o.MapFrom(s => s.User != null ? s.User.Email : null));
 
             CreateMap<CourseLesson, CourseLessonViewModel>();
             CreateMap<CourseLessonEditModel, CourseLesson>();

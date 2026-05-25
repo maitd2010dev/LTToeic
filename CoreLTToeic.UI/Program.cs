@@ -149,6 +149,9 @@ using (var scope = app.Services.CreateScope())
 
     var adminSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.AdminSeeder>();
     await adminSeeder.SeedAsync();
+
+    var courseToeicSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.CourseToeicSeeder>();
+    await courseToeicSeeder.SeedAsync();
 }
 
 app.Run();

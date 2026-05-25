@@ -20,6 +20,7 @@ namespace CoreLTToeic.Infrastructure.Helper
             services.AddScoped<IPartRepository, PartRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IScoreConversionRepository, ScoreConversionRepository>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
         }
     }
 }

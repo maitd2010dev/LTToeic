@@ -1,0 +1,155 @@
+@page "/admin/quan-li-ket-qua"
+@layout AdminLayout
+@attribute [Authorize(Roles = "Admin")]
+@inject IAdminService AdminService
+@inject MessageService Message
+
+<PageTitle>Quản lý kết quả thi — LTToeic Admin</PageTitle>
+
+<div style="padding:8px 0 24px;">
+    <h2 style="margin:0 0 4px;">Quản lý kết quả thi</h2>
+    <span style="color:#8c8c8c;">Tất cả kết quả thi của người dùng trong hệ thống</span>
+</div>
+
+<Row Gutter="(16, 16)" Style="margin-bottom:24px;">
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <Card Bordered Style="border-radius:12px;text-align:center;">
+            <div style="margin-bottom:8px;">
+                <Icon Type="solution" Theme="IconThemeType.Outline" Style="font-size:26px;color:#1B527A;" />
+            </div>
+            <Statistic Title="Tổng kết quả" Value="@_allResults.Count"
+                       ValueStyle="color:#1B527A;font-weight:700;" />
+        </Card>
+    </AntDesign.Col>
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <Card Bordered Style="border-radius:12px;text-align:center;">
+            <div style="margin-bottom:8px;">
+                <Icon Type="check-circle" Theme="IconThemeType.Outline" Style="font-size:26px;color:#52c41a;" />
+            </div>
+            <Statistic Title="Đã hoàn thành" Value="@_allResults.Count(r => r.AttemptStatus == AttemptStatus.Completed)"
+                       ValueStyle="color:#52c41a;font-weight:700;" />
+        </Card>
+    </AntDesign.Col>
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <Card Bordered Style="border-radius:12px;text-align:center;">
+            <div style="margin-bottom:8px;">
+                <Icon Type="trophy" Theme="IconThemeType.Outline" Style="font-size:26px;color:#722ed1;" />
+            </div>
+            <Statistic Title="Điểm trung bình"
+                       Value="@(_allResults.Any(r => r.AttemptStatus == AttemptStatus.Completed) ? (int)_allResults.Where(r => r.AttemptStatus == AttemptStatus.Completed).Average(r => r.TotalScore) : 0)"
+                       Suffix="/ 990"
+                       ValueStyle="color:#722ed1;font-weight:700;" />
+        </Card>
+    </AntDesign.Col>
+</Row>
+
+<Card Bordered Style="border-radius:12px;">
+    <div style="display:flex;gap:12px;margin-bottom:16px;align-items:center;flex-wrap:wrap;">
+        <Input @bind-Value="_searchText"
+               Placeholder="Tìm theo tên hoặc email người dùng..."
+               Style="max-width:360px"
+               AllowClear />
+        <Button Icon="search" OnClick="ApplyFilter">Tìm kiếm</Button>
+        <span style="color:#8c8c8c;font-size:0.85rem;">
+            Hiển thị @_filtered.Count / @_allResults.Count kết quả
+        </span>
+    </div>
+
+    <Table DataSource="_filtered" TItem="UserResultViewModel"
+           Loading="_loading" Bordered Size="TableSize.Small"
+           ScrollX="1400" PageSize="20">
+        <ActionColumn Title="STT" Width="60">
+            @(_filtered.IndexOf(context) + 1)
+        </ActionColumn>
+        <ActionColumn Title="Người dùng" Width="200">
+            <div>
+                <div style="font-weight:500;">@(context.UserFullName ?? "(chưa cập nhật)")</div>
+                <div style="font-size:0.8rem;color:#8c8c8c;">@context.UserEmail</div>
+            </div>
+        </ActionColumn>
+        <PropertyColumn Property="c => c.TestTitle" Title="Đề thi" />
+        <ActionColumn Title="Tổng điểm" Width="110">
+            <Tag Color="@ScoreColor(context.TotalScore)">
+                <span style="font-weight:700;">@context.TotalScore</span>
+            </Tag>
+        </ActionColumn>
+        <ActionColumn Title="Listening" Width="100">
+            <span style="color:#1B527A;font-weight:600;">@context.ListeningScore</span>
+        </ActionColumn>
+        <ActionColumn Title="Reading" Width="100">
+            <span style="color:#2471A3;font-weight:600;">@context.ReadingScore</span>
+        </ActionColumn>
+        <ActionColumn Title="Chính xác" Width="100">
+            @context.Accuracy.ToString("0.#")%
+        </ActionColumn>
+        <ActionColumn Title="Chế độ" Width="110">
+            <Tag Color="@(context.TestMode == TestMode.Simulation ? "gold" : "green")">
+                @(context.TestMode == TestMode.Simulation ? "Thi thử" : "Luyện tập")
+            </Tag>
+        </ActionColumn>
+        <ActionColumn Title="Trạng thái" Width="130">
+            <Tag Color="@StatusColor(context.AttemptStatus)">
+                @StatusLabel(context.AttemptStatus)
+            </Tag>
+        </ActionColumn>
+        <ActionColumn Title="Ngày thi" Width="145">
+            @context.CompletedAt?.ToString("dd/MM/yyyy HH:mm")
+        </ActionColumn>
+    </Table>
+</Card>
+
+@code {
+    private List<UserResultViewModel> _allResults = [];
+    private List<UserResultViewModel> _filtered   = [];
+    private bool   _loading    = true;
+    private string _searchText = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _allResults = await AdminService.GetAllResultsAsync();
+            _filtered   = _allResults;
+        }
+        catch (Exception ex)
+        {
+            await Message.ErrorAsync($"Lỗi tải dữ liệu: {ex.Message}");
+        }
+        finally { _loading = false; }
+    }
+
+    private void ApplyFilter()
+    {
+        if (string.IsNullOrWhiteSpace(_searchText))
+        {
+            _filtered = _allResults;
+            return;
+        }
+        var lower = _searchText.Trim().ToLower();
+        _filtered = _allResults
+            .Where(r =>
+                (r.UserFullName?.ToLower().Contains(lower) ?? false) ||
+                (r.UserEmail?.ToLower().Contains(lower) ?? false))
+            .ToList();
+    }
+
+    private static string ScoreColor(int score) =>
+        score >= 800 ? "success" : score >= 500 ? "warning" : "error";
+
+    private static string StatusColor(AttemptStatus status) => status switch
+    {
+        AttemptStatus.Completed  => "success",
+        AttemptStatus.InProgress => "processing",
+        AttemptStatus.Abandoned  => "error",
+        _                        => "default"
+    };
+
+    private static string StatusLabel(AttemptStatus status) => status switch
+    {
+        AttemptStatus.Completed  => "Hoàn thành",
+        AttemptStatus.InProgress => "Đang làm",
+        AttemptStatus.Abandoned  => "Bỏ dở",
+        AttemptStatus.NotStarted => "Chưa bắt đầu",
+        _                        => status.ToString()
+    };
+}

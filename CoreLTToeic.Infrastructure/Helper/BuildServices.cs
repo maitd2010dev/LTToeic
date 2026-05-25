@@ -12,9 +12,11 @@ namespace CoreLTToeic.Infrastructure.Helper
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IUserResultService, UserResultService>();
             services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<ToeicTestSeeder>();
             services.AddScoped<ScoreConversionSeeder>();
             services.AddScoped<AdminSeeder>();
+            services.AddScoped<CourseToeicSeeder>();
         }
     }
 }

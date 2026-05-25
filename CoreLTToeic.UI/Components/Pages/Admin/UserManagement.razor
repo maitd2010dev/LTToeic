@@ -1,0 +1,191 @@
+@page "/admin/quan-li-tai-khoan"
+@layout AdminLayout
+@attribute [Authorize(Roles = "Admin")]
+@inject IAdminService AdminService
+@inject MessageService Message
+@inject ModalService Modal
+
+<PageTitle>Quản lý tài khoản — LTToeic Admin</PageTitle>
+
+<div style="padding:8px 0 24px;">
+    <h2 style="margin:0 0 4px;">Quản lý tài khoản</h2>
+    <span style="color:#8c8c8c;">Quản lý người dùng và quyền truy cập hệ thống</span>
+</div>
+
+<Row Gutter="(16, 16)" Style="margin-bottom:24px;">
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <Card Bordered Style="border-radius:12px;text-align:center;">
+            <div style="margin-bottom:8px;">
+                <Icon Type="team" Theme="IconThemeType.Outline" Style="font-size:26px;color:#1B527A;" />
+            </div>
+            <Statistic Title="Tổng người dùng" Value="@_allUsers.Count"
+                       ValueStyle="color:#1B527A;font-weight:700;" />
+        </Card>
+    </AntDesign.Col>
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <Card Bordered Style="border-radius:12px;text-align:center;">
+            <div style="margin-bottom:8px;">
+                <Icon Type="check-circle" Theme="IconThemeType.Outline" Style="font-size:26px;color:#52c41a;" />
+            </div>
+            <Statistic Title="Đã xác thực email" Value="@_allUsers.Count(u => u.EmailConfirmed)"
+                       ValueStyle="color:#52c41a;font-weight:700;" />
+        </Card>
+    </AntDesign.Col>
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <Card Bordered Style="border-radius:12px;text-align:center;">
+            <div style="margin-bottom:8px;">
+                <Icon Type="lock" Theme="IconThemeType.Outline" Style="font-size:26px;color:#ff4d4f;" />
+            </div>
+            <Statistic Title="Đang bị khóa" Value="@_allUsers.Count(u => u.IsLocked)"
+                       ValueStyle="color:#ff4d4f;font-weight:700;" />
+        </Card>
+    </AntDesign.Col>
+</Row>
+
+<Card Bordered Style="border-radius:12px;">
+    <div style="display:flex;gap:12px;margin-bottom:16px;align-items:center;flex-wrap:wrap;">
+        <Input @bind-Value="_searchText"
+               Placeholder="Tìm theo họ tên, email, tên đăng nhập..."
+               Style="max-width:360px"
+               AllowClear />
+        <Button Icon="search" OnClick="ApplyFilter">Tìm kiếm</Button>
+        <span style="color:#8c8c8c;font-size:0.85rem;">
+            Hiển thị @_filtered.Count / @_allUsers.Count người dùng
+        </span>
+    </div>
+
+    <Table DataSource="_filtered" TItem="UserManagementViewModel"
+           Loading="_loading" Bordered Size="TableSize.Small"
+           ScrollX="1400" PageSize="20">
+        <ActionColumn Title="STT" Width="60">
+            @(_filtered.IndexOf(context) + 1)
+        </ActionColumn>
+        <ActionColumn Title="Họ tên" Width="180">
+            <span style="font-weight:500;">@(context.FullName ?? "(chưa cập nhật)")</span>
+        </ActionColumn>
+        <PropertyColumn Property="c => c.Email" Title="Email" />
+        <PropertyColumn Property="c => c.UserName" Title="Tên đăng nhập" Width="150" />
+        <ActionColumn Title="Ngày tạo" Width="120">
+            @context.CreateTime.ToString("dd/MM/yyyy")
+        </ActionColumn>
+        <ActionColumn Title="Đăng nhập cuối" Width="145">
+            @(context.LastLogin?.ToString("dd/MM/yyyy HH:mm") ?? "—")
+        </ActionColumn>
+        <ActionColumn Title="Role" Width="90">
+            <Tag Color="@(context.Role == "Admin" ? "purple" : "blue")">
+                @context.Role
+            </Tag>
+        </ActionColumn>
+        <ActionColumn Title="Xác thực email" Width="130">
+            <Tag Color="@(context.EmailConfirmed ? "success" : "warning")">
+                @(context.EmailConfirmed ? "Đã xác nhận" : "Chưa xác nhận")
+            </Tag>
+        </ActionColumn>
+        <ActionColumn Title="Trạng thái" Width="110">
+            <Tag Color="@(context.IsLocked ? "error" : "success")">
+                @(context.IsLocked ? "Đã khóa" : "Hoạt động")
+            </Tag>
+        </ActionColumn>
+        <ActionColumn Title="Số lần thi" Width="100">
+            <Tag Color="@("cyan")">@context.ExamCount</Tag>
+        </ActionColumn>
+        <ActionColumn Title="Hành động" Width="130">
+            @if (context.Role != "Admin")
+            {
+                <Button Size="ButtonSize.Small"
+                        Danger="@(!context.IsLocked)"
+                        Icon="@(context.IsLocked ? "unlock" : "lock")"
+                        Loading="@(_lockingUserId == context.Id)"
+                        OnClick="@(e => ToggleLock(context))">
+                    @(context.IsLocked ? "Mở khóa" : "Khóa")
+                </Button>
+            }
+            else
+            {
+                <span style="color:#8c8c8c;font-size:0.85rem;">—</span>
+            }
+        </ActionColumn>
+    </Table>
+</Card>
+
+@code {
+    private List<UserManagementViewModel> _allUsers  = [];
+    private List<UserManagementViewModel> _filtered  = [];
+    private bool   _loading       = true;
+    private string _searchText    = "";
+    private string _lockingUserId = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUsers();
+    }
+
+    private async Task LoadUsers()
+    {
+        _loading = true;
+        try
+        {
+            _allUsers = await AdminService.GetAllUsersAsync();
+            ApplyFilter();
+        }
+        catch (Exception ex)
+        {
+            await Message.ErrorAsync($"Lỗi tải dữ liệu: {ex.Message}");
+        }
+        finally { _loading = false; }
+    }
+
+    private void ApplyFilter()
+    {
+        if (string.IsNullOrWhiteSpace(_searchText))
+        {
+            _filtered = _allUsers;
+            return;
+        }
+        var lower = _searchText.Trim().ToLower();
+        _filtered = _allUsers
+            .Where(u =>
+                (u.FullName?.ToLower().Contains(lower) ?? false) ||
+                (u.Email?.ToLower().Contains(lower) ?? false) ||
+                (u.UserName?.ToLower().Contains(lower) ?? false))
+            .ToList();
+    }
+
+    private async Task ToggleLock(UserManagementViewModel user)
+    {
+        var action = user.IsLocked ? "mở khóa" : "khóa";
+        var confirmed = await Modal.ConfirmAsync(new ConfirmOptions
+        {
+            Title      = $"Xác nhận {action} tài khoản",
+            Content    = $"Bạn có chắc chắn muốn {action} tài khoản '{user.UserName}'?",
+            OkText     = "Xác nhận",
+            CancelText = "Huỷ",
+            OkButtonProps = new ButtonProps { Danger = !user.IsLocked }
+        });
+        if (!confirmed) return;
+
+        _lockingUserId = user.Id;
+        try
+        {
+            var result = user.IsLocked
+                ? await AdminService.UnlockUserAsync(user.Id)
+                : await AdminService.LockUserAsync(user.Id);
+
+            if (result.Succeeded)
+            {
+                await Message.SuccessAsync(user.IsLocked ? "Đã mở khóa tài khoản thành công" : "Đã khóa tài khoản thành công");
+                await LoadUsers();
+            }
+            else
+            {
+                var err = string.Join(", ", result.Errors.Select(e => e.Description));
+                await Message.ErrorAsync($"Thao tác thất bại: {err}");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Message.ErrorAsync($"Lỗi: {ex.Message}");
+        }
+        finally { _lockingUserId = ""; }
+    }
+}

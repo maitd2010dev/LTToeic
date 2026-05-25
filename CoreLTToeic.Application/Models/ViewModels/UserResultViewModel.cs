@@ -20,6 +20,10 @@ public class UserResultViewModel
     public int CompletionTime { get; set; }
     public DateTime? CompletedAt { get; set; }
     public TestMode TestMode { get; set; }
+    public AttemptStatus AttemptStatus { get; set; }
+    public string? UserId { get; set; }
+    public string? UserFullName { get; set; }
+    public string? UserEmail { get; set; }
     public string TestTitle { get; set; } = string.Empty;
     public List<UserAnswerViewModel> Answers { get; set; } = [];
 }
