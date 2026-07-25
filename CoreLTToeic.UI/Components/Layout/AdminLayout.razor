@@ -41,6 +41,9 @@
                     <MenuItem Key="test" OnClick="@(() => Nav.NavigateTo("/admin/quan-li-de-thi"))">
                         Đề thi
                     </MenuItem>
+                    <MenuItem Key="test-category" OnClick="@(() => Nav.NavigateTo("/admin/quan-li-danh-muc-de-thi"))">
+                        Danh mục
+                    </MenuItem>
                 </ChildContent>
             </SubMenu>
 
@@ -114,7 +117,8 @@
     {
         var path = new Uri(uri).AbsolutePath.ToLower();
 
-        if (path.Contains("/quan-li-de-thi")) { _selectedKeys = new[] { "test" }; _openKeys = new[] { "online-test" }; }
+        if (path.Contains("/quan-li-danh-muc-de-thi")) { _selectedKeys = new[] { "test-category" }; _openKeys = new[] { "online-test" }; }
+        else if (path.Contains("/quan-li-de-thi")) { _selectedKeys = new[] { "test" }; _openKeys = new[] { "online-test" }; }
         else if (path.Contains("/quan-li-tai-khoan")) { _selectedKeys = new[] { "account" }; _openKeys = new[] { "user" }; }
         else if (path.Contains("/quan-li-ket-qua")) { _selectedKeys = new[] { "result" }; _openKeys = new[] { "user" }; }
         else if (path.Contains("/quan-li-khoa-hoc")) { _selectedKeys = new[] { "course-list" }; _openKeys = new[] { "course" }; }

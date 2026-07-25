@@ -32,7 +32,8 @@ namespace CoreLTToeic.Application.Mapping
                 .ForMember(d => d.QuestionGroupCount, o => o.MapFrom(s => s.QuestionGroups.Count));
             CreateMap<PartEditModel, Part>();
 
-            CreateMap<TestCategory, TestCategoryViewModel>();
+            CreateMap<TestCategory, TestCategoryViewModel>()
+                .ForMember(d => d.Tests, o => o.MapFrom(s => s.Tests.OrderByDescending(t => t.Id)));
 
             CreateMap<UserAnswer, UserAnswerViewModel>()
                 .ForMember(d => d.CorrectAnswer,     o => o.MapFrom(s => s.Question != null ? s.Question.CorrectAnswer : null))
@@ -43,7 +44,16 @@ namespace CoreLTToeic.Application.Mapping
                 .ForMember(d => d.Answer4,            o => o.MapFrom(s => s.Question != null ? s.Question.Answer4 : null))
                 .ForMember(d => d.Audio,              o => o.MapFrom(s => s.Question != null ? s.Question.Audio : null))
                 .ForMember(d => d.Image,              o => o.MapFrom(s => s.Question != null ? s.Question.Image : null))
-                .ForMember(d => d.Transcript,         o => o.MapFrom(s => s.Question != null ? s.Question.Transcript : null))
+                .ForMember(d => d.Transcript, o => o.MapFrom(s =>
+                    s.Question != null
+                        ? s.Question.Transcript
+                          ?? (s.Question.Part != null
+                              && (s.Question.Part.PartNum == ToeicLRPart.Part3
+                                  || s.Question.Part.PartNum == ToeicLRPart.Part4)
+                              && s.Question.QuestionGroup != null
+                                  ? s.Question.QuestionGroup.Content
+                                  : null)
+                        : null))
                 .ForMember(d => d.Explanation,        o => o.MapFrom(s => s.Question != null ? s.Question.Explanation : null))
                 .ForMember(d => d.OrderNumber,        o => o.MapFrom(s => s.Question != null ? s.Question.OrderNumber : 0))
                 .ForMember(d => d.PartNum,            o => o.MapFrom(s => s.Question != null && s.Question.Part != null

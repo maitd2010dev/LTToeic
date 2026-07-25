@@ -5,5 +5,6 @@ namespace CoreLTToeic.Application.Interfaces.IRepository
 {
     public interface ITestCategoryRepository : IRepository<TestCategory>
     {
+        Task<List<TestCategory>> GetAllWithTestsAsync();
     }
 }

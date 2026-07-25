@@ -218,8 +218,51 @@ namespace CoreLTToeic.Application.Business
 
         public async Task<IEnumerable<TestCategoryViewModel>> GetCategoriesAsync()
         {
-            var cats = await _categoryRepo.GetAllAsync();
+            var cats = await _categoryRepo.GetAllWithTestsAsync();
             return _mapper.Map<IEnumerable<TestCategoryViewModel>>(cats);
+        }
+
+        public async Task<long> AddCategoryAsync(TestCategoryEditModel model)
+        {
+            var normalizedName = model.Name.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedName))
+                throw new InvalidOperationException("Tên danh mục không được để trống.");
+            if (await _categoryRepo.Find(c => c.Name == normalizedName).AnyAsync())
+                throw new InvalidOperationException("Tên danh mục đã tồn tại.");
+
+            var entity = new TestCategory { Name = normalizedName };
+            _categoryRepo.Add(entity);
+            await _categoryRepo.SaveChangesAsync();
+            return entity.Id;
+        }
+
+        public async Task UpdateCategoryAsync(TestCategoryEditModel model)
+        {
+            var entity = await _categoryRepo.Find(c => c.Id == model.Id).FirstOrDefaultAsync()
+                ?? throw new InvalidOperationException("Không tìm thấy danh mục.");
+
+            var normalizedName = model.Name.Trim();
+            if (string.IsNullOrWhiteSpace(normalizedName))
+                throw new InvalidOperationException("Tên danh mục không được để trống.");
+            if (await _categoryRepo.Find(c => c.Id != model.Id && c.Name == normalizedName).AnyAsync())
+                throw new InvalidOperationException("Tên danh mục đã tồn tại.");
+
+            entity.Name = normalizedName;
+            _categoryRepo.Update(entity);
+            await _categoryRepo.SaveChangesAsync();
+        }
+
+        public async Task DeleteCategoryAsync(long categoryId)
+        {
+            var entity = await _categoryRepo.Find(c => c.Id == categoryId)
+                .Include(c => c.Tests)
+                .FirstOrDefaultAsync();
+            if (entity == null) return;
+            if (entity.Tests.Count > 0)
+                throw new InvalidOperationException("Không thể xóa danh mục đang có đề thi. Hãy chuyển các đề sang danh mục khác trước.");
+
+            _categoryRepo.Remove(entity);
+            await _categoryRepo.SaveChangesAsync();
         }
 
         private async Task UpdateTestQuestionCount(long testId)

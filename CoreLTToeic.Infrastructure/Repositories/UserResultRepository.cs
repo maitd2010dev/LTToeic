@@ -31,6 +31,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
             return await ctx.UserResults
                 .Include(r => r.Test)
                 .Include(r => r.UserAnswers).ThenInclude(a => a.Question).ThenInclude(q => q!.Part)
+                .Include(r => r.UserAnswers).ThenInclude(a => a.Question).ThenInclude(q => q!.QuestionGroup)
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
     }

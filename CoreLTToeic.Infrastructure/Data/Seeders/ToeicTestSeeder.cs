@@ -10,6 +10,9 @@ namespace CoreLTToeic.Infrastructure.Data.Seeders;
 
 public class ToeicTestSeeder
 {
+    private const string Study4TestTitle = "TOEIC LR Collection 1 Test 1";
+    private const string LegacyTestTitle = "TOEIC Practice Test 1";
+
     private static readonly Dictionary<long, int> TypeToPartNum = new()
     {
         { 1636615697542L, 1 },
@@ -34,10 +37,31 @@ public class ToeicTestSeeder
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
 
-        if (await context.Tests.AnyAsync(t => t.Title == "TOEIC Practice Test 1"))
+        var category2025 = await EnsureCategoryAsync(context, "2025");
+        await EnsureCategoryAsync(context, "2026");
+        await context.SaveChangesAsync();
+
+        var existingTest = await context.Tests
+            .FirstOrDefaultAsync(t => t.Title == Study4TestTitle || t.Title == LegacyTestTitle);
+        if (existingTest != null)
         {
-            _logger.LogInformation("TOEIC Practice Test 1 already seeded, skipping.");
-            return;
+            // Nâng cấp dữ liệu seed cũ thay vì tạo trùng một bộ 200 câu hỏi.
+            existingTest.Title = Study4TestTitle;
+            existingTest.TestCategoryId = category2025.Id;
+            existingTest.Duration = 120;
+            await context.SaveChangesAsync();
+
+            var existingQuestionCount = await context.Questions.CountAsync(q => q.TestId == existingTest.Id);
+            if (existingQuestionCount > 0)
+            {
+                existingTest.TotalQuestions = existingQuestionCount;
+                await context.SaveChangesAsync();
+                _logger.LogInformation(
+                    "{title} already seeded with {count} questions; category and metadata were updated.",
+                    Study4TestTitle,
+                    existingQuestionCount);
+                return;
+            }
         }
 
         if (!File.Exists(jsonFilePath))
@@ -51,13 +75,12 @@ public class ToeicTestSeeder
         var cards = JsonSerializer.Deserialize<List<ToeicCardJson>>(json, options);
         if (cards == null || cards.Count == 0) return;
 
-        var test = new Test
-        {
-            Title = "TOEIC Practice Test 1",
-            Duration = 120,
-            Status = TestStatus.Active,
-            TotalQuestions = 0
-        };
+        var test = existingTest ?? new Test();
+        test.Title = Study4TestTitle;
+        test.Duration = 120;
+        test.Status = TestStatus.Active;
+        test.TotalQuestions = 0;
+        test.TestCategory = category2025;
 
         var parts = Enumerable.Range(1, 7)
             .ToDictionary(n => n, n => new Part { PartNum = (ToeicLRPart)n, Test = test });
@@ -83,9 +106,20 @@ public class ToeicTestSeeder
         }
 
         test.TotalQuestions = orderNum - 1;
-        context.Tests.Add(test);
+        if (existingTest == null)
+            context.Tests.Add(test);
         await context.SaveChangesAsync();
-        _logger.LogInformation("Seeded TOEIC Practice Test 1 with {count} questions.", test.TotalQuestions);
+        _logger.LogInformation("Seeded {title} in category 2025 with {count} questions.", Study4TestTitle, test.TotalQuestions);
+    }
+
+    private static async Task<TestCategory> EnsureCategoryAsync(AppDbContext context, string name)
+    {
+        var category = await context.TestCategories.FirstOrDefaultAsync(c => c.Name == name);
+        if (category != null) return category;
+
+        category = new TestCategory { Name = name };
+        context.TestCategories.Add(category);
+        return category;
     }
 
     private static QuestionGroup MapToGroup(ToeicCardJson card, Part part, Test test, ref int orderNum)

@@ -18,6 +18,26 @@
     <Button Type="ButtonType.Primary" Class="search-btn" OnClick="FilterTests">Tìm kiếm</Button>
 </div>
 
+@if (_categories.Count > 0)
+{
+    <div class="test-category-filter" aria-label="Lọc theo danh mục">
+        <button type="button"
+                class="@GetCategoryButtonClass(null)"
+                @onclick="() => SelectCategory(null)">
+            Tất cả
+        </button>
+        @foreach (var category in _categories)
+        {
+            <button type="button"
+                    class="@GetCategoryButtonClass(category.Id)"
+                    @onclick="() => SelectCategory(category.Id)">
+                @category.Name
+                <span>@category.Tests.Count(t => t.Status == TestStatus.Active)</span>
+            </button>
+        }
+    </div>
+}
+
 @if (_loading)
 {
     <div class="loading-center"><Spin /></div>
@@ -34,6 +54,10 @@ else
             <div class="test-card">
                 <div class="test-card-info">
                     <div class="test-card-title">@test.Title</div>
+                    @if (!string.IsNullOrWhiteSpace(test.CategoryName))
+                    {
+                        <span class="test-card-category">@test.CategoryName</span>
+                    }
                     <div class="test-card-meta">
                         <Icon Type="clock-circle" Theme="IconThemeType.Outline" />
                         @test.Duration phút &nbsp;|&nbsp; @test.TotalQuestions câu
@@ -51,16 +75,24 @@ else
 @code {
     private List<TestViewModel> _all = [];
     private List<TestViewModel> _filtered = [];
+    private List<TestCategoryViewModel> _categories = [];
     private string _searchText = "";
+    private long? _selectedCategoryId;
     private bool _loading = true;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            var all = await TestService.GetAllAsync();
-            _all = all.Where(t => t.Status == TestStatus.Active).ToList();
-            _filtered = _all;
+            var testsTask = TestService.GetAllAsync();
+            var categoriesTask = TestService.GetCategoriesAsync();
+            await Task.WhenAll(testsTask, categoriesTask);
+
+            _all = testsTask.Result.Where(t => t.Status == TestStatus.Active).ToList();
+            _categories = categoriesTask.Result
+                .Where(c => c.Tests.Any(t => t.Status == TestStatus.Active))
+                .ToList();
+            FilterTests();
         }
         catch (Exception ex)
         {
@@ -74,10 +106,25 @@ else
 
     private void FilterTests()
     {
-        _filtered = string.IsNullOrWhiteSpace(_searchText)
-            ? _all
-            : _all.Where(t => t.Title.Contains(_searchText, StringComparison.OrdinalIgnoreCase)).ToList();
+        IEnumerable<TestViewModel> query = _all;
+
+        if (_selectedCategoryId.HasValue)
+            query = query.Where(t => t.TestCategoryId == _selectedCategoryId.Value);
+
+        if (!string.IsNullOrWhiteSpace(_searchText))
+            query = query.Where(t => t.Title.Contains(_searchText.Trim(), StringComparison.OrdinalIgnoreCase));
+
+        _filtered = query.ToList();
     }
+
+    private void SelectCategory(long? categoryId)
+    {
+        _selectedCategoryId = categoryId;
+        FilterTests();
+    }
+
+    private string GetCategoryButtonClass(long? categoryId) =>
+        _selectedCategoryId == categoryId ? "test-category-chip active" : "test-category-chip";
 
     private void OnSearchKeyUp(KeyboardEventArgs e)
     {

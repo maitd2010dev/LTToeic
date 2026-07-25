@@ -1,0 +1,178 @@
+@page "/admin/quan-li-danh-muc-de-thi"
+@layout AdminLayout
+@attribute [Authorize(Roles = "Admin")]
+@inject ITestService TestService
+@inject MessageService Message
+@inject ModalService Modal
+
+<div class="admin-page">
+    <div class="admin-header">
+        <div>
+            <h2 class="admin-title">Danh mục đề thi</h2>
+            <p class="admin-category-subtitle">Quản lý danh mục dùng để lọc đề thi theo năm hoặc kỹ năng.</p>
+        </div>
+        <Button Type="ButtonType.Primary" Icon="plus" OnClick="OpenAddCategory">Thêm danh mục</Button>
+    </div>
+
+    @if (_loading)
+    {
+        <div class="loading-center"><Spin /></div>
+    }
+    else if (_categories.Count == 0)
+    {
+        <Empty Description="@("Chưa có danh mục đề thi")" />
+    }
+    else
+    {
+        <div class="admin-category-grid">
+            @foreach (var category in _categories)
+            {
+                <section class="admin-category-card">
+                    <header class="admin-category-card-header">
+                        <div>
+                            <h3>@category.Name</h3>
+                            <span>@category.TestCount đề thi</span>
+                        </div>
+                        <Space>
+                            <SpaceItem>
+                                <Button Size="ButtonSize.Small" Icon="edit" OnClick="() => OpenEditCategory(category)">Sửa</Button>
+                            </SpaceItem>
+                            <SpaceItem>
+                                <Button Size="ButtonSize.Small" Danger Icon="delete"
+                                        Disabled="@(category.TestCount > 0)"
+                                        OnClick="() => DeleteCategory(category)">
+                                    Xóa
+                                </Button>
+                            </SpaceItem>
+                        </Space>
+                    </header>
+
+                    @if (category.Tests.Count == 0)
+                    {
+                        <div class="admin-category-empty">Chưa có đề thi trong danh mục này.</div>
+                    }
+                    else
+                    {
+                        <div class="admin-category-test-list">
+                            @foreach (var test in category.Tests)
+                            {
+                                <div class="admin-category-test-item">
+                                    <div>
+                                        <strong>@test.Title</strong>
+                                        <span>@test.Duration phút · @test.TotalQuestions câu</span>
+                                    </div>
+                                    <Tag Color="@(test.Status == TestStatus.Active ? "success" : test.Status == TestStatus.Draft ? "warning" : "error")">
+                                        @(test.Status == TestStatus.Active ? "Hoạt động" : test.Status == TestStatus.Draft ? "Nháp" : "Ngưng")
+                                    </Tag>
+                                </div>
+                            }
+                        </div>
+                    }
+                </section>
+            }
+        </div>
+    }
+</div>
+
+<Modal Visible="_categoryModalOpen"
+       Title="@(_editingCategory.Id == 0 ? "Thêm danh mục" : "Sửa danh mục")"
+       Footer="@null"
+       OnCancel="CloseCategoryModal">
+    <Form Model="_editingCategory" OnFinish="SaveCategory" Layout="@FormLayout.Vertical">
+        <FormItem Label="Tên danh mục" Required>
+            <Input @bind-Value="_editingCategory.Name" Placeholder="Ví dụ: 2026, Reading, Speaking" />
+        </FormItem>
+        <FormItem>
+            <Button Type="ButtonType.Primary" HtmlType="submit" Loading="_saving">Lưu</Button>
+            <Button Style="margin-left:8px" OnClick="CloseCategoryModal">Hủy</Button>
+        </FormItem>
+    </Form>
+</Modal>
+
+@code {
+    private List<TestCategoryViewModel> _categories = [];
+    private TestCategoryEditModel _editingCategory = new();
+    private bool _loading = true;
+    private bool _saving;
+    private bool _categoryModalOpen;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCategories();
+        _loading = false;
+    }
+
+    private async Task LoadCategories()
+    {
+        try
+        {
+            _categories = (await TestService.GetCategoriesAsync()).ToList();
+        }
+        catch (Exception ex)
+        {
+            await Message.ErrorAsync($"Lỗi tải danh mục: {ex.Message}");
+        }
+    }
+
+    private void OpenAddCategory()
+    {
+        _editingCategory = new TestCategoryEditModel();
+        _categoryModalOpen = true;
+    }
+
+    private void OpenEditCategory(TestCategoryViewModel category)
+    {
+        _editingCategory = new TestCategoryEditModel { Id = category.Id, Name = category.Name };
+        _categoryModalOpen = true;
+    }
+
+    private void CloseCategoryModal() => _categoryModalOpen = false;
+
+    private async Task SaveCategory()
+    {
+        _saving = true;
+        try
+        {
+            if (_editingCategory.Id == 0)
+                await TestService.AddCategoryAsync(_editingCategory);
+            else
+                await TestService.UpdateCategoryAsync(_editingCategory);
+
+            await LoadCategories();
+            _categoryModalOpen = false;
+            await Message.SuccessAsync("Lưu danh mục thành công");
+        }
+        catch (Exception ex)
+        {
+            await Message.ErrorAsync(ex.Message);
+        }
+        finally
+        {
+            _saving = false;
+        }
+    }
+
+    private async Task DeleteCategory(TestCategoryViewModel category)
+    {
+        var confirmed = await Modal.ConfirmAsync(new ConfirmOptions
+        {
+            Title = "Xác nhận xóa",
+            Content = $"Bạn có chắc chắn muốn xóa danh mục “{category.Name}”?",
+            OkText = "Xóa",
+            CancelText = "Hủy",
+            OkButtonProps = new ButtonProps { Danger = true }
+        });
+        if (!confirmed) return;
+
+        try
+        {
+            await TestService.DeleteCategoryAsync(category.Id);
+            await LoadCategories();
+            await Message.SuccessAsync("Đã xóa danh mục");
+        }
+        catch (Exception ex)
+        {
+            await Message.ErrorAsync(ex.Message);
+        }
+    }
+}

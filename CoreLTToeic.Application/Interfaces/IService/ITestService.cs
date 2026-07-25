@@ -27,5 +27,8 @@ namespace CoreLTToeic.Application.Interfaces.IService
         Task DeletePartAsync(long partId);
 
         Task<IEnumerable<TestCategoryViewModel>> GetCategoriesAsync();
+        Task<long> AddCategoryAsync(TestCategoryEditModel model);
+        Task UpdateCategoryAsync(TestCategoryEditModel model);
+        Task DeleteCategoryAsync(long categoryId);
     }
 }
