@@ -25,7 +25,7 @@
         <select class="ant-input" @bind="_levelFilter">
             <option value="">Tất cả cấp độ</option>
             <option value="Beginner">Cơ bản</option>
-            <option value="Intermediate">Trung cấp</option>
+            <option value="Intermediate">Khá</option>
             <option value="Advanced">Nâng cao</option>
         </select>
     </div>
@@ -57,12 +57,12 @@
             <Input @bind-Value="_model.Title" />
         </FormItem>
         <FormItem Label="Mô tả" Required>
-            <TextArea @bind-Value="_model.Description" Rows="4" />
+            <RichTextEditor @bind-Value="_model.Description" Height="160" ConvertLegacyMarkdown="true" />
         </FormItem>
         <FormItem Label="Cấp độ">
             <select class="ant-input" @bind="_model.Level">
                 <option value="@CourseLevel.Beginner">Cơ bản</option>
-                <option value="@CourseLevel.Intermediate">Trung cấp</option>
+                <option value="@CourseLevel.Intermediate">Khá</option>
                 <option value="@CourseLevel.Advanced">Nâng cao</option>
             </select>
         </FormItem>
@@ -153,7 +153,7 @@
     private static string LevelLabel(CourseLevel level) => level switch
     {
         CourseLevel.Beginner => "Cơ bản",
-        CourseLevel.Intermediate => "Trung cấp",
+        CourseLevel.Intermediate => "Khá",
         _ => "Nâng cao"
     };
 }

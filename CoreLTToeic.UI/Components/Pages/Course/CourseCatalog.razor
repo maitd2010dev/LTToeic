@@ -14,7 +14,7 @@
         <Input @bind-Value="_search" Placeholder="Tìm khóa học..." />
         <select class="ant-input" @bind="_level">
             <option value="">Tất cả cấp độ</option><option value="Beginner">Cơ bản</option>
-            <option value="Intermediate">Trung cấp</option><option value="Advanced">Nâng cao</option>
+            <option value="Intermediate">Khá</option><option value="Advanced">Nâng cao</option>
         </select>
     </div>
     @if (_loading) { <Spin Tip="Đang tải..." /> }
@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <Tag Color="@("blue")">@LevelLabel(course.Level)</Tag>
                         <h3 class="h5 mt-2">@course.Title</h3>
-                        <p class="text-muted">@course.Description</p>
+                        <p class="text-muted">@CourseMarkdownRenderer.ToPlainText(course.Description, 180)</p>
                         <p>@course.SectionCount chương · @course.TotalLessons bài · @course.TotalDuration phút</p>
                         <p>★ @course.AverageRating.ToString("0.0") (@course.ReviewCount) · @course.EnrollmentCount học viên</p>
                         @if (course.IsEnrolled)
@@ -69,6 +69,6 @@
     }
     private static string LevelLabel(CourseLevel level) => level switch
     {
-        CourseLevel.Beginner => "Cơ bản", CourseLevel.Intermediate => "Trung cấp", _ => "Nâng cao"
+        CourseLevel.Beginner => "Cơ bản", CourseLevel.Intermediate => "Khá", _ => "Nâng cao"
     };
 }

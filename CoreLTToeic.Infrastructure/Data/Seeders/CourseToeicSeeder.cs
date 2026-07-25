@@ -8,6 +8,8 @@ namespace CoreLTToeic.Infrastructure.Data.Seeders;
 
 public class CourseToeicSeeder
 {
+    private const string CourseTitle = "[Complete TOEIC] Lộ trình 450–800+";
+
     private readonly IDbContextFactory<AppDbContext> _contextFactory;
     private readonly ILogger<CourseToeicSeeder> _logger;
 
@@ -21,45 +23,147 @@ public class CourseToeicSeeder
     {
         using var ctx = await _contextFactory.CreateDbContextAsync();
 
-        if (await ctx.Courses.AnyAsync(c => c.Title == "TOEIC Cơ Bản cho Người Mới"))
+        if (await ctx.Courses.AnyAsync(c => c.Title == CourseTitle))
         {
             _logger.LogInformation("TOEIC course already seeded, skipping.");
             return;
         }
 
-        _logger.LogInformation("Seeding TOEIC beginner course...");
+        _logger.LogInformation("Seeding Complete TOEIC course...");
 
         var course = new Course
         {
-            Title       = "TOEIC Cơ Bản cho Người Mới",
-            Description = "Khoá học TOEIC cơ bản dành cho người mới bắt đầu. Bao gồm từ vựng thiết yếu, ngữ pháp nền tảng và bài luyện thi thực tế theo định dạng TOEIC chính thức.",
-            Objective   = "Sau khi hoàn thành khoá học, học viên sẽ nắm vững 500+ từ vựng TOEIC thông dụng, hiểu các cấu trúc ngữ pháp cơ bản, và tự tin làm các dạng câu hỏi Part 5 & Part 6.",
+            Title       = CourseTitle,
+            Description = """
+<p>Lộ trình TOEIC Listening &amp; Reading toàn diện dành cho người học từ mất gốc đến mục tiêu 800+.</p>
+<p>Khóa học kết hợp <strong>từ vựng theo chủ đề, ngữ pháp trọng tâm, chiến lược 7 Part</strong> và bài luyện tập theo từng chặng để bạn học đúng phần đang cần cải thiện.</p>
+""",
+            Objective   = """
+<ul>
+<li>Xây dựng vốn từ vựng thường gặp trong môi trường công sở và bài thi TOEIC.</li>
+<li>Nắm chắc các chủ điểm ngữ pháp quan trọng của phần Reading.</li>
+<li>Biết chiến lược xử lý từng dạng câu hỏi từ Part 1 đến Part 7.</li>
+<li>Thiết lập lộ trình riêng cho các mốc 450+, 650+ và 800+.</li>
+<li>Theo dõi tiến độ qua bài kiểm tra cuối mỗi chặng.</li>
+</ul>
+""",
+            ThumbnailUrl    = "/images/courses/complete-toeic-cover.jpg",
+            PreviewVideoUrl = "https://www.youtube.com/embed/VPL358kfdQ4",
             Price       = 0,
             Status      = CourseStatus.Published,
-            Level       = CourseLevel.Beginner,
+            Level       = CourseLevel.Intermediate,
             CreatedAt   = DateTime.UtcNow,
             UpdatedAt   = DateTime.UtcNow,
             Sections    = new List<CourseSection>
             {
+                BuildOrientationSection(),
                 BuildVocabularySection(),
                 BuildGrammarSection(),
+                BuildListeningSection(),
                 BuildPracticeSection()
             }
         };
 
+        foreach (var lesson in course.Sections.SelectMany(section => section.Lessons))
+        {
+            var questionOrder = 1;
+            foreach (var question in lesson.QuizQuestions)
+                question.OrderIndex = questionOrder++;
+        }
+
         ctx.Courses.Add(course);
         await ctx.SaveChangesAsync();
 
-        _logger.LogInformation("TOEIC beginner course seeded successfully.");
+        _logger.LogInformation("Complete TOEIC course seeded successfully.");
     }
 
     // ─────────────────────────────────────────────────────────────
-    // SECTION 1: TỪ VỰNG TOEIC
+    // SECTION 1: KHỞI ĐỘNG VÀ LỘ TRÌNH
+    // ─────────────────────────────────────────────────────────────
+    private static CourseSection BuildOrientationSection() => new()
+    {
+        Title      = "Khởi động và lộ trình học",
+        OrderIndex = 1,
+        CreatedAt  = DateTime.UtcNow,
+        UpdatedAt  = DateTime.UtcNow,
+        Lessons    = new List<CourseLesson>
+        {
+            new()
+            {
+                Title       = "Cấu trúc bài thi TOEIC Listening & Reading",
+                Description = "Hiểu format, thời lượng và cách phân bổ điểm trước khi bắt đầu.",
+                Type        = LessonType.Text,
+                OrderIndex  = 1,
+                Duration    = 15,
+                IsFree      = true,
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow,
+                Content     = """
+<h2>Cấu trúc bài thi TOEIC Listening &amp; Reading</h2>
+<p>Bài thi gồm <strong>200 câu hỏi</strong>, chia đều cho hai kỹ năng và làm trong khoảng 120 phút.</p>
+<h3>Listening — 100 câu / khoảng 45 phút</h3>
+<ul>
+<li><strong>Part 1:</strong> Mô tả tranh</li>
+<li><strong>Part 2:</strong> Hỏi và đáp</li>
+<li><strong>Part 3:</strong> Hội thoại ngắn</li>
+<li><strong>Part 4:</strong> Bài nói ngắn</li>
+</ul>
+<h3>Reading — 100 câu / 75 phút</h3>
+<ul>
+<li><strong>Part 5:</strong> Hoàn thành câu</li>
+<li><strong>Part 6:</strong> Hoàn thành đoạn văn</li>
+<li><strong>Part 7:</strong> Đọc hiểu một hoặc nhiều văn bản</li>
+</ul>
+<blockquote><p>Hãy làm bài kiểm tra đầu vào trước, ghi lại tỷ lệ đúng theo từng Part và ưu tiên phần yếu nhất.</p></blockquote>
+"""
+            },
+            new()
+            {
+                Title       = "Video hướng dẫn cách học Complete TOEIC",
+                Description = "Video công khai từ kênh YouTube STUDY4.",
+                Type        = LessonType.Video,
+                OrderIndex  = 2,
+                Duration    = 6,
+                IsFree      = true,
+                VideoUrl    = "https://www.youtube.com/embed/dv8sdwZfdHM",
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow
+            },
+            new()
+            {
+                Title       = "Chọn lộ trình 450+, 650+ hoặc 800+",
+                Description = "Xác định thứ tự học theo mục tiêu điểm.",
+                Type        = LessonType.Text,
+                OrderIndex  = 3,
+                Duration    = 12,
+                IsFree      = true,
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow,
+                Content     = """
+<h2>Lộ trình theo mục tiêu</h2>
+<h3>Mục tiêu 450+</h3>
+<p>Tập trung nền tảng từ vựng, ngữ pháp và luyện theo thứ tự Listening Part 1 → 2 → 4; Reading Part 5 → 6.</p>
+<h3>Mục tiêu 650+</h3>
+<p>Hoàn thiện cả 7 Part. Chỉ chuyển sang dạng mới khi tỷ lệ đúng của dạng hiện tại ổn định ở mức 70–80%.</p>
+<h3>Mục tiêu 800+</h3>
+<p>Tăng tốc độ xử lý, luyện câu suy luận, câu paraphrase và các bài đọc ghép trong Part 7.</p>
+<ul>
+<li>Mỗi ngày học 20–30 từ trong ngữ cảnh.</li>
+<li>Dành ít nhất 20 phút cho nghe chép chính tả.</li>
+<li>Luôn chữa kỹ câu sai và ghi lại nguyên nhân.</li>
+</ul>
+"""
+            }
+        }
+    };
+
+    // ─────────────────────────────────────────────────────────────
+    // SECTION 2: TỪ VỰNG TOEIC
     // ─────────────────────────────────────────────────────────────
     private static CourseSection BuildVocabularySection() => new()
     {
         Title      = "Từ vựng TOEIC",
-        OrderIndex = 1,
+        OrderIndex = 2,
         CreatedAt  = DateTime.UtcNow,
         UpdatedAt  = DateTime.UtcNow,
         Lessons    = new List<CourseLesson>
@@ -352,12 +456,12 @@ Chủ đề nhà hàng và khách sạn xuất hiện trong Part 2 (câu hỏi �
     ];
 
     // ─────────────────────────────────────────────────────────────
-    // SECTION 2: NGỮ PHÁP TOEIC
+    // SECTION 3: NGỮ PHÁP TOEIC
     // ─────────────────────────────────────────────────────────────
     private static CourseSection BuildGrammarSection() => new()
     {
         Title      = "Ngữ pháp TOEIC",
-        OrderIndex = 2,
+        OrderIndex = 3,
         CreatedAt  = DateTime.UtcNow,
         UpdatedAt  = DateTime.UtcNow,
         Lessons    = new List<CourseLesson>
@@ -754,12 +858,197 @@ Giới từ là một trong những phần khó nhất trong TOEIC vì chúng th
     ];
 
     // ─────────────────────────────────────────────────────────────
-    // SECTION 3: LUYỆN THI TOEIC
+    // SECTION 4: TOEIC LISTENING
+    // ─────────────────────────────────────────────────────────────
+    private static CourseSection BuildListeningSection() => new()
+    {
+        Title      = "Chiến lược TOEIC Listening",
+        OrderIndex = 4,
+        CreatedAt  = DateTime.UtcNow,
+        UpdatedAt  = DateTime.UtcNow,
+        Lessons    = new List<CourseLesson>
+        {
+            new()
+            {
+                Title       = "Part 1 — Mô tả tranh",
+                Description = "Nhận diện người, vật, hành động và các bẫy âm tương tự.",
+                Type        = LessonType.Text,
+                OrderIndex  = 1,
+                Duration    = 18,
+                IsFree      = true,
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow,
+                Content     = """
+<h2>Part 1 — Photographs</h2>
+<p>Quan sát nhanh bức tranh trước khi audio bắt đầu và tự gọi tên các chi tiết nổi bật bằng tiếng Anh.</p>
+<h3>Trình tự xử lý</h3>
+<ol>
+<li>Xác định tranh có người hay không có người.</li>
+<li>Chú ý hành động đang diễn ra, vị trí và trạng thái đồ vật.</li>
+<li>Nghe đủ bốn phương án; không chọn chỉ vì nghe thấy một từ có trong tranh.</li>
+</ol>
+<p><strong>Bẫy thường gặp:</strong> từ phát âm gần giống, sai chủ thể, sai giới từ vị trí và mô tả hành động chưa xảy ra.</p>
+"""
+            },
+            new()
+            {
+                Title       = "Part 2 — Hỏi và đáp",
+                Description = "Nghe từ để hỏi và chọn phản hồi phù hợp về ý nghĩa.",
+                Type        = LessonType.Text,
+                OrderIndex  = 2,
+                Duration    = 22,
+                IsFree      = true,
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow,
+                Content     = """
+<h2>Part 2 — Question–Response</h2>
+<p>Tập trung vào <strong>từ đầu câu hỏi</strong>, thì của động từ và mục đích giao tiếp.</p>
+<ul>
+<li><strong>Who:</strong> người hoặc bộ phận phụ trách.</li>
+<li><strong>When:</strong> thời điểm, thời hạn hoặc tần suất.</li>
+<li><strong>Where:</strong> địa điểm hoặc chỉ dẫn.</li>
+<li><strong>Why/How:</strong> lý do, phương thức hoặc lời đề nghị.</li>
+</ul>
+<blockquote><p>Đáp án đúng thường là phản hồi gián tiếp. Đừng chờ một câu trả lời lặp lại nguyên từ trong câu hỏi.</p></blockquote>
+"""
+            },
+            new()
+            {
+                Title       = "Part 3 — Hội thoại ngắn",
+                Description = "Đọc trước câu hỏi, theo dõi người nói và bắt từ khóa đã được paraphrase.",
+                Type        = LessonType.Text,
+                OrderIndex  = 3,
+                Duration    = 25,
+                IsFree      = false,
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow,
+                Content     = """
+<h2>Part 3 — Conversations</h2>
+<p>Trong thời gian hướng dẫn, hãy đọc trước ba câu hỏi để biết mình cần nghe thông tin nào.</p>
+<h3>Ba lớp thông tin cần theo dõi</h3>
+<ol>
+<li><strong>Bối cảnh:</strong> ai đang nói, ở đâu và vì mục đích gì.</li>
+<li><strong>Chi tiết:</strong> thời gian, con số, vấn đề hoặc yêu cầu cụ thể.</li>
+<li><strong>Hành động tiếp theo:</strong> người nói sẽ làm gì sau cuộc hội thoại.</li>
+</ol>
+<p>Câu hỏi và audio thường dùng từ đồng nghĩa. Ví dụ, <em>reschedule</em> trong audio có thể xuất hiện dưới dạng <em>change the appointment time</em> trong đáp án.</p>
+"""
+            },
+            new()
+            {
+                Title       = "Video mẫu Part 3 — Câu hỏi chủ đề, mục đích",
+                Description = "Bài giảng mẫu công khai từ kênh YouTube STUDY4.",
+                Type        = LessonType.Video,
+                OrderIndex  = 4,
+                Duration    = 12,
+                IsFree      = true,
+                VideoUrl    = "https://www.youtube.com/embed/_5PijqLwmtk",
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow
+            },
+            new()
+            {
+                Title       = "Part 4 — Bài nói ngắn",
+                Description = "Nhận diện cấu trúc thông báo, quảng cáo, tin nhắn và bài phát biểu.",
+                Type        = LessonType.Text,
+                OrderIndex  = 5,
+                Duration    = 25,
+                IsFree      = false,
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow,
+                Content     = """
+<h2>Part 4 — Talks</h2>
+<p>Part 4 chỉ có một người nói, vì vậy cấu trúc bài nói là manh mối quan trọng nhất.</p>
+<ul>
+<li><strong>Thông báo:</strong> lý do thông báo → thay đổi → hướng dẫn.</li>
+<li><strong>Tin nhắn thoại:</strong> người gọi → vấn đề → yêu cầu gọi lại hoặc hành động.</li>
+<li><strong>Quảng cáo:</strong> sản phẩm → lợi ích → ưu đãi → cách liên hệ.</li>
+<li><strong>Bài phát biểu:</strong> chào mừng → chủ đề → lịch trình.</li>
+</ul>
+<p>Đánh dấu từ khóa trong câu hỏi trước khi nghe và chuyển ngay sang bộ câu hỏi tiếp theo sau khi chọn đáp án.</p>
+"""
+            },
+            new()
+            {
+                Title       = "Phương pháp nghe chép chính tả",
+                Description = "Quy trình dictation ngắn giúp nghe rõ âm nối và từ bị nuốt.",
+                Type        = LessonType.Text,
+                OrderIndex  = 6,
+                Duration    = 20,
+                IsFree      = false,
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow,
+                Content     = """
+<h2>Dictation — Nghe chép chính tả</h2>
+<ol>
+<li>Nghe toàn đoạn một lần để hiểu bối cảnh.</li>
+<li>Nghe từng câu và chép lại chính xác những gì nghe được.</li>
+<li>So sánh với transcript, đánh dấu chỗ nghe sai hoặc bỏ sót.</li>
+<li>Nghe lại và đọc nhại theo đúng nhịp, trọng âm và âm nối.</li>
+<li>Lặp lại đoạn đó vào ngày hôm sau.</li>
+</ol>
+<p>Mỗi buổi chỉ cần 15–20 phút nhưng phải ghi rõ lỗi thuộc nhóm nào: thiếu từ vựng, không nhận ra phát âm hay mất tập trung.</p>
+"""
+            },
+            new()
+            {
+                Title         = "Ôn tập chiến lược Listening",
+                Type          = LessonType.Quiz,
+                OrderIndex    = 7,
+                Duration      = 12,
+                IsFree        = true,
+                CreatedAt     = DateTime.UtcNow,
+                UpdatedAt     = DateTime.UtcNow,
+                QuizQuestions = BuildListeningQuiz()
+            }
+        }
+    };
+
+    private static List<QuizQuestion> BuildListeningQuiz() =>
+    [
+        Q("Trước khi audio Part 1 bắt đầu, thao tác hữu ích nhất là gì?",
+            "Quan sát người, vật và hành động nổi bật trong tranh",
+            "Đọc đáp án của Part 2",
+            "Dịch toàn bộ hướng dẫn sang tiếng Việt",
+            "Chọn trước đáp án có từ quen thuộc",
+            "1", "listening-strategy"),
+
+        Q("Khi làm Part 2, vì sao không nên chỉ tìm từ được lặp lại từ câu hỏi?",
+            "Audio luôn phát rất chậm",
+            "Đáp án đúng thường diễn đạt gián tiếp hoặc dùng từ khác",
+            "Mọi câu hỏi đều bắt đầu bằng Why",
+            "Các phương án luôn có cùng nghĩa",
+            "2", "listening-strategy"),
+
+        Q("Ở Part 3, việc đọc trước ba câu hỏi giúp người học làm gì?",
+            "Nhớ nguyên văn toàn bộ hội thoại",
+            "Biết trước thông tin cần tập trung khi nghe",
+            "Bỏ qua phần mở đầu của hội thoại",
+            "Đoán đáp án mà không cần nghe",
+            "2", "listening-strategy"),
+
+        Q("Thông tin nào thường xuất hiện cuối một tin nhắn thoại trong Part 4?",
+            "Một yêu cầu hoặc hành động tiếp theo",
+            "Danh sách toàn bộ nhân viên",
+            "Đáp án của câu hỏi trước",
+            "Một công thức ngữ pháp",
+            "1", "listening-strategy"),
+
+        Q("Sau khi so sánh bài dictation với transcript, bước tiếp theo phù hợp là gì?",
+            "Chuyển ngay sang đề mới",
+            "Đánh dấu lỗi rồi nghe và đọc nhại lại",
+            "Xóa toàn bộ phần đã chép",
+            "Chỉ học thuộc bản dịch tiếng Việt",
+            "2", "listening-strategy")
+    ];
+
+    // ─────────────────────────────────────────────────────────────
+    // SECTION 5: TOEIC READING
     // ─────────────────────────────────────────────────────────────
     private static CourseSection BuildPracticeSection() => new()
     {
-        Title      = "Luyện thi TOEIC",
-        OrderIndex = 3,
+        Title      = "Chiến lược TOEIC Reading",
+        OrderIndex = 5,
         CreatedAt  = DateTime.UtcNow,
         UpdatedAt  = DateTime.UtcNow,
         Lessons    = new List<CourseLesson>
@@ -917,9 +1206,39 @@ Part 6 có **4 đoạn văn**, mỗi đoạn có **4 chỗ trống** (tổng 16 
 
             new()
             {
+                Title       = "Hướng dẫn Part 7 — Reading Comprehension",
+                Description = "Đọc theo câu hỏi, nhận diện paraphrase và xử lý bài đơn/bài ghép.",
+                Type        = LessonType.Text,
+                OrderIndex  = 3,
+                Duration    = 30,
+                IsFree      = false,
+                CreatedAt   = DateTime.UtcNow,
+                UpdatedAt   = DateTime.UtcNow,
+                Content     = """
+<h2>Part 7 — Reading Comprehension</h2>
+<p>Part 7 kiểm tra khả năng tìm thông tin, hiểu mục đích, suy luận và kết nối dữ kiện giữa nhiều văn bản.</p>
+<h3>Quy trình làm bài</h3>
+<ol>
+<li>Đọc câu hỏi trước và gạch chân tên riêng, thời gian, địa điểm hoặc hành động.</li>
+<li>Xác định đoạn chứa thông tin thay vì dịch toàn bộ văn bản.</li>
+<li>Đối chiếu cách diễn đạt trong bài với từ đồng nghĩa trong đáp án.</li>
+<li>Với câu suy luận, chỉ chọn kết luận có đủ bằng chứng trong văn bản.</li>
+</ol>
+<h3>Phân bổ thời gian gợi ý</h3>
+<ul>
+<li>Part 5: 10 phút</li>
+<li>Part 6: 8 phút</li>
+<li>Part 7: khoảng 57 phút</li>
+</ul>
+<blockquote><p>Nếu một câu hỏi mất quá lâu, đánh dấu và chuyển tiếp. Giữ đủ thời gian cho các bài đọc ghép ở cuối.</p></blockquote>
+"""
+            },
+
+            new()
+            {
                 Title         = "Luyện tập Part 5",
                 Type          = LessonType.Quiz,
-                OrderIndex    = 3,
+                OrderIndex    = 4,
                 Duration      = 20,
                 IsFree        = true,
                 CreatedAt     = DateTime.UtcNow,
@@ -931,12 +1250,24 @@ Part 6 có **4 đoạn văn**, mỗi đoạn có **4 chỗ trống** (tổng 16 
             {
                 Title         = "Luyện tập Part 6",
                 Type          = LessonType.Quiz,
-                OrderIndex    = 4,
+                OrderIndex    = 5,
                 Duration      = 15,
                 IsFree        = false,
                 CreatedAt     = DateTime.UtcNow,
                 UpdatedAt     = DateTime.UtcNow,
                 QuizQuestions = BuildPart6Quiz()
+            },
+
+            new()
+            {
+                Title         = "Ôn tập chiến lược Part 7",
+                Type          = LessonType.Quiz,
+                OrderIndex    = 6,
+                Duration      = 12,
+                IsFree        = false,
+                CreatedAt     = DateTime.UtcNow,
+                UpdatedAt     = DateTime.UtcNow,
+                QuizQuestions = BuildPart7Quiz()
             }
         }
     };
@@ -1050,6 +1381,37 @@ Part 6 có **4 đoạn văn**, mỗi đoạn có **4 chỗ trống** (tổng 16 
             "(C) inconvenience",
             "(D) inconveniences",
             "3", "part6"),
+    ];
+
+    private static List<QuizQuestion> BuildPart7Quiz() =>
+    [
+        Q("Khi bắt đầu một bài đọc Part 7, bước nào giúp định hướng thông tin cần tìm?",
+            "Đọc câu hỏi và đánh dấu từ khóa trước",
+            "Dịch từng từ theo thứ tự",
+            "Đọc bốn đáp án rồi chọn ngẫu nhiên",
+            "Bỏ qua tên riêng và con số",
+            "1", "part7-strategy"),
+
+        Q("Một đáp án suy luận trong Part 7 được chọn khi nào?",
+            "Khi đáp án nghe có vẻ hợp lý ngoài đời",
+            "Khi có đủ dữ kiện trong văn bản để kết luận",
+            "Khi đáp án dùng đúng từ trong câu hỏi",
+            "Khi đó là phương án dài nhất",
+            "2", "part7-strategy"),
+
+        Q("Paraphrase trong Part 7 có nghĩa là gì?",
+            "Lặp nguyên văn một câu",
+            "Diễn đạt cùng một ý bằng từ hoặc cấu trúc khác",
+            "Dịch câu hỏi sang tiếng Việt",
+            "Đổi thứ tự các bài đọc",
+            "2", "part7-strategy"),
+
+        Q("Vì sao cần giữ thời gian cho cuối Part 7?",
+            "Các câu cuối không tính điểm",
+            "Cuối phần thường có các bộ bài đọc ghép cần kết nối nhiều dữ kiện",
+            "Audio chỉ phát ở cuối bài",
+            "Có thêm phần viết luận",
+            "2", "part7-strategy")
     ];
 
     // ─────────────────────────────────────────────────────────────

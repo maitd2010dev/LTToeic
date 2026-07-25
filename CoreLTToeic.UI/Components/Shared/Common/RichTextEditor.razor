@@ -1,10 +1,10 @@
 @inject IJSRuntime JS
 
-<div id="@_wrapperId">
+<div id="@_wrapperId" class="rich-text-editor">
     <TextEditor @ref="_editor"
                 Theme="EditorTheme.Snow"
                 OnTextChanged="HandleChanged"
-                WrapImagesInFigures="false">
+                WrapImagesInFigures="true">
         <ToolbarContent>
             <span class="ql-formats">
                 <button class="ql-bold"></button>
@@ -17,6 +17,7 @@
             </span>
             <span class="ql-formats">
                 <button class="ql-link"></button>
+                <button class="ql-image"></button>
             </span>
         </ToolbarContent>
     </TextEditor>
@@ -26,6 +27,7 @@
     [Parameter] public string Value { get; set; } = "";
     [Parameter] public EventCallback<string> ValueChanged { get; set; }
     [Parameter] public int Height { get; set; } = 280;
+    [Parameter] public bool ConvertLegacyMarkdown { get; set; }
 
     private TextEditor _editor = null!;
     private string _wrapperId = "qeditor-" + Guid.NewGuid().ToString("N")[..8];
@@ -36,12 +38,13 @@
     {
         if (firstRender)
         {
+            await Task.Delay(100); // allow Quill to fully initialize
             if (!string.IsNullOrEmpty(Value))
             {
-                await Task.Delay(100); // allow Quill to fully initialize
-                await JS.InvokeVoidAsync("QuillHelpers.setEditorHTML", _wrapperId, Value);
+                await SetEditorValueAsync(Value);
                 _lastValue = Value;
             }
+            await JS.InvokeVoidAsync("QuillHelpers.setEditorHeight", _wrapperId, Height);
             _initialized = true;
         }
     }
@@ -51,7 +54,8 @@
         if (_initialized && Value != _lastValue)
         {
             _lastValue = Value;
-            await JS.InvokeVoidAsync("QuillHelpers.setEditorHTML", _wrapperId, Value ?? "");
+            await SetEditorValueAsync(Value);
+            await JS.InvokeVoidAsync("QuillHelpers.setEditorHeight", _wrapperId, Height);
         }
     }
 
@@ -64,5 +68,13 @@
             Value = html;
             await ValueChanged.InvokeAsync(html);
         }
+    }
+
+    private ValueTask SetEditorValueAsync(string? value)
+    {
+        var editorValue = ConvertLegacyMarkdown && !CourseMarkdownRenderer.IsHtml(value)
+            ? CourseMarkdownRenderer.Render(value).Value
+            : value ?? "";
+        return JS.InvokeVoidAsync("QuillHelpers.setEditorHTML", _wrapperId, editorValue);
     }
 }

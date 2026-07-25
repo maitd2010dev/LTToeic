@@ -12,9 +12,19 @@
     {
         <div class="row g-4">
             <div class="col-lg-8">
-                <Tag Color="@("blue")">@_course.Level</Tag>
+                <Tag Color="@LevelColor(_course.Level)">@LevelLabel(_course.Level)</Tag>
                 <h1>@_course.Title</h1>
                 <div class="course-markdown">@CourseMarkdownRenderer.Render(_course.Description)</div>
+                @if (CourseMediaHelper.ToEmbedUrl(_course.PreviewVideoUrl) is { } previewVideoUrl)
+                {
+                    <div class="ratio ratio-16x9 mt-4">
+                        <iframe src="@previewVideoUrl"
+                                title="@($"Giới thiệu {_course.Title}")"
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                    </div>
+                }
                 <h2 class="h4 mt-4">Mục tiêu</h2>
                 <div class="course-markdown">@CourseMarkdownRenderer.Render(_course.Objective)</div>
                 <h2 class="h4 mt-4">Chương trình học</h2>
@@ -26,7 +36,7 @@
                             {
                                 <li class="list-group-item d-flex justify-content-between">
                                     <span>@LessonLabel(lesson.Type) · @lesson.Title</span>
-                                    <span>@(lesson.IsFree ? "Học thử" : $"{lesson.Duration} phút")</span>
+                                    <span>@lesson.Duration phút</span>
                                 </li>
                             }
                         </ul>
@@ -41,7 +51,15 @@
                 }
             </div>
             <div class="col-lg-4">
-                <div class="card shadow-sm sticky-top" style="top:80px"><div class="card-body">
+                <div class="card shadow-sm sticky-top" style="top:80px">
+                    @if (!string.IsNullOrWhiteSpace(_course.ThumbnailUrl))
+                    {
+                        <img src="@_course.ThumbnailUrl"
+                             class="card-img-top"
+                             alt="@_course.Title"
+                             style="aspect-ratio:16/9;object-fit:cover" />
+                    }
+                    <div class="card-body">
                     <h3 class="h4">Miễn phí</h3>
                     <p>@_course.TotalLessons bài · @_course.TotalDuration phút</p>
                     @if (_course.IsEnrolled)
@@ -52,12 +70,9 @@
                     else
                     {
                         <Button Type="ButtonType.Primary" Block Loading="_enrolling" OnClick="Enroll">Đăng ký miễn phí</Button>
-                        @if (_course.Sections.SelectMany(s => s.Lessons).Any(l => l.IsFree))
-                        {
-                            <Button Block OnClick="StartLearning" Style="margin-top:8px">Xem bài học thử</Button>
-                        }
                     }
-                </div></div>
+                    </div>
+                </div>
             </div>
         </div>
     }
@@ -91,5 +106,17 @@
         if (_userId == null) Nav.NavigateTo($"/login?returnUrl={Uri.EscapeDataString($"/khoa-hoc/{Id}/hoc")}");
         else Nav.NavigateTo($"/khoa-hoc/{Id}/hoc");
     }
+    private static string LevelLabel(CourseLevel level) => level switch
+    {
+        CourseLevel.Beginner => "Cơ bản",
+        CourseLevel.Intermediate => "Khá",
+        _ => "Nâng cao"
+    };
+    private static string LevelColor(CourseLevel level) => level switch
+    {
+        CourseLevel.Beginner => "blue",
+        CourseLevel.Intermediate => "orange",
+        _ => "red"
+    };
     private static string LessonLabel(LessonType type) => type switch { LessonType.Video => "Video", LessonType.Quiz => "Kiểm tra", _ => "Bài đọc" };
 }

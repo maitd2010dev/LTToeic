@@ -35,7 +35,7 @@
             <main>
                 @if (_selected == null)
                 {
-                    <Alert Type="AlertType.Info" Message="Hãy đăng ký khóa học để mở nội dung, hoặc chọn một bài học thử." />
+                    <Alert Type="AlertType.Info" Message="Hãy đăng ký khóa học để mở nội dung." />
                 }
                 else
                 {
@@ -44,13 +44,30 @@
                             <div><Tag Color="@("blue")">@LessonLabel(_selected.Type)</Tag><h2 class="mt-2">@_selected.Title</h2></div>
                             @if (_selected.IsCompleted) { <Tag Color="@("success")">Đã hoàn thành</Tag> }
                         </div>
+                        @if (!string.IsNullOrWhiteSpace(_selected.Description))
+                        {
+                            <p class="text-muted">@_selected.Description</p>
+                        }
                         @if (_selected.Type == LessonType.Text)
                         {
                             <div class="course-markdown">@CourseMarkdownRenderer.Render(_selected.Content)</div>
                         }
                         else if (_selected.Type == LessonType.Video)
                         {
-                            <div class="ratio ratio-16x9"><iframe src="@_selected.VideoUrl" title="@_selected.Title" allowfullscreen></iframe></div>
+                            @if (CourseMediaHelper.ToEmbedUrl(_selected.VideoUrl) is { } videoUrl)
+                            {
+                                <div class="ratio ratio-16x9">
+                                    <iframe src="@videoUrl"
+                                            title="@_selected.Title"
+                                            loading="lazy"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                </div>
+                            }
+                            else
+                            {
+                                <Alert Type="AlertType.Warning" Message="URL video không hợp lệ hoặc chưa được hỗ trợ." />
+                            }
                             <p class="mt-2"><a href="@_selected.VideoUrl" target="_blank" rel="noopener noreferrer">Mở video trong thẻ mới</a></p>
                         }
                         else
@@ -77,10 +94,6 @@
                             @if (_course.IsEnrolled)
                             {
                                 <Button Type="ButtonType.Primary" Loading="_submitting" OnClick="SubmitQuiz">Nộp bài</Button>
-                            }
-                            else
-                            {
-                                <Alert Type="AlertType.Info" Message="Bạn có thể xem bài học thử. Hãy đăng ký miễn phí để nộp bài và lưu tiến độ." />
                             }
                             @if (_latestAttempt != null)
                             {

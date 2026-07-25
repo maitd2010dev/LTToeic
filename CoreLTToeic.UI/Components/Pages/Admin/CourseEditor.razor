@@ -35,15 +35,46 @@ else
         <div class="admin-table-card">
             <Form Model="_courseModel" OnFinish="SaveGeneral" Layout="@FormLayout.Vertical">
                 <FormItem Label="Tên khóa học" Required><Input @bind-Value="_courseModel.Title" /></FormItem>
-                <FormItem Label="Mô tả (Markdown)" Required><TextArea @bind-Value="_courseModel.Description" Rows="5" /></FormItem>
-                <FormItem Label="Mục tiêu (Markdown)"><TextArea @bind-Value="_courseModel.Objective" Rows="5" /></FormItem>
+                <FormItem Label="Mô tả khóa học" Required>
+                    <RichTextEditor @bind-Value="_courseModel.Description" Height="180" ConvertLegacyMarkdown="true" />
+                </FormItem>
+                <FormItem Label="Mục tiêu khóa học">
+                    <RichTextEditor @bind-Value="_courseModel.Objective" Height="180" ConvertLegacyMarkdown="true" />
+                </FormItem>
                 <FormItem Label="Ảnh đại diện (URL hoặc đường dẫn)"><Input @bind-Value="_courseModel.ThumbnailUrl" /></FormItem>
                 <FormItem Label="Video giới thiệu (HTTP/HTTPS)"><Input @bind-Value="_courseModel.PreviewVideoUrl" /></FormItem>
+                @if (!string.IsNullOrWhiteSpace(_courseModel.ThumbnailUrl) ||
+                     CourseMediaHelper.ToEmbedUrl(_courseModel.PreviewVideoUrl) != null)
+                {
+                    <div class="course-media-row">
+                        @if (!string.IsNullOrWhiteSpace(_courseModel.ThumbnailUrl))
+                        {
+                            <div class="course-media-block">
+                                <label>Xem trước ảnh đại diện</label>
+                                <img src="@_courseModel.ThumbnailUrl"
+                                     class="course-thumbnail-preview"
+                                     alt="Ảnh đại diện khóa học" />
+                            </div>
+                        }
+                        @if (CourseMediaHelper.ToEmbedUrl(_courseModel.PreviewVideoUrl) is { } previewVideoUrl)
+                        {
+                            <div class="course-media-block">
+                                <label>Xem trước video giới thiệu</label>
+                                <div class="course-video-preview">
+                                    <iframe src="@previewVideoUrl"
+                                            title="Video giới thiệu khóa học"
+                                            loading="lazy"
+                                            allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                     <FormItem Label="Cấp độ">
                         <select class="ant-input" @bind="_courseModel.Level">
                             <option value="@CourseLevel.Beginner">Cơ bản</option>
-                            <option value="@CourseLevel.Intermediate">Trung cấp</option>
+                            <option value="@CourseLevel.Intermediate">Khá</option>
                             <option value="@CourseLevel.Advanced">Nâng cao</option>
                         </select>
                     </FormItem>
@@ -81,7 +112,7 @@ else
                         {
                             <div style="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #f1f5f9">
                                 <Tag Color="@LessonColor(lesson.Type)">@LessonLabel(lesson.Type)</Tag>
-                                <span style="flex:1">@(lesson.OrderIndex). @(lesson.Title) @(lesson.IsFree == true ? "(Học thử)" : "")</span>
+                                <span style="flex:1">@(lesson.OrderIndex). @(lesson.Title)</span>
                                 <Button Size="ButtonSize.Small" Icon="arrow-up" OnClick="() => MoveLesson(lesson.Id, -1)" />
                                 <Button Size="ButtonSize.Small" Icon="arrow-down" OnClick="() => MoveLesson(lesson.Id, 1)" />
                                 @if (lesson.Type == LessonType.Quiz)
@@ -169,7 +200,7 @@ else
     <Form Model="_lessonModel" OnFinish="SaveLesson" Layout="@FormLayout.Vertical">
         <FormItem Label="Tên bài học" Required><Input @bind-Value="_lessonModel.Title" /></FormItem>
         <FormItem Label="Mô tả"><TextArea @bind-Value="_lessonModel.Description" Rows="2" /></FormItem>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
             <FormItem Label="Loại bài">
                 <select class="ant-input" @bind="_lessonModel.Type">
                     <option value="@LessonType.Text">Văn bản</option>
@@ -178,11 +209,12 @@ else
                 </select>
             </FormItem>
             <FormItem Label="Thời lượng (phút)"><AntDesign.InputNumber @bind-Value="_lessonModel.Duration" Min="0" /></FormItem>
-            <FormItem Label="Học thử"><label><input type="checkbox" @bind="_lessonFree" /> Cho phép</label></FormItem>
         </div>
         @if (_lessonModel.Type == LessonType.Text)
         {
-            <FormItem Label="Nội dung Markdown"><TextArea @bind-Value="_lessonModel.Content" Rows="9" /></FormItem>
+            <FormItem Label="Nội dung bài học">
+                <RichTextEditor @bind-Value="_lessonModel.Content" Height="320" ConvertLegacyMarkdown="true" />
+            </FormItem>
         }
         else if (_lessonModel.Type == LessonType.Video)
         {
@@ -230,7 +262,6 @@ else
     private CourseSectionEditModel _sectionModel = new();
     private bool _lessonOpen;
     private long _lessonSectionId;
-    private bool _lessonFree;
     private CourseLessonEditModel _lessonModel = new();
     private bool _questionOpen;
     private long _questionLessonId;
@@ -310,7 +341,7 @@ else
 
     private void NewLesson(long sectionId)
     {
-        _lessonSectionId = sectionId; _lessonModel = new() { Type = LessonType.Text }; _lessonFree = false; _lessonOpen = true;
+        _lessonSectionId = sectionId; _lessonModel = new() { Type = LessonType.Text }; _lessonOpen = true;
     }
     private void EditLesson(CourseLessonViewModel item)
     {
@@ -319,11 +350,10 @@ else
             Id = item.Id, Title = item.Title, Description = item.Description, Type = item.Type,
             Duration = item.Duration, IsFree = item.IsFree, Content = item.Content, VideoUrl = item.VideoUrl
         };
-        _lessonFree = item.IsFree ?? false; _lessonOpen = true;
+        _lessonOpen = true;
     }
     private async Task SaveLesson()
     {
-        _lessonModel.IsFree = _lessonFree;
         try
         {
             if (_lessonModel.Id == 0) await CourseService.AddLessonAsync(_lessonSectionId, _lessonModel);

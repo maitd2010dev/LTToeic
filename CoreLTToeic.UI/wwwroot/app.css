@@ -1330,6 +1330,25 @@ input:-webkit-autofill:active {
     border: none;
 }
 
+.course-markdown img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem auto;
+    border-radius: 8px;
+}
+
+.course-markdown figure {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.course-markdown figcaption {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
 .markdown-hint {
     font-size: 0.75rem;
     color: var(--text-muted);

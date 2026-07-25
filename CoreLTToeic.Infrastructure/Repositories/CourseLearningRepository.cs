@@ -65,7 +65,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
                 };
                 sectionModel.Lessons = section.Lessons.OrderBy(l => l.OrderIndex).ThenBy(l => l.Id).Select(lesson =>
                 {
-                    var canAccess = userId != null && (enrolled || lesson.IsFree == true);
+                    var canAccess = userId != null && enrolled;
                     var lessonModel = new CourseLessonLearningViewModel
                     {
                         Id = lesson.Id,
@@ -85,7 +85,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
                         lessonModel.VideoUrl = lesson.Type == LessonType.Video ? lesson.VideoUrl : null;
                         if (lesson.Type == LessonType.Quiz)
                             lessonModel.QuizQuestions = lesson.QuizQuestions.OrderBy(q => q.OrderIndex).ThenBy(q => q.Id)
-                                .Select(MapLearnerQuestion).ToList();
+                                .Select((question, index) => MapLearnerQuestion(question, index + 1)).ToList();
                     }
                     return lessonModel;
                 }).ToList();
@@ -343,14 +343,14 @@ namespace CoreLTToeic.Infrastructure.Repositories
             target.ProgressPercent = source.ProgressPercent;
         }
 
-        private static QuizQuestionLearningViewModel MapLearnerQuestion(QuizQuestion question)
+        private static QuizQuestionLearningViewModel MapLearnerQuestion(QuizQuestion question, int displayOrder)
         {
             var result = new QuizQuestionLearningViewModel
             {
                 Id = question.Id,
                 Question = question.Question,
                 Type = question.Type,
-                OrderIndex = question.OrderIndex ?? 0
+                OrderIndex = displayOrder
             };
             if (question.Option == null) return result;
             result.Options.Add(new QuizOptionViewModel { Key = "1", Text = question.Option.OptionText1 });
