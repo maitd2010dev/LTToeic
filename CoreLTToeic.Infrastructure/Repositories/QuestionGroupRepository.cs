@@ -19,6 +19,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         {
             using var ctx = await _factory.CreateDbContextAsync();
             return await ctx.QuestionGroups
+                .Include(g => g.Part)
                 .Include(g => g.Images)
                 .Include(g => g.Questions)
                 .Where(g => g.TestId == testId)

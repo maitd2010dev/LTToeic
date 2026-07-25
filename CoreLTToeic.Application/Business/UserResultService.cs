@@ -68,10 +68,18 @@ public class UserResultService : IUserResultService
             int totalListening = 0, totalReading = 0;
             var userAnswers = new List<UserAnswer>();
 
-            foreach (var answer in model.Answers)
+            // Only score questions that belong to this test, and never count a
+            // QuestionId more than once even if the client submits duplicates.
+            var submittedAnswers = model.Answers
+                .Where(answer => correctAnswerMap.ContainsKey(answer.QuestionId))
+                .GroupBy(answer => answer.QuestionId)
+                .Select(group => group.Last())
+                .ToList();
+
+            foreach (var answer in submittedAnswers)
             {
                 correctAnswerMap.TryGetValue(answer.QuestionId, out var correctAns);
-                bool isSkipped = string.IsNullOrEmpty(answer.SelectedAnswer);
+                bool isSkipped = string.IsNullOrWhiteSpace(answer.SelectedAnswer);
                 bool isCorrect = !isSkipped && answer.SelectedAnswer == correctAns;
 
                 if (isSkipped) skipped++;
@@ -99,11 +107,16 @@ public class UserResultService : IUserResultService
             int readingKey = totalReading > 0
                 ? Math.Min((int)Math.Round(readingCorrects * 100.0 / totalReading), 100) : 0;
 
-            int listeningScore = await _scoreRepo.GetListeningScoreAsync(listeningKey);
-            int readingScore   = await _scoreRepo.GetReadingScoreAsync(readingKey);
+            // A blank section and a section absent from this test both score 0.
+            int listeningScore = totalListening > 0 && listeningCorrects > 0
+                ? await _scoreRepo.GetListeningScoreAsync(listeningKey)
+                : 0;
+            int readingScore = totalReading > 0 && readingCorrects > 0
+                ? await _scoreRepo.GetReadingScoreAsync(readingKey)
+                : 0;
 
-            float accuracy = model.Answers.Count > 0
-                ? (float)correct / model.Answers.Count * 100 : 0;
+            float accuracy = submittedAnswers.Count > 0
+                ? (float)correct / submittedAnswers.Count * 100 : 0;
 
             var result = new UserResult
             {

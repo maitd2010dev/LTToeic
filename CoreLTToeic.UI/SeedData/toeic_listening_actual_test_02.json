@@ -1,0 +1,1435 @@
+{
+  "schemaVersion": 1,
+  "title": "TOEIC Listening Actual Test 02 (2023)",
+  "category": "2023",
+  "duration": 45,
+  "status": "Active",
+  "source": {
+    "questions": "document/feed-html/Practice toeic listening test 2023 with answer - Actual test 02 - Practice Toeic Tests.html",
+    "transcript": "document/feed-html/Transcript toeic listening test 02 - Practice Toeic Tests.html"
+  },
+  "parts": [
+    {
+      "partNum": 1,
+      "directions": "For each question in this part, you will hear four statements about a picture in your test book. When you hear the statements, you must select the one statement that best describes what you see in the picture. Then find the number of the question on your answer sheet and mark your answer. The statements will not be printed in your test book and will be spoken only one time.",
+      "questions": [
+        {
+          "orderNumber": 1,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": "",
+          "correctAnswer": "B",
+          "image": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-1-01.jpg",
+          "audio": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-1.mp3",
+          "transcript": "<p><strong>Transcript</strong><br>1. (A) The woman is cutting out some patterns. (B) The woman is chopping some wood. (C) The lumber is being loaded. (D) The woman is putting on safety goggles.</p>"
+        },
+        {
+          "orderNumber": 2,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": "",
+          "correctAnswer": "D",
+          "image": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-1-02.jpg",
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>2. (A) The men are shaking hands. (B) The men are exchanging business cards. (C) Both men are wearing suits and ties. (D) The men are standing across from each other.</p>"
+        },
+        {
+          "orderNumber": 3,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": "",
+          "correctAnswer": "D",
+          "image": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-1-03.jpg",
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>3. (A) Pedestrians are walking around the park. (B) Cars are being parked near the building. (C) Trees are being planted in a garden. (D) The bench is unoccupied at the moment.</p>"
+        },
+        {
+          "orderNumber": 4,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": "",
+          "correctAnswer": "C",
+          "image": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-1-04.jpg",
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>4. (A) The frames are being hung on the wall. (B) The men are talking to each other on the phone. (C) Documents have been spread out on the desk. (D) One man is pointing something on the board.</p>"
+        },
+        {
+          "orderNumber": 5,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": "",
+          "correctAnswer": "B",
+          "image": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-1-05.jpg",
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>5. (A) A woman is shopping for some food. (B) Some clothes have been hung on racks. (C) A sales clerk is reaching into a box. (D) Some bags have been placed on the floor.</p>"
+        },
+        {
+          "orderNumber": 6,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": "",
+          "correctAnswer": "A",
+          "image": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-1-06.jpg",
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>6. (A) Some people are having their hair cut. (B) Some people are trimming branches. (C) Some people are sitting around the table. (D) Some people are putting on aprons.</p>"
+        }
+      ],
+      "groups": []
+    },
+    {
+      "partNum": 2,
+      "directions": "You will hear a question or statement and three responses spoken in English. They will not be printed in your test book and will be spoken only one time. Select the best response to the question or statement and mark the letter (A), (B), or (C) on your answer sheet.",
+      "questions": [
+        {
+          "orderNumber": 7,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-2.mp3",
+          "transcript": "<p><strong>Transcript</strong><br>7. Where will the guest speakers stay during the convention? (A) The last day of the event. (B) At a nearby hotel. (C) I’ll be leaving tomorrow.</p>"
+        },
+        {
+          "orderNumber": 8,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>8. How many handouts should we prepare for the meeting? (A) Not until tomorrow. (B) At least two dozen. (C) I’ll do it right away.</p>"
+        },
+        {
+          "orderNumber": 9,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>9. Did you go to the market yesterday? (A) Yes, I bought some vegetables. (B) The price has been marked down. (C) Yes, I’m going there soon.</p>"
+        },
+        {
+          "orderNumber": 10,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>10. Why weren’t you at the company picnic on Saturday? (A) Actually, Sunday is better for me. (B) It will take place in a park. (C) Something came up.</p>"
+        },
+        {
+          "orderNumber": 11,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>11. What forms of identification should I need? (A) A passport or a driver’s license will do. (B) I don’t need anything, thank you. (C) Please fill out this form first.</p>"
+        },
+        {
+          "orderNumber": 12,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>12. Which printer would be better for the home usage? (A) The machine needs to be repaired. (B) I would recommend the one in this corner. (C) We can give you a 10 percent discount.</p>"
+        },
+        {
+          "orderNumber": 13,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>13. Haven’t you taken this course before? (A) Yes, but it was a long time ago. (B) The classes will be held in the auditorium. (C) No, one will be enough for me.</p>"
+        },
+        {
+          "orderNumber": 14,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>14. Who’s sponsoring this charity event to benefit the city library? (A) It will be held next Saturday. (B) At the convention center downtown. (C) The Benson Corporation is.</p>"
+        },
+        {
+          "orderNumber": 15,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>15. Why don’t you get a loan from the bank? (A) Seventy five dollars per day. (B) I’ll get it for you right away. (C) You’re right. I should do that.</p>"
+        },
+        {
+          "orderNumber": 16,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>16. Do you carry the latest model of this cassette player? (A) It’s too heavy to hold. (B) Sorry, we don’t. (C) The appliance store.</p>"
+        },
+        {
+          "orderNumber": 17,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>17. What’s the extension for the personnel department? (A) Find the extension cord from the top drawer. (B) It contains personal information. (C) I believe it’s 327.</p>"
+        },
+        {
+          "orderNumber": 18,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>18. It’s a beautiful day today, isn’t it? (A) I arranged it myself. (B) Yes, It truly is. (C) Yes, we should be back soon.</p>"
+        },
+        {
+          "orderNumber": 19,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>19. Haven’t you met Cindy Conrad before? (A) I believe Cindy will arrive soon. (B) Yes, at the company banquet last winter. (C) No, it’s too far away from here.</p>"
+        },
+        {
+          "orderNumber": 20,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>20. Should I get tickets for 10 o’clock, or 12 o’clock? (A) Either one will be fine with me. (B) Yes, let’s get the express service. (C) It will last at least two hours.</p>"
+        },
+        {
+          "orderNumber": 21,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>21. You ordered the new printer for the accounting team, didn’t you? (A) Yes, the copy machine is not broken. (B) Sure, let me take a look at it. (C) Yes, it should be here soon.</p>"
+        },
+        {
+          "orderNumber": 22,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>22. It’s too cold in here. (A) Let’s open the window. (B) Why don’t you put your sweater on? (C) No, I don’t have his number.</p>"
+        },
+        {
+          "orderNumber": 23,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>23. Do you want me to give you a ride to the convention? (A) Give me a call when you get home. (B) Keep the change, please. (C) Thank you. That would be great.</p>"
+        },
+        {
+          "orderNumber": 24,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>24. How do you like your new job so far? (A) The work is quite interesting. (B) I don’t like him at all. (C) You can send it by e-mail or fax.</p>"
+        },
+        {
+          "orderNumber": 25,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>25. Would you like to leave now, or stay a little longer? (A) I’d rather go if it’s okay with you. (B) I’m not sure why. (C) A little over to the right, please.</p>"
+        },
+        {
+          "orderNumber": 26,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>26. Can you tell me where the nearest gas station is? (A) It’s just one block up this road. (B) I think the store is open today. (C) No, it leaves every 30 minutes.</p>"
+        },
+        {
+          "orderNumber": 27,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>27. Why don’t we hire some more staff for the holiday season? (A) Sure, the new product demonstration. (B) That would be a wise thing to do. (C) The sale starts from Monday, the 25th.</p>"
+        },
+        {
+          "orderNumber": 28,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>28. When did you learn about Mr. Stalk’s transfer? (A) Just today. (B) By transporting goods by ship. (C) It should be finished soon.</p>"
+        },
+        {
+          "orderNumber": 29,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>29. Don’t you want to join our company baseball team? (A) It might rain tomorrow. (B) Sorry, I’m too busy these days. (C) I’d like to see a different one, please.</p>"
+        },
+        {
+          "orderNumber": 30,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>30. The director’s flight will arrive at LaGuardia Airport at 7 tomorrow evening. (A) I can pick him up if you want. (B) Some of the directories list the wrong numbers. (C) We should delay our flights then.</p>"
+        },
+        {
+          "orderNumber": 31,
+          "content": null,
+          "answer1": "",
+          "answer2": "",
+          "answer3": "",
+          "answer4": null,
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": "<p><strong>Transcript</strong><br>31. We have to discuss the budget figures before we present them to the board. (A) OK, I can figure it out myself. (B) Oh, is there something wrong with them? (C) In the last year’s budget report.</p>"
+        }
+      ],
+      "groups": []
+    },
+    {
+      "partNum": 3,
+      "directions": "You will hear some conversations between two or more people. You will be asked to answer three questions about what the speakers say in each conversation. Select the best response to each question and mark the letter (A), (B), (C), or (D) on your answer sheet. The conversations will not be printed in your test book and will be spoken only one time.",
+      "questions": [],
+      "groups": [
+        {
+          "name": "Questions 32-34",
+          "audio": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-3.mp3",
+          "content": "<p><strong>Transcript</strong><br><strong>W:</strong> Hi, I’m in room 805. I checked in two days ago. This is already the third time I’m having problems with the shower. You need to do something about it.<br><strong>M:</strong> I’m sorry, ma’am. If you can give us more detailed information about your problem, we could fix it far more quickly.<br><strong>W:</strong> Well, the water is so weak and it suddenly turns into cold water in the middle of shower. I suggest you find out what the problem is.<br><strong>M:</strong> I feel so bad about your inconvenience. Why don’t I move you to one of our suite rooms to make up for your trouble?</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 32,
+              "content": "What is the woman’s problem?",
+              "answer1": "She was overcharged.",
+              "answer2": "Her room is too small.",
+              "answer3": "Facility is not working properly.",
+              "answer4": "She checked in too late.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 33,
+              "content": "How long has the woman stayed in her room?",
+              "answer1": "One day",
+              "answer2": "Two days",
+              "answer3": "Three days",
+              "answer4": "Five days",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 34,
+              "content": "What does the man offer?",
+              "answer1": "Move to another hotel",
+              "answer2": "Give her a refund",
+              "answer3": "Change the room",
+              "answer4": "Investigate the problem himself",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 35-37",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>M:</strong> Hi, I’m looking for a guitar to learn with. Do you have one for beginners?<br><strong>W:</strong> Sure we do. Is there anything particular you’re looking for?<br><strong>M:</strong> I was hoping to get the one that is reasonably priced.<br><strong>W:</strong> I understand. But the problem with guitars in the lower price range is that they can be hard to tune. A lot of beginners end up quitting because the notes don’t sound right.<br><strong>M:</strong> Well, the guitar is actually for me, and I have a little of experience of playing other instruments, so I don’t think that will be a problem.<br><strong>W:</strong> In that case, the guitars you should look at are on this wall.<br><strong>M:</strong> They look fine to me. Is there anything else I should know about before starting playing?<br><strong>W:</strong> Well, I suggest buying some music books, too. We have a large selection of beginner’s books to get you started with your new guitar.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 35,
+              "content": "Who is the woman?",
+              "answer1": "A school teacher",
+              "answer2": "A sales clerk",
+              "answer3": "A librarian",
+              "answer4": "A songwriter",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 36,
+              "content": "What problem does the woman mention?",
+              "answer1": "All classes have been filled up.",
+              "answer2": "A musical instrument cannot be returned.",
+              "answer3": "Only advanced level books are available.",
+              "answer4": "Inexpensive guitars are difficult to tune.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 37,
+              "content": "What does the woman suggest the man do?",
+              "answer1": "Sign up for lessons",
+              "answer2": "Attend a guitar concert",
+              "answer3": "Purchase some books",
+              "answer4": "Visit the store again later",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 38-40",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>W:</strong> Good afternoon. Do you need any help finding something? I’m the manager of the store.<br><strong>M:</strong> I’m fine. I just came here to look for a birthday present for my brother and I found a jacket that he would like.<br><strong>W:</strong> That’s great. Before you pay for it, however, let me give you a great offer. If you sign up for our Frequent Shoppers Card, you’ll get 15% off all your charges that you will pay today. Would you like an application form?<br><strong>M:</strong> Yes, please. That sounds like a good deal. I guess I have to get the membership first to get a discount.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 38,
+              "content": "Why is the man at the store?",
+              "answer1": "To see the manager",
+              "answer2": "To meet with his brother",
+              "answer3": "To apply for the card",
+              "answer4": "To purchase a present",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 39,
+              "content": "What special offer is currently available?",
+              "answer1": "A discount card",
+              "answer2": "Extended warranty",
+              "answer3": "Personalized gift wrapping",
+              "answer4": "Free delivery",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 40,
+              "content": "What will the man most likely do next?",
+              "answer1": "Speak to the manager",
+              "answer2": "Join the fitness club",
+              "answer3": "Sign up for the card",
+              "answer4": "Apply for the position",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 41-43",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>W:</strong> Adam, one of the overseas sales managers will be visiting us next week. He’s never been to New York before and I’d like to show him around. Have you ever taken the city tour bus?<br><strong>M:</strong> Well, if he has some time, it would be a good idea. Or, you could take him out on musical shows on Broadway. Everybody loves the show.<br><strong>W:</strong> He should be leaving next Monday to meet with the managers in the west coast.<br><strong>M:</strong> Why don’t you call the ticket office now and find out what shows still have seats left? They sell out pretty quickly, you know.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 41,
+              "content": "According to the woman, what will happen next week?",
+              "answer1": "She will be transferred.",
+              "answer2": "A colleague will visit.",
+              "answer3": "A sale will begin.",
+              "answer4": "A new show will be introduced.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 42,
+              "content": "What does the woman ask about?",
+              "answer1": "City tours",
+              "answer2": "Broadway shows",
+              "answer3": "Flight schedules",
+              "answer4": "Contact information",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 43,
+              "content": "What does the man suggest the woman do?",
+              "answer1": "Find out where the hotel is",
+              "answer2": "Call the manager right away",
+              "answer3": "Reserve the city tours",
+              "answer4": "Check the ticket availability",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 44-46",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>W1:</strong> Excuse me. We just saw a sign by the store entrance about your interior design service.<br><strong>M:</strong> My wife and I are interested in doing some remodeling in our kitchen. Can you help us with that?<br><strong>W2:</strong> Certainly. We can help you choose everything from appliances and cabinets to paint colors.<br><strong>M:</strong> That sounds great. How do we get started?<br><strong>W2:</strong> Before we begin, I just want to let you know that we’re offering a special promotion this month, 15% off any home-improvement purchase you make in our store.<br><strong>W1:</strong> That is wonderful news. It is a good thing we decided to stop by at the store.<br><strong>W2:</strong> First, I can set up an appointment for one of our designers to come out to your home. That way, the designer can see your kitchen and give you some ideas.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 44,
+              "content": "What is the couple planning to do?",
+              "answer1": "Remodel a kitchen",
+              "answer2": "Open a restaurant",
+              "answer3": "Build a new house",
+              "answer4": "Hire a real estate agent",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 45,
+              "content": "What is available only until the end of the month?",
+              "answer1": "A free gift with a purchase",
+              "answer2": "An extended warranty",
+              "answer3": "Free installation service",
+              "answer4": "A fifteen percent discount",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 46,
+              "content": "What does the store manager offer to do?",
+              "answer1": "Place an order",
+              "answer2": "Give a promotional catalog",
+              "answer3": "Set up a home visit",
+              "answer4": "Contact customer service",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 47-49",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>M:</strong> Since you’ve been feeling well lately, I think we can reduce the dose of your medication. Do you want us to send a new prescription to your pharmacist?<br><strong>W:</strong> Thank you, Dr. Young. But, I recently changed my pharmacy, so could you send the prescription to them? Last month, I moved to a small apartment in Pine-view Complex and I found out it has a small pharmacy inside the building.<br><strong>M:</strong> Sure, just don’t forget to give the number of the new pharmacy to the receptionist when you leave.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 47,
+              "content": "What are the speakers discussing?",
+              "answer1": "Getting a surgery",
+              "answer2": "Moving into a new place",
+              "answer3": "Filling a prescription.",
+              "answer4": "Renovating an apartment",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 48,
+              "content": "What happened to the woman last month?",
+              "answer1": "She changed the doctor.",
+              "answer2": "Her condition got worse.",
+              "answer3": "She found a new roommate.",
+              "answer4": "She moved to a new apartment.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 49,
+              "content": "What information will the woman give the receptionist?",
+              "answer1": "A telephone number",
+              "answer2": "Discount coupons",
+              "answer3": "The name of an employee",
+              "answer4": "The location of the pharmacy",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 50-52",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>W:</strong> Is there any way I can get to Los Angeles as soon as possible? My flight from New York didn’t arrive on time, so I missed my connecting flight.<br><strong>M:</strong> Well, let me check. We don’t have any direct flights, but if you’re willing to stop over in San Francisco, there’s a flight leaving in 20 minutes. That will be your best choice for now.<br><strong>W:</strong> As long as it gets me to Los Angeles in one piece, I’ll take it. Would there be any extra charge?<br><strong>M:</strong> No, ma’am. You’re fine. Here is your ticket and please hurry to gate number 20. The ground crew will be waiting for you.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 50,
+              "content": "What is the woman’s problem?",
+              "answer1": "She missed her flight.",
+              "answer2": "She lost her ticket.",
+              "answer3": "She wants a direct flight.",
+              "answer4": "She couldn’t find her luggage.",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 51,
+              "content": "What is the woman’s final destination?",
+              "answer1": "New York",
+              "answer2": "Los Angeles",
+              "answer3": "San Francisco",
+              "answer4": "Miami",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 52,
+              "content": "What does the man mean when he says, “You’re fine”?",
+              "answer1": "He likes the woman’s appearance.",
+              "answer2": "She is going to miss the flight.",
+              "answer3": "He will take the woman to the gate.",
+              "answer4": "She doesn’t have to pay for the charge.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 53-55",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>M:</strong> Thank you for coming, Ms. Wilson. As the last stage of our interview process, we’re interviewing the top three candidates for the position of our online sales manager. Could you tell us more about your previous job experience?<br><strong>W:</strong> Well, I’ve been working at Sanwa Electronics for the last 5 years and I was awarded as the employee of the year in 2007 by making record-breaking sales.<br><strong>M:</strong> That is pretty impressive. Do you mind telling us why you would want to leave your current job?<br><strong>W:</strong> Well, I’m going back to school to get my master’s degree in business administration, but I still want to work full-time. This position has the flexibility that will allow me to work and study at the same time.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 53,
+              "content": "What position is the woman interviewing for?",
+              "answer1": "An electrician",
+              "answer2": "A service representative",
+              "answer3": "A sales manager",
+              "answer4": "A school administrator",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 54,
+              "content": "What is said about Sanwa Electronics?",
+              "answer1": "It makes quality electronic appliances.",
+              "answer2": "The products are sold in many countries.",
+              "answer3": "It was established in the year 2007.",
+              "answer4": "It gives out awards to employees.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 55,
+              "content": "Why does the woman say she wants to change jobs?",
+              "answer1": "She will be attending classes.",
+              "answer2": "She wants to make more money.",
+              "answer3": "She wants to work closer to home.",
+              "answer4": "She would like to have more responsibilities.",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 56-58",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>M:</strong> Becky, how was your sales presentation? I was afraid you might be feeling nervous about meeting all the board members.<br><strong>W:</strong> It didn’t go well at all. I spent So much time preparing the slides, but unfortunately, the projector just stopped in the middle of the presentation. It was a complete disaster.<br><strong>M:</strong> That’s awful. How did you manage?<br><strong>W:</strong> Luckily, the copy center was close, so I ran over and made enough copies for everyone to look at. I did my best and tried to sound strong and confident.<br><strong>M:</strong> You did the best you could do. I’m sure everyone understood that it wasn’t your fault.<br><strong>W:</strong> I’m feeling exhausted now that it’s over.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 56,
+              "content": "What problem did the woman have?",
+              "answer1": "She was too nervous to talk aloud.",
+              "answer2": "Some equipment malfunctioned.",
+              "answer3": "Some of her slides weren’t ready.",
+              "answer4": "Some of the board members didn’t show up.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 57,
+              "content": "What did the woman do to solve the problem?",
+              "answer1": "She postponed the presentation.",
+              "answer2": "She asked for a new projector.",
+              "answer3": "She took a break in the middle.",
+              "answer4": "She made some extra copies.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 58,
+              "content": "Why does the woman say, “I’m feeling exhausted”?",
+              "answer1": "Because she didn’t sleep well last night.",
+              "answer2": "Because there was a natural disaster.",
+              "answer3": "Because she worked hard for the presentation.",
+              "answer4": "Because the copy machine was broken.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 59-61",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>M:</strong> Rebecca, I wanted to remind you that we’ll be having our office painted this weekend. The painters will move the furniture and paint the whole office, and make sure you clear everything off your desk before you leave today.<br><strong>W:</strong> Sure, Mr. Roy. But, we will have to start working on Monday and I’m concerned about ventilation. Do you think the air in the office would be clean enough to work on Monday?<br><strong>M:</strong> Don’t worry, I specifically requested the workers use a special kind of paint that gives off less fume. They claim that the room will be cleared of all smells just after a few hours. We’ll see on Monday I guess.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 59,
+              "content": "According to the speakers, what will happen this weekend?",
+              "answer1": "Workers will be relocated.",
+              "answer2": "New furniture will be delivered.",
+              "answer3": "A painting will be purchased.",
+              "answer4": "An office will be painted.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 60,
+              "content": "What is the woman asked to do?",
+              "answer1": "Choose a paint color.",
+              "answer2": "Remove items from the desk.",
+              "answer3": "Open the windows",
+              "answer4": "Contact the delivery person",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 61,
+              "content": "What has the man requested that the workers do?",
+              "answer1": "Use a specific type of product",
+              "answer2": "Place all the furniture back in its places",
+              "answer3": "Finish the work in time",
+              "answer4": "Use some fans to dry off the paint",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 62-64",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>W:</strong> I can’t believe the train hasn’t come in yet. I wonder what could possibly be wrong. Do you think there has been an accident?<br><strong>M:</strong> Well, the ticket agent said that the tracks are being worked on and it’s causing delays up to 30 minutes. I’m afraid I might be late for work. I have to be at the company by 8:30 to get ready for a 9:00 opening.<br><strong>W:</strong> I’ve been taking the train for a long time, and this is the first time this has happened. The train is supposed to be so reliable, you know.<br><strong>M:</strong> You’re right. This is strange. I take the train because it stops just a few streets from the bank where I work. In 5 years as a teller, I’ve never been late for work.</p>",
+          "images": [
+            "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-3-62.jpg"
+          ],
+          "questions": [
+            {
+              "orderNumber": 62,
+              "content": "Why is the woman concerned?",
+              "answer1": "She is late for her appointment.",
+              "answer2": "She couldn’t get a loan from a bank.",
+              "answer3": "The weather has not been nice.",
+              "answer4": "The train got delayed.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 63,
+              "content": "Look at the graphic. When is likely the new departure time for the man’s train?",
+              "answer1": "7:30 a.m.",
+              "answer2": "8:00 a.m.",
+              "answer3": "8:30 a.m.",
+              "answer4": "9:00 a.m.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 64,
+              "content": "Where does the man work?",
+              "answer1": "At a weather agency",
+              "answer2": "At a bank",
+              "answer3": "At a training center",
+              "answer4": "At a repair shop",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 65-67",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>W:</strong> Hi, Tony. This is Angela. I’m just checking in. How’s everything going up here? Are you checking the lights of the Olsen Energy offices yet? They’ve been asking to fix them for days.<br><strong>M:</strong> Actually, it is taking longer than I thought it would. I changed the light bulbs of the rooms, but they won’t turn on. So I decided to check the electric wires in the back room. I’m just going to get the keys from the maintenance room.<br><strong>W:</strong> Well, before you start working on the wiring, could you come downstairs? I need some help moving the big table in one of the conference rooms on the fourth floor. We need to repaint the wall.<br><strong>M:</strong> Sure, I’ll be right up. This is a good time for me to take a break anyway.</p>",
+          "images": [
+            "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-3-65.jpg"
+          ],
+          "questions": [
+            {
+              "orderNumber": 65,
+              "content": "Who most likely are the speakers?",
+              "answer1": "Interior designers",
+              "answer2": "Appliance store clerks",
+              "answer3": "Maintenance crew",
+              "answer4": "Office receptionists",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 66,
+              "content": "Look at the graphic. Where is the man currently working?",
+              "answer1": "On the first floor",
+              "answer2": "On the second floor",
+              "answer3": "On the third floor",
+              "answer4": "On the fourth floor",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 67,
+              "content": "What are the speakers probably going to do next?",
+              "answer1": "Move a table",
+              "answer2": "Install a new lighting fixture",
+              "answer3": "Fix the machine",
+              "answer4": "Make a conference call",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 68-70",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br><strong>M:</strong> Hi, our employees are participating in a trade convention in two weeks and we’d like to order T-shirts with our company’s logo on them. What options would you recommend?<br><strong>W:</strong> Well, we have a wide variety of colors and styles. After you choose the T-shirts you want, we can either print or sew the design on them.<br><strong>M:</strong> I would prefer sewing. It looks more professional. How long would it take to have 100 T-shirts sewed with our logo on them? We don’t have that much time.<br><strong>W:</strong> First, we need to know how complicated your logo is to give you a detailed estimate. However, if you visit our website, we have posted the standard price list for different options. You can check the price there for the basic sewing for 100 people plus the price of the T-shirts you choose as well.<br><strong>M:</strong> OK, I’ll do that right away.<br><strong>W:</strong> Meanwhile, if you want to expedite the process, please update your company’s logo on your online order form and click for estimate request.</p>",
+          "images": [
+            "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-3-68.jpg"
+          ],
+          "questions": [
+            {
+              "orderNumber": 68,
+              "content": "What information does the woman provide?",
+              "answer1": "Discount on larger orders",
+              "answer2": "Designing tips for company logos",
+              "answer3": "Sales strategy to treat customers",
+              "answer4": "Availability of different styles and options",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 69,
+              "content": "What is the man concerned about?",
+              "answer1": "When the order will be complete",
+              "answer2": "Where the order will be delivered to",
+              "answer3": "Who he should contact for more information",
+              "answer4": "What kind of payment options he has",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 70,
+              "content": "Look at the graphic. How much will the man’s order cost?",
+              "answer1": "$300.00",
+              "answer2": "$500.00",
+              "answer3": "$700.00",
+              "answer4": "$1000.00",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNum": 4,
+      "directions": "You will hear some talks given by a single speaker. You will be asked to answer three questions about what the speaker says in each talk. Select the best response to each question and mark the letter (A), (B), (C), or (D) on your answer sheet. The talks will not be printed in your test book and will be spoken only one time.",
+      "questions": [],
+      "groups": [
+        {
+          "name": "Questions 71-73",
+          "audio": "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-4.mp3",
+          "content": "<p><strong>Transcript</strong><br>Hello, my name is Charles Xing. I’m calling because I’m interested in holiday packages to France that your company offers. My wife and I have been looking for an affordable trip and one of my colleagues recommended your tours. I heard you have a variety of tours for people with different interests. We want to spend more time in Paris and learn about different architecture and history of the area. I’ll be on a business trip this weekend and I’d like to meet with you before I leave on Saturday. Could you call me at 555-2859 and let me know when you are available this week? Thank you.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 71,
+              "content": "Why is the speaker calling?",
+              "answer1": "To inquire about employment opportunity",
+              "answer2": "To find more about packaged tours",
+              "answer3": "To book a business trip",
+              "answer4": "To request a price discount",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 72,
+              "content": "How did the speaker learn about the agency?",
+              "answer1": "From a newspaper",
+              "answer2": "From a website",
+              "answer3": "From an acquaintance",
+              "answer4": "From a family member",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 73,
+              "content": "What will the speaker do on Saturday?",
+              "answer1": "Visiting his family",
+              "answer2": "Take a history class",
+              "answer3": "Return from work",
+              "answer4": "Leave for a trip",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 74-76",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>Are you tired of wondering who to call whenever you have problems with your appliances? Now, one call does it all. You can get a service contract for all your appliances – refrigerator, television, washer and dryer and even your water heater – covered in one easy contract. With the monthly fee of as low as 10 dollars, Care-For-You offers high quality maintenance and repair service on all your appliances. Should you have any troubles, just call us day or night, 7 days a week. We will be there for you. And if you call us now, we will take 15% off from your first bill. But hurry, this offer is good for next ten days only. So, call today and wash away your worries.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 74,
+              "content": "What is offered in this advertisement?",
+              "answer1": "A sale on office equipment",
+              "answer2": "An extended warranty on mattress",
+              "answer3": "Reduced prices on a refrigerator",
+              "answer4": "A service contract for appliances",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 75,
+              "content": "Why does the man say, “call us day or night, 7 days a week”?",
+              "answer1": "To sell new appliances to customers",
+              "answer2": "To emphasize the company’s service",
+              "answer3": "To encourage to log in their website",
+              "answer4": "To explain the refund policy",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 76,
+              "content": "How long is the special offer good for?",
+              "answer1": "For one day",
+              "answer2": "For seven days",
+              "answer3": "For ten days",
+              "answer4": "For fifteen days",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 77-79",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>Everyone, I have an announcement before you start your shift. We’re going to upgrade some of the machinery in the ceramics factory. The new machines will do the same function of mixing and taking the air out of the soil mixture, but they’ll do it more quickly. This upgrade will help us speed up our production of new line of ceramic dinnerware and tea wares almost 30 to 40 percent faster than before. Everyone must be trained on using the new equipment before they start using it. The training will be conducted department by department during your regular working hours so that the whole operation won’t be affected by it. You’ll get an e-mail today explaining your team’s exact training date and time.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 77,
+              "content": "What type of merchandise does the factory produce?",
+              "answer1": "Ceramic ware",
+              "answer2": "Electronics",
+              "answer3": "Packaged food",
+              "answer4": "Office supplies",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 78,
+              "content": "Why is the factory getting new equipment?",
+              "answer1": "To manufacture different products",
+              "answer2": "To replace broken machinery",
+              "answer3": "To cut down the production cost",
+              "answer4": "To increase production",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 79,
+              "content": "According to the speaker, how will the employees receive training?",
+              "answer1": "The will take online courses.",
+              "answer2": "They will take turns.",
+              "answer3": "They will receive certificates afterwards.",
+              "answer4": "Someone from the main office will teach them.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 80-82",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>Hello, this is Vanessa Adams from the accounting department. I’m calling about the problem with your expense report you’ve submitted for your trip to New York last month. You have submitted the report and receipts on the payment you made on your one week trip. I’m afraid some of the restaurant receipts don’t match the amounts you’ve entered in your expense report. Also, a couple of dates don’t match the dates on your itinerary. I’m sure you would like to be reimbursed for these expenses as soon as possible, but I can’t approve the payment until these discrepancies are corrected. I would like you to stop by at the accounting office today or tomorrow to discuss this matter. Thank you.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 80,
+              "content": "What department does the speaker work for?",
+              "answer1": "Human resources",
+              "answer2": "Accounting",
+              "answer3": "Banking",
+              "answer4": "Purchasing",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 81,
+              "content": "What does the woman imply when she says, “receipts don’t match the amounts”?",
+              "answer1": "There has been a scheduling conflict.",
+              "answer2": "The restaurant complained about the process.",
+              "answer3": "The discount amount has not been applied.",
+              "answer4": "Information on receipts is inaccurate.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 82,
+              "content": "What does the speaker ask the listener to do?",
+              "answer1": "Make their payment",
+              "answer2": "Talk to his supervisor",
+              "answer3": "Visit her office soon",
+              "answer4": "Contact her through the phone",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 83-85",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>Thank you all for coming to Lakeville Complex Residents’ Association meeting. My name is Lisa Arnold and I’m the new building manager. It is a great pleasure to see all of you. As the manager, my first job should be preparing for the annual safety inspection next month. As you know, passing this inspection is very important in managing this size of property. So, please feel free to let me know any repairs that should be done before the inspection. I would set up a special bulletin board in front of the manager’s office, so that you can put any comments or suggestions on the board concerning the problems with our complex. I’ll check the board every day and make sure that the problems are fixed as soon as possible.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 83,
+              "content": "Who is the speaker?",
+              "answer1": "A real estate agent",
+              "answer2": "A local resident",
+              "answer3": "A service representative",
+              "answer4": "A building manager",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 84,
+              "content": "What does the speaker say her first task will be?",
+              "answer1": "Communicating well with tenants",
+              "answer2": "Getting in touch with the city council",
+              "answer3": "Passing the annual inspection",
+              "answer4": "Installing new safety equipment",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 85,
+              "content": "What are the listeners asked to do?",
+              "answer1": "Introduce themselves to each other",
+              "answer2": "Give their feedbacks to her",
+              "answer3": "Call her if there is an emergency",
+              "answer4": "Make a decision on a certain issue",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 86-88",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>As you know, each year our company supports a local improvement project. And this year, we have decided to support a local charity called Green Peace. Green Peace is a nonprofit organization focusing on planting more trees and educating people on the importance of greener planet. We’ve decided to purchase about 100 trees and each one of you will plant them together with local residents. Now, I will be distributing copies of an article we got from Green Peace. This article explains in terms of what we should do to protect our environment, especially by saving trees first. You should read it before the volunteering project scheduled for next Friday.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 86,
+              "content": "What are the listeners asked to do?",
+              "answer1": "Join a nonprofit organization",
+              "answer2": "Take care of your garden better",
+              "answer3": "Donate some money",
+              "answer4": "Plant trees for a cause",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 87,
+              "content": "Who provided the article that the speaker is distributing?",
+              "answer1": "A company officer",
+              "answer2": "A newspaper reporter",
+              "answer3": "A government official",
+              "answer4": "A charity organization",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 88,
+              "content": "What type of information about trees does the article contain?",
+              "answer1": "Where they should send the donation",
+              "answer2": "How to protect trees for better environment",
+              "answer3": "How to volunteer for the on-going projects",
+              "answer4": "Which environmental agency to contact",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 89-91",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>This is WXG, your evening business report. Today, Dudley Motor Corporation’s Chairman Michael Santos announced that they will increase the production of the company’s most popular model, the DW-3000. The sales of this production have steadily increased in almost all global markets since its introduction in last March. Mr. Santos thinks that the compact size and affordable price are the key factors in this model’s success. As of next month, DW-3000 will be the only car model produced at the company’s factory in Spring Valley, Australia. Mr. Santos will expect this will ease the strain on meeting the increased global supplies.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 89,
+              "content": "Who is Michael Santos?",
+              "answer1": "A marketing expert",
+              "answer2": "A design staff",
+              "answer3": "A corporate executive",
+              "answer4": "A newspaper reporter",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 90,
+              "content": "What did Michal Santos announce?",
+              "answer1": "Introduction of a new line of products",
+              "answer2": "The construction of a new factory",
+              "answer3": "A change in product features",
+              "answer4": "Increased production of a popular product",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 91,
+              "content": "What does the man imply when he mention, “DW-3000 will be the only car model produced in Australia”?",
+              "answer1": "Additional safety precautions will be taken in the factory.",
+              "answer2": "They’re going to expand to Australian auto market.",
+              "answer3": "They will focus on meeting the demand of one product model.",
+              "answer4": "They’re going to close down some manufacturing facilities.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 92-94",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>If you are looking for a job or considering a career change, come to Ocean City’s 10th Annual Job Fair. The fair will take place in the city’s convention center from August 10 through August 12. Over 100 small and medium sized companies will look for their new and experienced employees in the fair. Again, this year, Radio WXN is one of the sponsors of the fair and you can listen to WXN for live updates every hour throughout the convention period. Admission is free but the participants should register beforehand to receive official name cards and other information. Candidates must bring their resumes and up to-date employment history and current contact information. Please visit the job fair website at www.oceanjobfair.govt. for the complete list of companies and organizations participating in the event.</p>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 92,
+              "content": "What is the purpose of the event?",
+              "answer1": "To solicit more sponsors",
+              "answer2": "To inform schedule changes",
+              "answer3": "To advertisement a particular company",
+              "answer4": "To publicize job openings",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 93,
+              "content": "Who is one of the sponsors of the event?",
+              "answer1": "A employment agency",
+              "answer2": "A radio station",
+              "answer3": "A web-designing firm",
+              "answer4": "A non-profit organization",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 94,
+              "content": "According to the speaker, what can be found on the website?",
+              "answer1": "Steps to register in a fair",
+              "answer2": "Recommendations from the hiring manger",
+              "answer3": "History of the city’s events being held",
+              "answer4": "A list of participating organizations",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 95-97",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>Good morning and thank you for listening to MZ morning traffic with Julie Park. The last night’s storm did quite some damage on the road and the morning commute is not easy today. Lincoln Tunnel is backed up almost 10 miles because broken trees are blocking the entrance of one of the lanes to downtown. The police are already at the scene directing the clean-up but it will take at least another hour, so, if you’re on Highway 95, I would recommend the Route 65 instead of the tunnel. Most of the major roads are moving smoothly but please take caution of the slippery road conditions because of the storm. Stay tuned. I’ll be right back with more detailed road conditions after the short message from our sponsors.</p>",
+          "images": [
+            "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-4-95.jpg"
+          ],
+          "questions": [
+            {
+              "orderNumber": 95,
+              "content": "What is the problem with the tunnel?",
+              "answer1": "The repair work is being conducted.",
+              "answer2": "There has been an accident.",
+              "answer3": "The entrance has been blocked.",
+              "answer4": "The road is being repaved.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 96,
+              "content": "Look at the graphic. Which exit are the motorists advised to take?",
+              "answer1": "Exit 6",
+              "answer2": "Exit 7",
+              "answer3": "Exit 8",
+              "answer4": "Stay on Highway 95",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 97,
+              "content": "What will the listeners most likely hear next?",
+              "answer1": "News on road conditions",
+              "answer2": "Weather updates",
+              "answer3": "An interview with the police",
+              "answer4": "An advertisement",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 98-100",
+          "audio": null,
+          "content": "<p><strong>Transcript</strong><br>Before we start, I’d like to remind everyone about our new discount coupon promotions. As you know, discount coupons for our product have been printed in local newspapers. But, starting next month, customers will also receive coupons electronically by e-mail. We’d like the cashiers to mention this to customers as they’re checking out of the store. Ask them if they would be interested in receiving discount coupons through e-mail. These special e-coupons offer premium discounts and special deals to be used on different weekdays. For example, on Mondays and Tuesdays all vegetable are 50% off after 4 o’clock and on Wednesdays and Thursdays, all dairy products are 50% off and so on. This change will attract more customers to the store on weekdays as well as the weekends. We can also obtain more information about our customers to serve them better in the future.</p>",
+          "images": [
+            "https://toeiclistening.net/wp-content/uploads/2021/10/practice-toeic-listening-test-2021-with-answer-test-02-part-4-98.jpg"
+          ],
+          "questions": [
+            {
+              "orderNumber": 98,
+              "content": "What is the announcement about?",
+              "answer1": "A new store promotion",
+              "answer2": "A going-out-of-business sale",
+              "answer3": "A change in payment method",
+              "answer4": "Recent customer complaints",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 99,
+              "content": "Who most likely are the listeners?",
+              "answer1": "Marketing researchers",
+              "answer2": "Store employees",
+              "answer3": "Supermarket customers",
+              "answer4": "Website designers",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 100,
+              "content": "Look at the graphic. What day is the coupon valid on?",
+              "answer1": "Monday",
+              "answer2": "Wednesday",
+              "answer3": "Weekends",
+              "answer4": "Any of the weekdays",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

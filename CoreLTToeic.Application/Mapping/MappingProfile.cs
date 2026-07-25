@@ -42,7 +42,13 @@ namespace CoreLTToeic.Application.Mapping
                 .ForMember(d => d.Answer2,            o => o.MapFrom(s => s.Question != null ? s.Question.Answer2 : null))
                 .ForMember(d => d.Answer3,            o => o.MapFrom(s => s.Question != null ? s.Question.Answer3 : null))
                 .ForMember(d => d.Answer4,            o => o.MapFrom(s => s.Question != null ? s.Question.Answer4 : null))
-                .ForMember(d => d.Audio,              o => o.MapFrom(s => s.Question != null ? s.Question.Audio : null))
+                .ForMember(d => d.Audio, o => o.MapFrom(s =>
+                    s.Question != null
+                        ? s.Question.Audio
+                          ?? (s.Question.QuestionGroup != null
+                              ? s.Question.QuestionGroup.Audio
+                              : null)
+                        : null))
                 .ForMember(d => d.Image,              o => o.MapFrom(s => s.Question != null ? s.Question.Image : null))
                 .ForMember(d => d.Transcript, o => o.MapFrom(s =>
                     s.Question != null

@@ -28,14 +28,27 @@ public class ScoreConversionSeeder
             ctx.ReadingScoreConversions.AddRange(ReadingTable());
             await ctx.SaveChangesAsync();
         }
+
+        // Keep existing databases in sync with the application's zero-score rule.
+        var listeningZero = await ctx.ListeningScoreConversions
+            .FirstOrDefaultAsync(x => x.Correct == 0);
+        var readingZero = await ctx.ReadingScoreConversions
+            .FirstOrDefaultAsync(x => x.Correct == 0);
+
+        if (listeningZero != null)
+            listeningZero.Score = 0;
+        if (readingZero != null)
+            readingZero.Score = 0;
+
+        await ctx.SaveChangesAsync();
     }
 
-    // Approximate standard TOEIC Listening conversion (0-100 correct → 5-495)
+    // Approximate TOEIC Listening conversion (0 correct = 0 in the app)
     private static IEnumerable<ListeningScoreConversion> ListeningTable()
     {
         int[] scores =
         [
-              5,   5,   5,  10,  10,  15,  20,  25,  30,  35, // 0-9
+              0,   5,   5,  10,  10,  15,  20,  25,  30,  35, // 0-9
              40,  45,  50,  55,  60,  65,  70,  75,  80,  85, // 10-19
              90,  95, 100, 105, 110, 115, 120, 125, 130, 135, // 20-29
             140, 145, 150, 155, 160, 165, 170, 175, 180, 185, // 30-39
@@ -51,12 +64,12 @@ public class ScoreConversionSeeder
         return scores.Select((s, i) => new ListeningScoreConversion { Correct = i, Score = s });
     }
 
-    // Approximate standard TOEIC Reading conversion (0-100 correct → 5-495)
+    // Approximate TOEIC Reading conversion (0 correct = 0 in the app)
     private static IEnumerable<ReadingScoreConversion> ReadingTable()
     {
         int[] scores =
         [
-              5,   5,   5,   5,  10,  15,  20,  25,  30,  35, // 0-9
+              0,   5,   5,   5,  10,  15,  20,  25,  30,  35, // 0-9
              40,  45,  50,  55,  60,  65,  70,  75,  80,  85, // 10-19
              90,  95, 100, 105, 110, 115, 120, 125, 135, 140, // 20-29
             145, 150, 155, 160, 165, 170, 175, 180, 185, 190, // 30-39

@@ -1,7 +1,7 @@
 @page "/luyen-thi/{TestId:long}"
 @layout TestLayout
 @rendermode InteractiveServer
-@implements IDisposable
+@implements IAsyncDisposable
 @inject ITestService TestService
 @inject IUserResultService UserResultService
 @inject AuthenticationStateProvider AuthStateProvider
@@ -30,7 +30,7 @@ else if (!_testStarted)
 }
 else
 {
-    <div class="tt-root">
+    <div class="tt-root" id="toeic-test-root">
         <!-- Top bar: Brand | Timer | Submit -->
         <div class="tt-topbar">
             <span class="tt-brand">LTToeic Practice</span>
@@ -80,7 +80,7 @@ else
         {
             <div class="tt-result-banner">
                 <div class="tt-result-score">
-                    <span class="tt-score-total">@_result.TotalScore<span class="tt-score-max">/990</span></span>
+                    <span class="tt-score-total">@_result.TotalScore<span class="tt-score-max">/@ResultMaxScore</span></span>
                     <span class="tt-score-label">TỔNG ĐIỂM</span>
                 </div>
                 <div class="tt-result-details">
@@ -372,6 +372,11 @@ else
     private bool _loading = true;
     private bool _submitting;
     private long _activePartId;
+    private bool _audioNavigationInitialized;
+    private DotNetObjectReference<TakeTest>? _audioNavigationReference;
+    private int ResultMaxScore =>
+        (_result?.TotalListeningQuestions > 0 ? 495 : 0) +
+        (_result?.TotalReadingQuestions > 0 ? 495 : 0);
 
     private int _remainingSeconds;
     private System.Threading.Timer? _timer;
@@ -415,6 +420,27 @@ else
         finally
         {
             _loading = false;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!_testStarted || _audioNavigationInitialized)
+            return;
+
+        try
+        {
+            _audioNavigationReference = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync(
+                "ltToeicTestTaking.initialize",
+                "toeic-test-root",
+                _audioNavigationReference);
+            _audioNavigationInitialized = true;
+        }
+        catch
+        {
+            _audioNavigationReference?.Dispose();
+            _audioNavigationReference = null;
         }
     }
 
@@ -685,6 +711,16 @@ else
         await ScrollToPart(partId);
     }
 
+    [JSInvokable]
+    public async Task SetActivePartFromScroll(long partId)
+    {
+        if (_activePartId == partId)
+            return;
+
+        _activePartId = partId;
+        await InvokeAsync(StateHasChanged);
+    }
+
     private async Task ScrollToQuestion(int number)
     {
         await JS.InvokeVoidAsync("eval",
@@ -707,8 +743,22 @@ else
             : $"{m:D2}:{s:D2}";
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         _timer?.Dispose();
+
+        if (_audioNavigationInitialized)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("ltToeicTestTaking.dispose", "toeic-test-root");
+            }
+            catch
+            {
+                // The browser may already be disconnected during navigation.
+            }
+        }
+
+        _audioNavigationReference?.Dispose();
     }
 }

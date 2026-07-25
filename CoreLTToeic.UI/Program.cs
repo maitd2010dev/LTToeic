@@ -18,7 +18,11 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateBootstrapLogger();
 
-var builder = WebApplication.CreateBuilder(args);
+var seedOnly = args.Contains("--seed-only", StringComparer.OrdinalIgnoreCase);
+var builderArgs = args
+    .Where(arg => !string.Equals(arg, "--seed-only", StringComparison.OrdinalIgnoreCase))
+    .ToArray();
+var builder = WebApplication.CreateBuilder(builderArgs);
 
 var isDev = builder.Environment.IsDevelopment();
 builder.Host.UseSerilog((ctx, services, cfg) =>
@@ -165,6 +169,18 @@ using (var scope = app.Services.CreateScope())
     var seeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.ToeicTestSeeder>();
     await seeder.SeedAsync(Path.Combine(contentRoot, "SeedData", "toeic_test_1.json"));
 
+    var listeningSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.ListeningTestSeeder>();
+    var listeningSeedDirectory = Path.Combine(contentRoot, "SeedData");
+    if (Directory.Exists(listeningSeedDirectory))
+    {
+        foreach (var seedFile in Directory
+                     .EnumerateFiles(listeningSeedDirectory, "toeic_listening_*.json")
+                     .OrderBy(path => path, StringComparer.OrdinalIgnoreCase))
+        {
+            await listeningSeeder.SeedAsync(seedFile);
+        }
+    }
+
     var scoreSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.ScoreConversionSeeder>();
     await scoreSeeder.SeedAsync();
 
@@ -173,6 +189,12 @@ using (var scope = app.Services.CreateScope())
 
     var courseToeicSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.CourseToeicSeeder>();
     await courseToeicSeeder.SeedAsync();
+}
+
+if (seedOnly)
+{
+    Log.Information("Database seeding completed. Exiting because --seed-only was specified.");
+    return;
 }
 
 app.Run();

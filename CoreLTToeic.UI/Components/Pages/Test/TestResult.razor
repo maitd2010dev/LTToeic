@@ -1,5 +1,6 @@
 @page "/ket-qua/{ResultId:long}"
 @layout MainLayout
+@implements IAsyncDisposable
 @using AntDesign
 @using CoreLTToeic.Application.Interfaces.IService
 @using CoreLTToeic.Application.Models.ViewModels
@@ -30,7 +31,7 @@ else if (_result == null)
 }
 else
 {
-    <div style="max-width:960px; margin:0 auto; padding:24px 16px;">
+    <div class="tr-page">
 
         <div style="text-align:center; margin-bottom:24px;">
             <h2 style="margin-bottom:4px;">Kết quả bài thi</h2>
@@ -63,21 +64,89 @@ else
             <strong style="font-size:1.1rem;">Xem lại đáp án</strong>
         </Divider>
 
-        <Virtualize Items="_flatItems" Context="item" ItemSize="160">
-            @if (item.IsHeader)
-            {
-                <div style="margin-top:20px; margin-bottom:8px;">
-                    <Tag Color="@("blue")" Style="font-size:0.95rem; padding:4px 12px;">
-                        @ToeicPartHelper.GetPartLabel(item.PartNum)
-                    </Tag>
-                    <span style="color:#8c8c8c; margin-left:8px; font-size:0.9rem;">@item.QuestionCount câu</span>
+        <div class="tr-review-root" id="toeic-result-review">
+            <div class="tr-review-sticky">
+                <div class="tr-part-tabs">
+                    @foreach (var group in _partGroups)
+                    {
+                        <button class="tr-part-tab @(_activePartNum == group.Key ? "tr-part-tab-active" : "")"
+                                @onclick="() => ScrollToPart(group.Key)">
+                            Part @group.Key
+                        </button>
+                    }
                 </div>
-            }
-            else
-            {
-                <QuestionReviewItem Answer="item.Answer!" QuestionNumber="item.QuestionNumber" />
-            }
-        </Virtualize>
+
+                @if (_partAudioByPart.TryGetValue(_activePartNum, out var activeAudio)
+                    && !string.IsNullOrWhiteSpace(activeAudio))
+                {
+                    <div class="tr-sticky-audio">
+                        <span>
+                            <Icon Type="sound" Theme="@IconThemeType.Outline" />
+                            Audio Part @_activePartNum
+                        </span>
+                        <audio controls
+                               preload="metadata"
+                               src="@activeAudio"
+                               data-part-audio="@_activePartNum"></audio>
+                    </div>
+                }
+            </div>
+
+            <div class="tr-review-layout">
+                <div class="tr-review-content">
+                    @foreach (var group in _partGroups)
+                    {
+                        <section class="tr-part-section"
+                                 id="result-part-@group.Key"
+                                 data-test-part-id="@group.Key">
+                            <div class="tr-part-header">
+                                <Tag Color="@("blue")" Style="font-size:0.95rem; padding:4px 12px;">
+                                    @ToeicPartHelper.GetPartLabel(group.Key)
+                                </Tag>
+                                <span>@group.Count() câu</span>
+                            </div>
+
+                            @foreach (var answer in group.OrderBy(a => a.OrderNumber))
+                            {
+                                var questionNumber = _questionNumberById[answer.QuestionId];
+                                <div id="result-question-@questionNumber" class="tr-question-anchor">
+                                    <QuestionReviewItem Answer="answer" QuestionNumber="questionNumber" />
+                                </div>
+                            }
+                        </section>
+                    }
+                </div>
+
+                <aside class="tr-answer-nav">
+                    <div class="tr-answer-nav-inner">
+                        <div class="tr-answer-nav-title">Điều hướng câu hỏi</div>
+                        @foreach (var group in _partGroups)
+                        {
+                            <button class="tr-nav-part"
+                                    @onclick="() => ScrollToPart(group.Key)">
+                                Part @group.Key
+                            </button>
+                            <div class="tr-question-grid">
+                                @foreach (var answer in group.OrderBy(a => a.OrderNumber))
+                                {
+                                    var questionNumber = _questionNumberById[answer.QuestionId];
+                                    <button class="tr-question-btn @GetQuestionStateClass(answer)"
+                                            title="@GetQuestionStateLabel(answer)"
+                                            @onclick="() => ScrollToQuestion(questionNumber)">
+                                        @questionNumber
+                                    </button>
+                                }
+                            </div>
+                        }
+                        <div class="tr-nav-legend">
+                            <span><i class="tr-dot tr-dot-correct"></i>Đúng</span>
+                            <span><i class="tr-dot tr-dot-wrong"></i>Sai</span>
+                            <span><i class="tr-dot tr-dot-skipped"></i>Bỏ qua</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
 
         <div style="display:flex; justify-content:center; gap:16px; margin-top:32px; margin-bottom:16px; flex-wrap:wrap;">
             <Button OnClick='() => Nav.NavigateTo($"/luyen-thi/{_result.TestId}")'>
@@ -90,16 +159,278 @@ else
     </div>
 }
 
+<style>
+    .tr-page {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 24px 16px;
+    }
+
+    .tr-review-root {
+        position: relative;
+        width: calc(50vw + 50% - 16px);
+        margin-left: 0;
+    }
+
+    .tr-review-sticky {
+        position: sticky;
+        top: 56px;
+        z-index: 190;
+        margin-right: 326px;
+        margin-bottom: 16px;
+        border: 1px solid #d6e4ff;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, .98);
+        box-shadow: 0 4px 14px rgba(27, 82, 122, .14);
+        overflow: hidden;
+        backdrop-filter: blur(8px);
+    }
+
+    .tr-part-tabs {
+        display: flex;
+        overflow-x: auto;
+        border-bottom: 1px solid #eef2f7;
+    }
+
+    .tr-part-tab {
+        flex: 0 0 auto;
+        padding: 9px 18px;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        background: transparent;
+        color: #666;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .tr-part-tab:hover,
+    .tr-part-tab-active {
+        color: #1B527A;
+        background: #f0f5ff;
+    }
+
+    .tr-part-tab-active {
+        border-bottom-color: #1B527A;
+        font-weight: 700;
+    }
+
+    .tr-sticky-audio {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 12px;
+    }
+
+    .tr-sticky-audio > span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+        color: #1B527A;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .tr-sticky-audio audio {
+        width: 100%;
+        min-width: 0;
+        height: 36px;
+    }
+
+    .tr-review-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 310px;
+        gap: 16px;
+        align-items: start;
+    }
+
+    .tr-review-content {
+        min-width: 0;
+    }
+
+    .tr-part-section {
+        scroll-margin-top: 160px;
+        margin-bottom: 24px;
+    }
+
+    .tr-part-header {
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border: 1px solid #d6e4ff;
+        border-radius: 8px;
+        background: #f0f5ff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #8c8c8c;
+        font-size: .9rem;
+    }
+
+    .tr-question-anchor {
+        scroll-margin-top: 160px;
+    }
+
+    .tr-answer-nav {
+        position: sticky;
+        top: 160px;
+    }
+
+    .tr-answer-nav-inner {
+        max-height: calc(100vh - 176px);
+        padding: 16px;
+        overflow-y: auto;
+        border: 1px solid #e8e8e8;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+    }
+
+    .tr-answer-nav-title {
+        margin-bottom: 10px;
+        color: #1B527A;
+        font-weight: 700;
+    }
+
+    .tr-nav-part {
+        width: 100%;
+        padding: 6px 0;
+        border: 0;
+        background: transparent;
+        color: #1B527A;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .tr-question-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .tr-question-btn {
+        aspect-ratio: 1;
+        min-width: 0;
+        padding: 0;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        background: #fff;
+        color: #555;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .tr-question-btn:hover {
+        border-color: #1677ff;
+        transform: translateY(-1px);
+    }
+
+    .tr-question-correct {
+        border-color: #b7eb8f;
+        background: #f6ffed;
+        color: #389e0d;
+    }
+
+    .tr-question-wrong {
+        border-color: #ffa39e;
+        background: #fff2f0;
+        color: #cf1322;
+    }
+
+    .tr-question-skipped {
+        background: #fafafa;
+        color: #8c8c8c;
+    }
+
+    .tr-nav-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid #f0f0f0;
+        color: #777;
+        font-size: 11px;
+    }
+
+    .tr-nav-legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .tr-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+    }
+
+    .tr-dot-correct { background: #52c41a; }
+    .tr-dot-wrong { background: #ff4d4f; }
+    .tr-dot-skipped { background: #bfbfbf; }
+
+    @@media (max-width: 1100px) {
+        .tr-review-root {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .tr-review-sticky {
+            margin-right: 0;
+        }
+
+        .tr-review-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .tr-answer-nav {
+            position: static;
+            grid-row: 1;
+        }
+
+        .tr-answer-nav-inner {
+            max-height: none;
+        }
+
+        .tr-question-grid {
+            grid-template-columns: repeat(10, 1fr);
+        }
+    }
+
+    @@media (max-width: 640px) {
+        .tr-page {
+            padding: 16px 10px;
+        }
+
+        .tr-sticky-audio > span {
+            font-size: 0;
+        }
+
+        .tr-sticky-audio > span .anticon {
+            font-size: 16px;
+        }
+
+        .tr-question-grid {
+            grid-template-columns: repeat(8, 1fr);
+        }
+    }
+</style>
+
 @code {
     [Parameter] public long ResultId { get; set; }
 
     private UserResultViewModel? _result;
     private bool _loading = true;
     private List<IGrouping<int, UserAnswerViewModel>> _partGroups = [];
-    private Dictionary<int, int> _partStartNumbers = [];
-    private List<FlatItem> _flatItems = [];
-
-    private record struct FlatItem(bool IsHeader, int PartNum, int QuestionCount, UserAnswerViewModel? Answer, int QuestionNumber);
+    private Dictionary<long, int> _questionNumberById = [];
+    private Dictionary<int, string?> _partAudioByPart = [];
+    private int _activePartNum;
+    private bool _reviewNavigationInitialized;
+    private DotNetObjectReference<TestResult>? _reviewNavigationReference;
 
     protected override async Task OnInitializedAsync()
     {
@@ -123,6 +454,24 @@ else
     {
         if (firstRender)
             await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+
+        if (_result == null || _reviewNavigationInitialized)
+            return;
+
+        try
+        {
+            _reviewNavigationReference = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync(
+                "ltToeicTestTaking.initialize",
+                "toeic-result-review",
+                _reviewNavigationReference);
+            _reviewNavigationInitialized = true;
+        }
+        catch
+        {
+            _reviewNavigationReference?.Dispose();
+            _reviewNavigationReference = null;
+        }
     }
 
     private void BuildPartGroups()
@@ -133,26 +482,87 @@ else
             .GroupBy(a => a.PartNum)
             .ToList();
 
-        int counter = 1;
-        _partStartNumbers = [];
-        foreach (var group in _partGroups)
-        {
-            _partStartNumbers[group.Key] = counter;
-            counter += group.Count();
-        }
+        _questionNumberById = [];
+        _partAudioByPart = [];
+        var questionNumber = 1;
 
-        _flatItems = [];
         foreach (var group in _partGroups)
         {
-            int startNum = _partStartNumbers[group.Key];
-            _flatItems.Add(new FlatItem(true, group.Key, group.Count(), null, 0));
-            int idx = 0;
-            foreach (var answer in group.OrderBy(a => a.OrderNumber))
+            _partAudioByPart[group.Key] = group
+                .Select(answer => answer.Audio)
+                .FirstOrDefault(audio => !string.IsNullOrWhiteSpace(audio));
+
+            foreach (var answer in group.OrderBy(answer => answer.OrderNumber))
             {
-                _flatItems.Add(new FlatItem(false, group.Key, 0, answer, startNum + idx));
-                idx++;
+                _questionNumberById[answer.QuestionId] = questionNumber;
+                questionNumber++;
             }
         }
+
+        _activePartNum = _partGroups.FirstOrDefault()?.Key ?? 0;
+    }
+
+    private async Task ScrollToPart(int partNum)
+    {
+        _activePartNum = partNum;
+        await JS.InvokeVoidAsync(
+            "eval",
+            $"document.getElementById('result-part-{partNum}')?.scrollIntoView({{behavior:'smooth',block:'start'}})");
+    }
+
+    private async Task ScrollToQuestion(int questionNumber)
+    {
+        await JS.InvokeVoidAsync(
+            "eval",
+            $"document.getElementById('result-question-{questionNumber}')?.scrollIntoView({{behavior:'smooth',block:'start'}})");
+    }
+
+    [JSInvokable]
+    public async Task SetActivePartFromScroll(long partId)
+    {
+        var partNum = (int)partId;
+        if (_activePartNum == partNum)
+            return;
+
+        _activePartNum = partNum;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private static string GetQuestionStateClass(UserAnswerViewModel answer)
+    {
+        if (answer.IsCorrect)
+            return "tr-question-correct";
+        return string.IsNullOrWhiteSpace(answer.SelectedAnswer)
+            ? "tr-question-skipped"
+            : "tr-question-wrong";
+    }
+
+    private static string GetQuestionStateLabel(UserAnswerViewModel answer)
+    {
+        if (answer.IsCorrect)
+            return "Đúng";
+        return string.IsNullOrWhiteSpace(answer.SelectedAnswer)
+            ? "Bỏ qua"
+            : "Sai";
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_reviewNavigationInitialized)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync(
+                    "ltToeicTestTaking.dispose",
+                    "toeic-result-review");
+            }
+            catch
+            {
+                // The browser may already be disconnected during navigation.
+            }
+        }
+
+        _reviewNavigationReference?.Dispose();
     }
 
 }

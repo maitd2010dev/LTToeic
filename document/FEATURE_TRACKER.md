@@ -1,6 +1,6 @@
 # LTToeic — Bảng Theo Dõi Chức Năng
 
-> Cập nhật lần cuối: 2026-07-25 (session 5)
+> Cập nhật lần cuối: 2026-07-25 (session 6)
 > Đánh dấu `[x]` khi hoàn thành, thêm ngày hoàn thành vào cuối dòng.
 
 ---
@@ -38,12 +38,12 @@
 | 3.2 | Làm bài thi (`/luyen-thi/{TestId}`) | ✅ Hoàn thành | `TakeTest.razor`, timer, answer sheet |
 | 3.3 | Nộp bài & tính điểm tự động | ✅ Hoàn thành | `UserResultService.SubmitTestAsync` |
 | 3.4 | Trang kết quả sau khi nộp bài | ✅ Hoàn thành | `TestResult.razor` `/ket-qua/{ResultId}` — 2026-05-17 |
-| 3.5 | Xem lại đáp án chi tiết sau thi | ✅ Hoàn thành | `QuestionReviewItem.razor` — màu đúng/sai/bỏ qua, nhóm theo Part — 2026-05-17 |
+| 3.5 | Xem lại đáp án chi tiết sau thi | ✅ Hoàn thành | Đủ 100 câu, navigator đúng/sai/bỏ qua, audio sticky theo Part, transcript sau khi hoàn thành — 2026-07-25 |
 | 3.6 | Lịch sử các lần thi của người dùng | ✅ Hoàn thành | `ExamHistory.razor`, `ExamHistoryTable.razor`; hỗ trợ xem chi tiết kết quả và hiển thị trong Drawer của NavMenu |
 | 3.7 | Chế độ luyện tập từng Part | ✅ Hoàn thành | `TestStartScreen` checkbox chọn Part; `TakeTest` filter `_parts` + `_questionIndex` giữ nguyên số câu theo DB — 2026-05-20 |
 | 3.8 | Chế độ thi thử toàn bài (120 phút cố định) | ✅ Hoàn thành | `TestMode.Simulation`, màn hình chọn chế độ — 2026-05-17 |
 | 3.9 | Lọc/tìm kiếm đề thi theo danh mục | ⚠️ Một phần | UI có filter, backend cần kiểm tra |
-| 3.10 | Bảng quy đổi điểm Listening/Reading | ✅ Hoàn thành | Seeder 101 dòng (0–100→5–495), `ScoreConversionRepository` lookup — 2026-05-17 |
+| 3.10 | Bảng quy đổi điểm Listening/Reading | ✅ Hoàn thành | Seeder 101 dòng; 0 câu đúng = 0 điểm; Listening-only tối đa 495 — 2026-07-25 |
 | 3.11 | Màn hình chọn chế độ thi trước khi bắt đầu | ✅ Hoàn thành | `TestStartScreen.razor` — Thi thử (120p) / Luyện tập (30/60/90/120p / không giới hạn) — 2026-05-17 |
 | 3.12 | Timer đếm lên khi luyện tập không giới hạn | ✅ Hoàn thành | `_countUp` mode trong `TakeTest.razor`, lưu thời gian thực khi nộp — 2026-05-17 |
 
@@ -62,7 +62,7 @@
 | 4.7 | Upload ảnh cho câu hỏi | ✅ Hoàn thành | |
 | 4.8 | Preview câu hỏi realtime | ✅ Hoàn thành | `QuestionPreviewCard.razor`, `QuestionGroupPreviewCard.razor` |
 | 4.9 | Quản lý danh mục đề thi | ➖ Không triển khai UI riêng | Đã xóa tab/ô “Danh mục” khỏi giao diện Admin; danh mục vẫn được dùng nội bộ để phân loại đề thi — 2026-07-25 |
-| 4.10 | Import đề thi từ JSON/file | ⚠️ Có seeder | `ToeicTestSeeder` chỉ dùng để seed, chưa phải UI import |
+| 4.10 | Import đề thi từ JSON/file | ✅ Seeder/CLI | Tự quét `SeedData/toeic_listening_*.json`; chạy trực tiếp DB bằng `--seed-only`; hướng dẫn tại `document/LISTENING_TEST_SEEDING.md` — 2026-07-25 |
 | 4.11 | Phân quyền admin (bảo vệ route) | ✅ Hoàn thành | `[Authorize(Roles="Admin")]` trên `AdminLayout`, `ExamManagementList`, `CourseManagement`, `AdminIndex`; `AuthorizeRouteView` trong `Routes.razor` — 2026-05-17 |
 
 ---

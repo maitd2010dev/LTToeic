@@ -6,7 +6,7 @@
         <Card Bordered Style="flex:1; min-width:180px; text-align:center; background:linear-gradient(135deg,#1B527A,#2471A3); color:#fff; border-radius:12px;">
             <Statistic Title="Tổng điểm"
                        Value="@TotalScore"
-                       Suffix="/ 990"
+                       Suffix="@($"/ {_maxScore}")"
                        ValueStyle="font-size:2.5rem; font-weight:700; color:#fff;" />
         </Card>
         @if (TotalListeningQuestions > 0)
@@ -38,7 +38,7 @@ else
                        Suffix="@($"/ {_totalQ} câu")"
                        ValueStyle="font-size:2.5rem; font-weight:700; color:#fff;" />
             <div style="color:rgba(255,255,255,0.72); font-size:0.82rem; margin-top:6px;">
-                Điểm ước tính: ~@TotalScore / 990
+                Điểm ước tính: ~@TotalScore / @_maxScore
             </div>
         </Card>
         @if (TotalListeningQuestions > 0)
@@ -76,4 +76,7 @@ else
     [Parameter] public int TotalReadingQuestions { get; set; }
 
     private int _totalQ => TotalListeningQuestions + TotalReadingQuestions;
+    private int _maxScore =>
+        (TotalListeningQuestions > 0 ? 495 : 0) +
+        (TotalReadingQuestions > 0 ? 495 : 0);
 }

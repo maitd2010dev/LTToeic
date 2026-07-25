@@ -1,7 +1,7 @@
 <div class="tq-item" id="question-@QuestionNumber">
     <div class="tq-header">
         <span class="tq-number">@QuestionNumber</span>
-        @if (!string.IsNullOrEmpty(Question.Audio))
+        @if (ShowAudio && !string.IsNullOrEmpty(Question.Audio))
         {
             <audio controls src="@Question.Audio" class="tq-audio" />
         }
@@ -69,7 +69,7 @@
         border-radius: 8px;
         background: #fff;
         margin-bottom: 12px;
-        scroll-margin-top: 64px;
+        scroll-margin-top: 152px;
     }
 
     .tq-header {
@@ -230,17 +230,29 @@
     [Parameter] public int QuestionNumber { get; set; }
     [Parameter] public string? SelectedAnswer { get; set; }
     [Parameter] public bool IsViewResult { get; set; }
+    [Parameter] public bool ShowAudio { get; set; } = true;
     [Parameter] public EventCallback<string> OnAnswerSelected { get; set; }
 
     private bool _transcriptOpen;
 
-    private List<KeyValuePair<string, string?>> _options =>
-    [
-        new("A", Question.Answer1),
-        new("B", Question.Answer2),
-        new("C", Question.Answer3),
-        new("D", Question.Answer4),
-    ];
+    private List<KeyValuePair<string, string?>> _options
+    {
+        get
+        {
+            var options = new List<KeyValuePair<string, string?>>
+            {
+                new("A", Question.Answer1),
+                new("B", Question.Answer2),
+                new("C", Question.Answer3),
+                new("D", Question.Answer4)
+            };
+
+            // Part 2 chỉ có A-C. Chuỗi rỗng vẫn là một lựa chọn hợp lệ
+            // vì nội dung đáp án Listening không được in trong lúc làm bài.
+            var configuredOptions = options.Where(option => option.Value != null).ToList();
+            return configuredOptions.Count > 0 ? configuredOptions : options;
+        }
+    }
 
     private string GetOptionCss(string key)
     {
