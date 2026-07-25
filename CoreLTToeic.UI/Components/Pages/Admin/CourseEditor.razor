@@ -149,13 +149,13 @@ else
     else if (_tab == "students")
     {
         <div class="admin-table-card">
-            <Table DataSource="_enrollments" TItem="CourseEnrollmentAdminViewModel" Loading="_loadingTab" Bordered Size="TableSize.Small">
+            <Table DataSource="_enrollments" TItem="CourseEnrollmentAdminViewModel" Loading="_loadingTab" Bordered Size="TableSize.Small" ScrollX="1200">
                 <PropertyColumn Property="e => e.FullName" Title="Học viên" />
                 <PropertyColumn Property="e => e.Email" Title="Email" />
                 <ActionColumn Title="Trạng thái"><Tag Color="@(context.Status == EnrollmentStatus.Cancelled ? "error" : "success")">@EnrollmentLabel(context.Status)</Tag></ActionColumn>
                 <ActionColumn Title="Tiến độ">@context.CompletedLessons/@context.TotalLessons (@context.ProgressPercent%)</ActionColumn>
                 <ActionColumn Title="Quiz">@context.QuizAttemptCount lượt · tốt nhất @(context.BestQuizScore?.ToString() ?? "-")%</ActionColumn>
-                <ActionColumn Title="Quản lý">
+                <ActionColumn Title="Quản lý" Width="120" Fixed="ColumnFixPlacement.Right">
                     @if (context.Status == EnrollmentStatus.Cancelled)
                     {
                         <Button Size="ButtonSize.Small" OnClick="() => SetEnrollment(context.Id, EnrollmentStatus.Active)">Kích hoạt</Button>
@@ -167,23 +167,23 @@ else
                 </ActionColumn>
             </Table>
             <h3 style="margin-top:22px">Lịch sử làm bài</h3>
-            <Table DataSource="_attempts" TItem="QuizAttemptViewModel" Bordered Size="TableSize.Small">
+            <Table DataSource="_attempts" TItem="QuizAttemptViewModel" Bordered Size="TableSize.Small" ScrollX="800">
                 <PropertyColumn Property="a => a.LessonTitle" Title="Bài kiểm tra" />
                 <PropertyColumn Property="a => a.AttemptNumber" Title="Lần" />
                 <ActionColumn Title="Điểm">@context.CorrectAnswers/@context.TotalQuestions (@context.ScorePercent%)</ActionColumn>
-                <ActionColumn Title="Nộp lúc">@context.SubmittedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</ActionColumn>
+                <ActionColumn Title="Nộp lúc" Width="150" Fixed="ColumnFixPlacement.Right">@context.SubmittedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</ActionColumn>
             </Table>
         </div>
     }
     else
     {
         <div class="admin-table-card">
-            <Table DataSource="_reviews" TItem="CourseReviewViewModel" Loading="_loadingTab" Bordered Size="TableSize.Small">
+            <Table DataSource="_reviews" TItem="CourseReviewViewModel" Loading="_loadingTab" Bordered Size="TableSize.Small" ScrollX="900">
                 <PropertyColumn Property="r => r.UserDisplayName" Title="Học viên" />
                 <ActionColumn Title="Sao">@context.Rating / 5</ActionColumn>
                 <PropertyColumn Property="r => r.Comment" Title="Nhận xét" />
                 <ActionColumn Title="Ngày">@context.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")</ActionColumn>
-                <ActionColumn Title=""><Button Danger Size="ButtonSize.Small" Icon="delete" OnClick="() => DeleteReview(context.Id)" /></ActionColumn>
+                <ActionColumn Title="" Width="70" Fixed="ColumnFixPlacement.Right"><Button Danger Size="ButtonSize.Small" Icon="delete" OnClick="() => DeleteReview(context.Id)" /></ActionColumn>
             </Table>
         </div>
     }

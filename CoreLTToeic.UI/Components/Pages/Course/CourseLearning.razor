@@ -177,6 +177,7 @@
                 if (_selected?.Type == LessonType.Quiz) await LoadAttempts();
             }
         }
+        catch (UnauthorizedAccessException) { Nav.NavigateTo("/tai-khoan-bi-khoa"); }
         catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
     }
 
@@ -199,6 +200,7 @@
             await Message.SuccessAsync("Đã lưu tiến độ.");
             await Reload(id);
         }
+        catch (UnauthorizedAccessException) { Nav.NavigateTo("/tai-khoan-bi-khoa"); }
         catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
         finally { _completing = false; }
     }
@@ -220,6 +222,7 @@
             await Reload(lessonId);
             await LoadAttempts();
         }
+        catch (UnauthorizedAccessException) { Nav.NavigateTo("/tai-khoan-bi-khoa"); }
         catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
         finally { _submitting = false; }
     }
@@ -228,6 +231,7 @@
     {
         if (_selected == null) return;
         try { _attempts = await CourseLearningService.GetQuizAttemptsAsync(_selected.Id, _userId); }
+        catch (UnauthorizedAccessException) { Nav.NavigateTo("/tai-khoan-bi-khoa"); }
         catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
     }
 
@@ -235,6 +239,7 @@
     {
         _savingReview = true;
         try { await CourseLearningService.UpsertReviewAsync(Id, _userId, _review); await Message.SuccessAsync("Đã lưu đánh giá."); await Reload(_selected?.Id); }
+        catch (UnauthorizedAccessException) { Nav.NavigateTo("/tai-khoan-bi-khoa"); }
         catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
         finally { _savingReview = false; }
     }

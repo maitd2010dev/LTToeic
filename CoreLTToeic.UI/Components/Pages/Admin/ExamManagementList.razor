@@ -12,7 +12,7 @@
         <Button Type="ButtonType.Primary" Icon="plus" OnClick="OpenAddTest">Thêm đề thi</Button>
     </div>
 
-    <Table DataSource="_tests" TItem="TestViewModel" Loading="_loading" Bordered>
+    <Table DataSource="_tests" TItem="TestViewModel" Loading="_loading" Bordered ScrollX="1100">
         <PropertyColumn Property="c => c.Id" Title="ID" Width="70" />
         <PropertyColumn Property="c => c.Title" Title="Tiêu đề" />
         <PropertyColumn Property="c => c.CategoryName" Title="Loại" Width="140" />
@@ -23,7 +23,7 @@
                 @(context.Status == TestStatus.Active ? "Hoạt động" : context.Status == TestStatus.Draft ? "Nháp" : "Ngưng")
             </Tag>
         </ActionColumn>
-        <ActionColumn Title="Thao tác" Width="220">
+        <ActionColumn Title="Thao tác" Width="220" Fixed="ColumnFixPlacement.Right">
             <Space>
                 <SpaceItem>
                     <Button Size="ButtonSize.Small" Icon="bars" OnClick="() => OpenQuestions(context)">Câu hỏi</Button>
@@ -97,7 +97,7 @@
             <div style="margin-bottom:12px">
                 <Button Type="ButtonType.Primary" Icon="plus" OnClick="OpenAddQuestion">Thêm câu hỏi</Button>
             </div>
-            <Table DataSource="_questions" TItem="QuestionViewModel" Size="TableSize.Small" Bordered>
+            <Table DataSource="_questions" TItem="QuestionViewModel" Size="TableSize.Small" Bordered ScrollX="800">
                 <PropertyColumn Property="c => c.OrderNumber" Title="#" Width="45" />
                 <PropertyColumn Property="c => c.Content" Title="Nội dung câu hỏi" Ellipsis />
                 <ActionColumn Title="Đ/A đúng" Width="90">
@@ -107,7 +107,7 @@
                     @if (!string.IsNullOrEmpty(context.Image)) { <Icon Type="picture" Theme="IconThemeType.Outline" /> }
                     @if (!string.IsNullOrEmpty(context.Audio)) { <Icon Type="sound" Theme="IconThemeType.Outline" Style="margin-left:4px" /> }
                 </ActionColumn>
-                <ActionColumn Title="Thao tác" Width="140">
+                <ActionColumn Title="Thao tác" Width="140" Fixed="ColumnFixPlacement.Right">
                     <Space>
                         <SpaceItem>
                             <Button Size="ButtonSize.Small" Icon="edit" OnClick="() => OpenEditQuestion(context)">Sửa</Button>
@@ -124,7 +124,7 @@
             <div style="margin-bottom:12px">
                 <Button Type="ButtonType.Primary" Icon="plus" OnClick="OpenAddQuestionGroup">Thêm nhóm câu hỏi</Button>
             </div>
-            <Table DataSource="_questionGroups" TItem="QuestionGroupViewModel" Size="TableSize.Small" Bordered>
+            <Table DataSource="_questionGroups" TItem="QuestionGroupViewModel" Size="TableSize.Small" Bordered ScrollX="800">
                 <PropertyColumn Property="c => c.Id" Title="ID" Width="60" />
                 <PropertyColumn Property="c => c.Name" Title="Tên nhóm" />
                 <ActionColumn Title="Câu hỏi con" Width="100">
@@ -134,7 +134,7 @@
                     @if (!string.IsNullOrEmpty(context.Audio)) { <Icon Type="sound" Theme="IconThemeType.Outline" /> }
                     @if (context.Images.Any(i => !string.IsNullOrEmpty(i))) { <Icon Type="picture" Theme="IconThemeType.Outline" Style="margin-left:4px" /> }
                 </ActionColumn>
-                <ActionColumn Title="Thao tác" Width="140">
+                <ActionColumn Title="Thao tác" Width="140" Fixed="ColumnFixPlacement.Right">
                     <Space>
                         <SpaceItem>
                             <Button Size="ButtonSize.Small" Icon="edit" OnClick="() => OpenEditQuestionGroup(context)">Sửa</Button>

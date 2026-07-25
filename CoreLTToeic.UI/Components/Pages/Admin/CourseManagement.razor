@@ -30,7 +30,7 @@
         </select>
     </div>
 
-    <Table DataSource="FilteredCourses" TItem="CourseViewModel" Loading="_loading" Bordered Size="TableSize.Small">
+    <Table DataSource="FilteredCourses" TItem="CourseViewModel" Loading="_loading" Bordered Size="TableSize.Small" ScrollX="1000">
         <PropertyColumn Property="c => c.Title" Title="Khóa học" Sortable />
         <ActionColumn Title="Cấp độ" Width="120">
             <Tag Color="@LevelColor(context.Level)">@LevelLabel(context.Level)</Tag>
@@ -42,7 +42,7 @@
         </ActionColumn>
         <ActionColumn Title="Nội dung" Width="120">@context.SectionCount chương / @context.TotalLessons bài</ActionColumn>
         <ActionColumn Title="Học viên" Width="90">@context.EnrollmentCount</ActionColumn>
-        <ActionColumn Title="Thao tác" Width="130">
+        <ActionColumn Title="Thao tác" Width="130" Fixed="ColumnFixPlacement.Right">
             <Space>
                 <SpaceItem><Button Size="ButtonSize.Small" Icon="edit" OnClick="() => Edit(context.Id)">Sửa</Button></SpaceItem>
                 <SpaceItem><Button Danger Size="ButtonSize.Small" Icon="delete" OnClick="() => Delete(context.Id)" /></SpaceItem>

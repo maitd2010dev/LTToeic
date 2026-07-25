@@ -136,8 +136,15 @@ public class AdminRepository : IAdminRepository
         if (user == null)
             return IdentityResult.Failed(new IdentityError { Description = "Không tìm thấy người dùng" });
 
-        await _userManager.SetLockoutEnabledAsync(user, true);
-        return await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.MaxValue);
+        var enableLockoutResult = await _userManager.SetLockoutEnabledAsync(user, true);
+        if (!enableLockoutResult.Succeeded)
+            return enableLockoutResult;
+
+        var lockResult = await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.MaxValue);
+        if (!lockResult.Succeeded)
+            return lockResult;
+
+        return await _userManager.UpdateSecurityStampAsync(user);
     }
 
     public async Task<IdentityResult> UnlockUserAsync(string userId)

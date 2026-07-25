@@ -82,6 +82,24 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();
+app.Use(async (context, next) =>
+{
+    var isCourseRoute = context.Request.Path.StartsWithSegments("/khoa-hoc") ||
+                        context.Request.Path.StartsWithSegments("/khoa-hoc-cua-toi");
+
+    if (isCourseRoute && context.User.Identity?.IsAuthenticated == true)
+    {
+        var userManager = context.RequestServices.GetRequiredService<UserManager<AppUser>>();
+        var user = await userManager.GetUserAsync(context.User);
+        if (user == null || await userManager.IsLockedOutAsync(user))
+        {
+            context.Response.Redirect("/tai-khoan-bi-khoa");
+            return;
+        }
+    }
+
+    await next();
+});
 app.UseAuthorization();
 app.UseAntiforgery();
 
@@ -108,6 +126,9 @@ app.MapPost("/api/auth/signin", async (
         return Results.Redirect(Err("Email chưa được xác nhận, vui lòng kiểm tra hộp thư"));
 
     var result = await signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
+    if (result.IsLockedOut)
+        return Results.Redirect(Err("Tài khoản đã bị khóa. Vui lòng liên hệ quản trị viên."));
+
     if (!result.Succeeded)
         return Results.Redirect(Err("Tài khoản hoặc mật khẩu không đúng"));
 

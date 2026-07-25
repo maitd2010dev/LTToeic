@@ -18,7 +18,7 @@ else if (_parts.Count == 0)
 }
 else
 {
-    <Table DataSource="_parts" TItem="PartViewModel" Size="TableSize.Small" Bordered>
+    <Table DataSource="_parts" TItem="PartViewModel" Size="TableSize.Small" Bordered ScrollX="900">
         <PropertyColumn Property="c => c.PartNum" Title="Part" Width="100">
             <Tag Color="@("blue")">Part @((int)context.PartNum)</Tag>
         </PropertyColumn>
@@ -29,7 +29,7 @@ else
         <PropertyColumn Property="c => c.QuestionGroupCount" Title="Nhóm câu hỏi" Width="120">
             <Tag>@context.QuestionGroupCount nhóm</Tag>
         </PropertyColumn>
-        <ActionColumn Title="Thao tác" Width="130">
+        <ActionColumn Title="Thao tác" Width="130" Fixed="ColumnFixPlacement.Right">
             <Space>
                 <SpaceItem>
                     <Button Size="ButtonSize.Small" Icon="edit" OnClick="() => OpenEditPart(context)">Sửa</Button>

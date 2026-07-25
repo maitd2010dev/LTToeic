@@ -49,6 +49,11 @@ namespace CoreLTToeic.Infrastructure.Repositories
                 return IdentityResult.Failed(new IdentityError { Description = "Email chưa được xác nhận, vui lòng xác nhận lại trong email" });
             }
 
+            if (await _userManager.IsLockedOutAsync(currentUser))
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Tài khoản đã bị khóa. Vui lòng liên hệ quản trị viên." });
+            }
+
             if (await _userManager.CheckPasswordAsync(currentUser, loginModel.Password))
             {
                 return IdentityResult.Success;

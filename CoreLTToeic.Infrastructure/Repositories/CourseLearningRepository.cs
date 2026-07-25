@@ -21,6 +21,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         public async Task<List<CourseCatalogItemViewModel>> GetPublishedCoursesAsync(string? userId)
         {
             await using var ctx = await _factory.CreateDbContextAsync();
+            await RequireCourseAccessAsync(ctx, userId);
             var courses = await PublishedGraph(ctx).AsNoTracking().OrderByDescending(c => c.CreatedAt).ToListAsync();
             return courses.Select(course => MapCatalog(course, userId)).ToList();
         }
@@ -28,6 +29,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         public async Task<CourseDetailViewModel?> GetCourseDetailsAsync(long courseId, string? userId, bool includeLearningContent)
         {
             await using var ctx = await _factory.CreateDbContextAsync();
+            await RequireCourseAccessAsync(ctx, userId);
             var course = await PublishedGraph(ctx).AsNoTracking().FirstOrDefaultAsync(c => c.Id == courseId);
             if (course == null) return null;
 
@@ -97,6 +99,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         public async Task<List<CourseCatalogItemViewModel>> GetMyCoursesAsync(string userId)
         {
             await using var ctx = await _factory.CreateDbContextAsync();
+            await RequireCourseAccessAsync(ctx, userId);
             var courses = await PublishedGraph(ctx)
                 .Where(c => c.Enrollments.Any(e => e.UserId == userId && e.Status != EnrollmentStatus.Cancelled))
                 .AsNoTracking().OrderByDescending(c => c.CreatedAt).ToListAsync();
@@ -106,6 +109,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         public async Task EnrollAsync(long courseId, string userId)
         {
             await using var ctx = await _factory.CreateDbContextAsync();
+            await RequireCourseAccessAsync(ctx, userId);
             if (!await ctx.Courses.AnyAsync(c => c.Id == courseId && c.Status == CourseStatus.Published))
                 throw new KeyNotFoundException("Khóa học không tồn tại hoặc chưa được xuất bản.");
             var existing = await ctx.CourseEnrollments.FirstOrDefaultAsync(e => e.CourseId == courseId && e.UserId == userId);
@@ -142,6 +146,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         public async Task CompleteLessonAsync(long courseId, long lessonId, string userId)
         {
             await using var ctx = await _factory.CreateDbContextAsync();
+            await RequireCourseAccessAsync(ctx, userId);
             var lesson = await ctx.CourseLessons.Include(l => l.Section)
                 .FirstOrDefaultAsync(l => l.Id == lessonId && l.Section.CourseId == courseId)
                 ?? throw new KeyNotFoundException("Không tìm thấy bài học.");
@@ -174,6 +179,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         public async Task<QuizAttemptViewModel> SubmitQuizAsync(long courseId, long lessonId, string userId, QuizSubmissionEditModel model)
         {
             await using var ctx = await _factory.CreateDbContextAsync();
+            await RequireCourseAccessAsync(ctx, userId);
             await using var transaction = await ctx.Database.BeginTransactionAsync(IsolationLevel.Serializable);
             await RequireActiveEnrollmentAsync(ctx, courseId, userId);
             var lesson = await ctx.CourseLessons.Include(l => l.Section)
@@ -233,6 +239,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         public async Task<List<QuizAttemptViewModel>> GetQuizAttemptsAsync(long lessonId, string userId)
         {
             await using var ctx = await _factory.CreateDbContextAsync();
+            await RequireCourseAccessAsync(ctx, userId);
             var attempts = await ctx.QuizAttempts.Include(a => a.Lesson).Include(a => a.Answers)
                 .Where(a => a.LessonId == lessonId && a.UserId == userId)
                 .OrderByDescending(a => a.AttemptNumber).AsNoTracking().ToListAsync();
@@ -242,6 +249,7 @@ namespace CoreLTToeic.Infrastructure.Repositories
         public async Task<CourseReviewViewModel> UpsertReviewAsync(long courseId, string userId, CourseReviewEditModel model)
         {
             await using var ctx = await _factory.CreateDbContextAsync();
+            await RequireCourseAccessAsync(ctx, userId);
             await RequireActiveEnrollmentAsync(ctx, courseId, userId);
             var review = await ctx.CourseReviews.Include(r => r.User)
                 .FirstOrDefaultAsync(r => r.CourseId == courseId && r.UserId == userId);
@@ -365,6 +373,20 @@ namespace CoreLTToeic.Infrastructure.Repositories
             => await ctx.CourseEnrollments.FirstOrDefaultAsync(e =>
                    e.CourseId == courseId && e.UserId == userId && e.Status != EnrollmentStatus.Cancelled)
                ?? throw new UnauthorizedAccessException("Bạn cần đăng ký khóa học để thực hiện thao tác này.");
+
+        private static async Task RequireCourseAccessAsync(AppDbContext ctx, string? userId)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+                return;
+
+            var user = await ctx.Users.AsNoTracking()
+                .Where(u => u.Id == userId)
+                .Select(u => new { u.LockoutEnabled, u.LockoutEnd })
+                .SingleOrDefaultAsync();
+
+            if (user == null || (user.LockoutEnabled && user.LockoutEnd > DateTimeOffset.UtcNow))
+                throw new UnauthorizedAccessException("Tài khoản của bạn đã bị khóa. Bạn không thể truy cập khóa học.");
+        }
 
         private static async Task RecalculateEnrollmentAsync(AppDbContext ctx, long courseId, string userId)
         {

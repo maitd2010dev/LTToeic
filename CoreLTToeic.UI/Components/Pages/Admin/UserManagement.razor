@@ -89,7 +89,7 @@
         <ActionColumn Title="Số lần thi" Width="100">
             <Tag Color="@("cyan")">@context.ExamCount</Tag>
         </ActionColumn>
-        <ActionColumn Title="Hành động" Width="130">
+        <ActionColumn Title="Hành động" Width="130" Fixed="ColumnFixPlacement.Right">
             @if (context.Role != "Admin")
             {
                 <Button Size="ButtonSize.Small"

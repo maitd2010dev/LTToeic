@@ -1,0 +1,26 @@
+@page "/tai-khoan-bi-khoa"
+@layout MainLayout
+@inject NavigationManager Nav
+
+<PageTitle>Tài khoản bị khóa - LTToeic</PageTitle>
+
+<div style="display:flex;justify-content:center;align-items:center;min-height:60vh">
+    <Result Status="@ResultStatus.Error"
+            Title="Tài khoản đã bị khóa"
+            SubTitle="Bạn không thể truy cập khóa học. Vui lòng liên hệ quản trị viên để được hỗ trợ.">
+        <Extra>
+            <Space>
+                <SpaceItem>
+                    <Button Type="ButtonType.Primary" OnClick="@(() => Nav.NavigateTo("/"))">Về trang chủ</Button>
+                </SpaceItem>
+                <SpaceItem>
+                    <Button OnClick="Logout">Đăng xuất</Button>
+                </SpaceItem>
+            </Space>
+        </Extra>
+    </Result>
+</div>
+
+@code {
+    private void Logout() => Nav.NavigateTo("/api/auth/signout", forceLoad: true);
+}

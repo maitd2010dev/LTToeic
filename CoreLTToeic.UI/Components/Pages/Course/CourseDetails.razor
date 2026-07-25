@@ -90,6 +90,7 @@
         var state = await AuthStateProvider.GetAuthenticationStateAsync();
         _userId = state.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         try { _course = await CourseLearningService.GetCourseDetailsAsync(Id, _userId); }
+        catch (UnauthorizedAccessException) { Nav.NavigateTo("/tai-khoan-bi-khoa"); }
         catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
         finally { _loading = false; }
     }
@@ -98,6 +99,7 @@
         if (_userId == null) { Nav.NavigateTo($"/login?returnUrl={Uri.EscapeDataString($"/khoa-hoc/{Id}")}"); return; }
         _enrolling = true;
         try { await CourseLearningService.EnrollAsync(Id, _userId); await Message.SuccessAsync("Đăng ký thành công."); StartLearning(); }
+        catch (UnauthorizedAccessException) { Nav.NavigateTo("/tai-khoan-bi-khoa"); }
         catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
         finally { _enrolling = false; }
     }

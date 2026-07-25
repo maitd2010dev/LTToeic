@@ -92,7 +92,7 @@
                 @StatusLabel(context.AttemptStatus)
             </Tag>
         </ActionColumn>
-        <ActionColumn Title="Ngày thi" Width="145">
+        <ActionColumn Title="Ngày thi" Width="145" Fixed="ColumnFixPlacement.Right">
             @context.CompletedAt?.ToString("dd/MM/yyyy HH:mm")
         </ActionColumn>
     </Table>

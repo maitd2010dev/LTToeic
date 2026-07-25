@@ -64,6 +64,7 @@
         var state = await AuthStateProvider.GetAuthenticationStateAsync();
         _userId = state.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         try { _courses = await CourseLearningService.GetPublishedCoursesAsync(_userId); }
+        catch (UnauthorizedAccessException) { Nav.NavigateTo("/tai-khoan-bi-khoa"); }
         catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
         finally { _loading = false; }
     }
