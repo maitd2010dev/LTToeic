@@ -13,5 +13,6 @@ namespace CoreLTToeic.Application.Models.ViewModels
         public bool? IsFree { get; set; }
         public string? Content { get; set; }
         public string? VideoUrl { get; set; }
+        public List<QuizQuestionAdminViewModel> QuizQuestions { get; set; } = new();
     }
 }

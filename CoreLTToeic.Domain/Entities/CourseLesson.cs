@@ -22,5 +22,6 @@ namespace CoreLTToeic.Domain.Entities
 
         public ICollection<LessonCompletion> Completions { get; set; } = new List<LessonCompletion>();
         public ICollection<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
+        public ICollection<QuizAttempt> QuizAttempts { get; set; } = new List<QuizAttempt>();
     }
 }

@@ -16,6 +16,10 @@ namespace CoreLTToeic.Application.Models.ViewModels
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int SectionCount { get; set; }
+        public int TotalLessons { get; set; }
+        public int EnrollmentCount { get; set; }
+        public int ReviewCount { get; set; }
+        public double AverageRating { get; set; }
         public List<CourseSectionViewModel> Sections { get; set; } = new();
     }
 }

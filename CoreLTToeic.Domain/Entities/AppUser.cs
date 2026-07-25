@@ -16,5 +16,6 @@ namespace CoreLTToeic.Domain.Entities
         public string? EnglishLevel { get; set; }
         public int? TargetScore { get; set; }
         public ICollection<UserResult> UserResults { get; set; } = new List<UserResult>();
+        public ICollection<QuizAttempt> QuizAttempts { get; set; } = new List<QuizAttempt>();
     }
 }

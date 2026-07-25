@@ -2,550 +2,158 @@
 @layout AdminLayout
 @attribute [Authorize(Roles = "Admin")]
 @inject ICourseService CourseService
-@inject IWebHostEnvironment Env
 @inject MessageService Message
 @inject ModalService Modal
+@inject NavigationManager Nav
 
-<div>
-    <div class="admin-page-header">
-        <div>
-            <h2 class="admin-page-title">Quản lý khóa học</h2>
-            <p class="admin-page-subtitle">Quản lý các khóa học TOEIC, chương học và bài học</p>
-        </div>
-        <Button Type="ButtonType.Primary" Icon="plus" OnClick="OpenAddModal">+ Thêm khóa học</Button>
+<div class="admin-page-header">
+    <div>
+        <h2 class="admin-page-title">Quản lý khóa học</h2>
+        <p class="admin-page-subtitle">Tạo khóa học và quản lý toàn bộ chương trình học.</p>
     </div>
-
-    <!-- Stats -->
-    <div class="admin-stats-row">
-        <div class="admin-stat-card">
-            <div class="admin-stat-icon blue">
-                <Icon Type="read" Theme="IconThemeType.Outline" />
-            </div>
-            <div class="admin-stat-info">
-                <span class="admin-stat-label">Tổng số khóa học</span>
-                <span class="admin-stat-value">@_courses.Count</span>
-            </div>
-        </div>
-        <div class="admin-stat-card">
-            <div class="admin-stat-icon green">
-                <Icon Type="check-circle" Theme="IconThemeType.Outline" />
-            </div>
-            <div class="admin-stat-info">
-                <span class="admin-stat-label">Đã xuất bản</span>
-                <span class="admin-stat-value">@_courses.Count(c => c.Status == CourseStatus.Published)</span>
-            </div>
-        </div>
-        <div class="admin-stat-card">
-            <div class="admin-stat-icon orange">
-                <Icon Type="clock-circle" Theme="IconThemeType.Outline" />
-            </div>
-            <div class="admin-stat-info">
-                <span class="admin-stat-label">Bản nháp</span>
-                <span class="admin-stat-value">@_courses.Count(c => c.Status == CourseStatus.Draft)</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Table -->
-    <div class="admin-table-card">
-        <h3 class="admin-table-header">Tất cả khóa học</h3>
-        <Table DataSource="_courses" TItem="CourseViewModel" Loading="_loading" Bordered Size="TableSize.Small">
-            <PropertyColumn Property="c => c.Id" Title="ID" Width="60" Sortable />
-            <PropertyColumn Property="c => c.Title" Title="Title" Sortable />
-            <ActionColumn Title="Cấp độ" Width="130">
-                <Tag Color="@LevelColor(context.Level)">@LevelLabel(context.Level)</Tag>
-            </ActionColumn>
-            <ActionColumn Title="Trạng thái" Width="110">
-                <Tag Color="@(context.Status == CourseStatus.Published ? "success" : "warning")">
-                    @(context.Status == CourseStatus.Published ? "Đã xuất bản" : "Bản nháp")
-                </Tag>
-            </ActionColumn>
-            <ActionColumn Title="Giá (đ)" Width="130">
-                <span>@context.Price.ToString("N0") đ</span>
-            </ActionColumn>
-            <ActionColumn Title="Số chương" Width="90">
-                <Tag Color="@("cyan")">@context.SectionCount</Tag>
-            </ActionColumn>
-            <ActionColumn Title="Ngày tạo" Width="155">
-                @(context.CreatedAt == default ? "" : context.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"))
-            </ActionColumn>
-            <ActionColumn Title="Thao tác" Width="90">
-                <Space>
-                    <SpaceItem>
-                        <Button Size="ButtonSize.Small" Icon="setting" OnClick="() => OpenEditModal(context)" />
-                    </SpaceItem>
-                    <SpaceItem>
-                        <Button Size="ButtonSize.Small" Icon="edit" OnClick="() => OpenEditModal(context)" />
-                    </SpaceItem>
-                </Space>
-            </ActionColumn>
-        </Table>
-    </div>
+    <Button Type="ButtonType.Primary" Icon="plus" OnClick="OpenCreate">Thêm khóa học</Button>
 </div>
 
-<!-- Add/Edit Modal -->
-<Modal Visible="_modalOpen"
-       Title="@(_editingCourse.Id == 0 ? "Thêm khóa học" : "Sửa khóa học")"
-       Width="900"
-       Footer="null"
-       OnCancel="CloseModal"
-       DestroyOnClose>
-    <Tabs ActiveKey="_activeTab" OnChange="HandleTabChange">
-        <TabPane Key="basic">
-            <TabPane.Tab>
-                <Icon Type="info-circle" Theme="IconThemeType.Outline" />&nbsp;Thông tin cơ bản
-            </TabPane.Tab>
-            <Form Model="_editingCourse" OnFinish="SaveCourse" Layout="@FormLayout.Vertical">
-                <div class="course-form-row">
-                    <FormItem Label="Tiêu đề khóa học *" Required>
-                        <Input @bind-Value="_editingCourse.Title" Placeholder="Nhập tên khóa học" />
-                    </FormItem>
-                    <FormItem Label="Giá (VND) *" Required>
-                        <AntDesign.InputNumber @bind-Value="_editingCourse.Price"
-                                               Min="0"
-                                               Style="width:100%" />
-                    </FormItem>
-                </div>
-                <div class="course-form-row">
-                    <FormItem Label="Cấp độ *" Required>
-                        <Select TItem="CourseLevel" TItemValue="CourseLevel" @bind-Value="_editingCourse.Level">
-                            <SelectOption TItemValue="CourseLevel" TItem="CourseLevel" Value="CourseLevel.Beginner" Label="Cơ bản" />
-                            <SelectOption TItemValue="CourseLevel" TItem="CourseLevel" Value="CourseLevel.Intermediate" Label="Trung cấp" />
-                            <SelectOption TItemValue="CourseLevel" TItem="CourseLevel" Value="CourseLevel.Advanced" Label="Nâng cao" />
-                        </Select>
-                    </FormItem>
-                    <FormItem Label="Trạng thái *" Required>
-                        <Select TItem="CourseStatus" TItemValue="CourseStatus" @bind-Value="_editingCourse.Status">
-                            <SelectOption TItemValue="CourseStatus" TItem="CourseStatus" Value="CourseStatus.Published" Label="Đã xuất bản" />
-                            <SelectOption TItemValue="CourseStatus" TItem="CourseStatus" Value="CourseStatus.Draft" Label="Bản nháp" />
-                        </Select>
-                    </FormItem>
-                </div>
+<div class="admin-table-card">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:16px">
+        <Input @bind-Value="_search" Placeholder="Tìm theo tên khóa học..." />
+        <select class="ant-input" @bind="_statusFilter">
+            <option value="">Tất cả trạng thái</option>
+            <option value="Draft">Bản nháp</option>
+            <option value="Published">Đã xuất bản</option>
+        </select>
+        <select class="ant-input" @bind="_levelFilter">
+            <option value="">Tất cả cấp độ</option>
+            <option value="Beginner">Cơ bản</option>
+            <option value="Intermediate">Trung cấp</option>
+            <option value="Advanced">Nâng cao</option>
+        </select>
+    </div>
 
-                <FormItem Label="Mô tả * (Hỗ trợ Markdown)">
-                    <p class="markdown-hint">Gợi ý Markdown: **in đậm**, *in nghiêng*, # Tiêu đề lớn, ## Tiêu đề nhỏ, * Danh sách, [liên kết](url), `code`</p>
-                    <TextArea @bind-Value="_editingCourse.Description"
-                              Rows="5"
-                              Placeholder="Mô tả khóa học..." />
-                </FormItem>
+    <Table DataSource="FilteredCourses" TItem="CourseViewModel" Loading="_loading" Bordered Size="TableSize.Small">
+        <PropertyColumn Property="c => c.Title" Title="Khóa học" Sortable />
+        <ActionColumn Title="Cấp độ" Width="120">
+            <Tag Color="@LevelColor(context.Level)">@LevelLabel(context.Level)</Tag>
+        </ActionColumn>
+        <ActionColumn Title="Trạng thái" Width="130">
+            <Tag Color="@(context.Status == CourseStatus.Published ? "success" : "warning")">
+                @(context.Status == CourseStatus.Published ? "Đã xuất bản" : "Bản nháp")
+            </Tag>
+        </ActionColumn>
+        <ActionColumn Title="Nội dung" Width="120">@context.SectionCount chương / @context.TotalLessons bài</ActionColumn>
+        <ActionColumn Title="Học viên" Width="90">@context.EnrollmentCount</ActionColumn>
+        <ActionColumn Title="Thao tác" Width="130">
+            <Space>
+                <SpaceItem><Button Size="ButtonSize.Small" Icon="edit" OnClick="() => Edit(context.Id)">Sửa</Button></SpaceItem>
+                <SpaceItem><Button Danger Size="ButtonSize.Small" Icon="delete" OnClick="() => Delete(context.Id)" /></SpaceItem>
+            </Space>
+        </ActionColumn>
+    </Table>
+</div>
 
-                <FormItem Label="Mục tiêu học tập (Hỗ trợ Markdown)">
-                    <p class="markdown-hint">Gợi ý Markdown: **in đậm**, *in nghiêng*, # Tiêu đề lớn, ## Tiêu đề nhỏ, * Danh sách, [liên kết](url), `code`</p>
-                    <TextArea @bind-Value="_editingCourse.Objective"
-                              Rows="4"
-                              Placeholder="Mục tiêu học tập..." />
-                </FormItem>
-
-                <div class="course-media-row">
-                    <div class="course-media-block">
-                        <label>Ảnh đại diện khóa học</label>
-                        <InputFile OnChange="OnThumbnailUpload" accept="image/*" />
-                        @if (!string.IsNullOrEmpty(_editingCourse.ThumbnailUrl))
-                        {
-                            <div style="margin-top:8px">
-                                <p class="markdown-hint">Xem trước ảnh</p>
-                                <img src="@_editingCourse.ThumbnailUrl" class="course-thumbnail-preview" alt="thumbnail" />
-                            </div>
-                        }
-                    </div>
-                    <div class="course-media-block">
-                        <label>URL video xem trước (YouTube)</label>
-                        <Input @bind-Value="_editingCourse.PreviewVideoUrl"
-                               Placeholder="https://www.youtube.com/watch?v=..." />
-                        @if (!string.IsNullOrEmpty(_editingCourse.PreviewVideoUrl))
-                        {
-                            <div style="margin-top:8px">
-                                <p class="markdown-hint">Xem trước video</p>
-                                <div class="course-video-preview">
-                                    <iframe src="@GetYouTubeEmbedUrl(_editingCourse.PreviewVideoUrl)"
-                                            allowfullscreen
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-                                    </iframe>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-
-                <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:20px">
-                    <Button OnClick="CloseModal">Huỷ</Button>
-                    <Button Type="ButtonType.Primary" HtmlType="submit" Loading="_saving">
-                        @(_editingCourse.Id == 0 ? "Tạo mới" : "Cập nhật")
-                    </Button>
-                </div>
-            </Form>
-        </TabPane>
-
-        <TabPane Key="content" Disabled="@(_editingCourse.Id == 0)">
-            <TabPane.Tab>
-                <Icon Type="unordered-list" Theme="IconThemeType.Outline" />&nbsp;Nội dung khóa học
-            </TabPane.Tab>
-
-            @if (_editingCourseView != null)
-            {
-                <div class="course-sections-header">
-                    <h4 class="course-sections-title">Danh sách chương học</h4>
-                    <Button Type="ButtonType.Primary" Icon="plus" OnClick="ShowAddSectionForm">+ Thêm chương</Button>
-                </div>
-
-                @if (_showAddSectionForm)
-                {
-                    <div class="inline-add-form" style="margin-bottom:12px">
-                        <Input @bind-Value="_newSectionTitle" Placeholder="Tên chương..." Style="margin-bottom:8px" />
-                        <Space>
-                            <SpaceItem>
-                                <Button Type="ButtonType.Primary" Size="ButtonSize.Small" Loading="_savingSection" OnClick="AddSection">Lưu</Button>
-                            </SpaceItem>
-                            <SpaceItem>
-                                <Button Size="ButtonSize.Small" OnClick="() => _showAddSectionForm = false">Huỷ</Button>
-                            </SpaceItem>
-                        </Space>
-                    </div>
-                }
-
-                @foreach (var sec in _editingCourseView.Sections)
-                {
-                    var isExpanded = _expandedSections.Contains(sec.Id);
-                    <div class="course-section-item">
-                        <div class="course-section-row" @onclick="() => ToggleSection(sec.Id)">
-                            <Icon Type="right" Theme="IconThemeType.Outline"
-                                  Class="@("course-section-expand-icon" + (isExpanded ? " expanded" : ""))" />
-                            <Icon Type="folder" Theme="IconThemeType.Outline" Style="color:var(--text-muted)" />
-                            <span class="course-section-title">@sec.Title</span>
-                            <Tag Color="@("blue")">@sec.LessonCount bài học</Tag>
-                            <Button Danger Size="ButtonSize.Small" Icon="delete"
-                                    OnClick:stopPropagation="true"
-                                    OnClick="() => DeleteSection(sec.Id)" />
-                        </div>
-
-                        @if (isExpanded)
-                        {
-                            <div class="course-lesson-list">
-                                @foreach (var lesson in sec.Lessons)
-                                {
-                                    <div class="course-lesson-item">
-                                        <Icon Type="play-circle" Theme="IconThemeType.Outline" Style="color:var(--text-muted)" />
-                                        <span style="flex:1">@lesson.Title</span>
-                                        @if (lesson.Duration > 0)
-                                        {
-                                            <span style="color:var(--text-muted);font-size:0.8rem">@lesson.Duration phút</span>
-                                        }
-                                        <Button Danger Size="ButtonSize.Small" Icon="delete"
-                                                OnClick="() => DeleteLesson(lesson.Id)" />
-                                    </div>
-                                }
-
-                                @if (_addingLessonSectionId == sec.Id)
-                                {
-                                    <div class="inline-add-form add-lesson-row">
-                                        <Input @bind-Value="_newLessonTitle" Placeholder="Tên bài học..." Style="margin-bottom:6px" />
-                                        <AntDesign.InputNumber @bind-Value="_newLessonDuration"
-                                                               Min="0" Placeholder="Thời lượng (phút)"
-                                                               Style="width:100%;margin-bottom:8px" />
-                                        <Space>
-                                            <SpaceItem>
-                                                <Button Type="ButtonType.Primary" Size="ButtonSize.Small" Loading="_savingLesson" OnClick="() => AddLesson(sec.Id)">Lưu</Button>
-                                            </SpaceItem>
-                                            <SpaceItem>
-                                                <Button Size="ButtonSize.Small" OnClick="() => _addingLessonSectionId = 0">Huỷ</Button>
-                                            </SpaceItem>
-                                        </Space>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="add-lesson-row">
-                                        <Button Size="ButtonSize.Small" Icon="plus" OnClick="() => ShowAddLessonForm(sec.Id)">
-                                            Thêm bài học
-                                        </Button>
-                                    </div>
-                                }
-                            </div>
-                        }
-                    </div>
-                }
-
-                @if (!_editingCourseView.Sections.Any())
-                {
-                    <div style="text-align:center;padding:32px;color:var(--text-muted)">
-                        <Icon Type="inbox" Style="font-size:2rem;margin-bottom:8px" />
-                        <p>Chưa có chương học nào. Nhấn "+ Thêm chương" để bắt đầu.</p>
-                    </div>
-                }
-            }
-        </TabPane>
-    </Tabs>
+<Modal Visible="_createOpen" Title="@("Tạo khóa học")" Footer="null" OnCancel="CloseCreate" DestroyOnClose>
+    <Form Model="_model" OnFinish="Create" Layout="@FormLayout.Vertical">
+        <FormItem Label="Tên khóa học" Required>
+            <Input @bind-Value="_model.Title" />
+        </FormItem>
+        <FormItem Label="Mô tả" Required>
+            <TextArea @bind-Value="_model.Description" Rows="4" />
+        </FormItem>
+        <FormItem Label="Cấp độ">
+            <select class="ant-input" @bind="_model.Level">
+                <option value="@CourseLevel.Beginner">Cơ bản</option>
+                <option value="@CourseLevel.Intermediate">Trung cấp</option>
+                <option value="@CourseLevel.Advanced">Nâng cao</option>
+            </select>
+        </FormItem>
+        <p style="color:#64748b">Khóa học miễn phí. Sau khi tạo, hãy thêm chương và bài học trước khi xuất bản.</p>
+        <div style="display:flex;justify-content:flex-end;gap:8px">
+            <Button OnClick="CloseCreate">Hủy</Button>
+            <Button Type="ButtonType.Primary" HtmlType="submit" Loading="_saving">Tạo khóa học</Button>
+        </div>
+    </Form>
 </Modal>
 
 @code {
     private List<CourseViewModel> _courses = [];
     private bool _loading;
     private bool _saving;
-    private bool _savingSection;
-    private bool _savingLesson;
-    private bool _modalOpen;
-    private string _activeTab = "basic";
+    private bool _createOpen;
+    private string _search = "";
+    private string _statusFilter = "";
+    private string _levelFilter = "";
+    private CourseEditModel _model = new();
 
-    private CourseEditModel _editingCourse = new();
-    private CourseViewModel? _editingCourseView;
+    private IEnumerable<CourseViewModel> FilteredCourses => _courses.Where(c =>
+        (string.IsNullOrWhiteSpace(_search) || c.Title.Contains(_search, StringComparison.OrdinalIgnoreCase)) &&
+        (string.IsNullOrEmpty(_statusFilter) || c.Status.ToString() == _statusFilter) &&
+        (string.IsNullOrEmpty(_levelFilter) || c.Level.ToString() == _levelFilter));
 
-    private HashSet<long> _expandedSections = [];
-    private bool _showAddSectionForm;
-    private string _newSectionTitle = "";
-    private long _addingLessonSectionId;
-    private string _newLessonTitle = "";
-    private int _newLessonDuration;
+    protected override Task OnInitializedAsync() => Load();
 
-    private void HandleTabChange(string key) => _activeTab = key;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadCourses();
-    }
-
-    private async Task LoadCourses()
+    private async Task Load()
     {
         _loading = true;
-        try
-        {
-            _courses = await CourseService.GetAllAsync();
-        }
-        catch (Exception ex) { await Message.ErrorAsync($"Lỗi tải dữ liệu: {ex.Message}"); }
+        try { _courses = await CourseService.GetAllAsync(); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
         finally { _loading = false; }
     }
 
-    private void OpenAddModal()
+    private void OpenCreate()
     {
-        _editingCourse = new CourseEditModel();
-        _editingCourseView = null;
-        _activeTab = "basic";
-        _expandedSections.Clear();
-        _modalOpen = true;
+        _model = new CourseEditModel { Status = CourseStatus.Draft, Price = 0 };
+        _createOpen = true;
     }
 
-    private void OpenEditModal(CourseViewModel course)
-    {
-        _editingCourse = new CourseEditModel
-        {
-            Id = course.Id,
-            Title = course.Title,
-            Description = course.Description,
-            Objective = course.Objective,
-            ThumbnailUrl = course.ThumbnailUrl,
-            PreviewVideoUrl = course.PreviewVideoUrl,
-            Price = course.Price,
-            Level = course.Level,
-            Status = course.Status
-        };
-        _editingCourseView = course;
-        _activeTab = "basic";
-        _expandedSections.Clear();
-        _modalOpen = true;
-    }
+    private void CloseCreate() => _createOpen = false;
 
-    private void CloseModal()
-    {
-        _modalOpen = false;
-        _showAddSectionForm = false;
-        _addingLessonSectionId = 0;
-    }
-
-    private async Task SaveCourse()
+    private async Task Create()
     {
         _saving = true;
         try
         {
-            string? thumbnailPath = null;
-            if (_pendingThumbnailFile != null)
-                thumbnailPath = await SaveUploadedFile(_pendingThumbnailFile, "thumbnails");
-
-            if (_editingCourse.Id == 0)
-            {
-                var created = await CourseService.CreateAsync(_editingCourse, thumbnailPath);
-                await Message.SuccessAsync("Tạo khóa học thành công");
-                _editingCourse.Id = created.Id;
-                _editingCourseView = created;
-                if (thumbnailPath != null) _editingCourse.ThumbnailUrl = thumbnailPath;
-            }
-            else
-            {
-                _editingCourseView = await CourseService.UpdateAsync(_editingCourse.Id, _editingCourse, thumbnailPath);
-                if (thumbnailPath != null) _editingCourse.ThumbnailUrl = thumbnailPath;
-                await Message.SuccessAsync("Cập nhật khóa học thành công");
-            }
-            _pendingThumbnailFile = null;
-            await LoadCourses();
+            var course = await CourseService.CreateAsync(_model, null);
+            await Message.SuccessAsync("Đã tạo khóa học.");
+            _createOpen = false;
+            Nav.NavigateTo($"/admin/quan-li-khoa-hoc/{course.Id}");
         }
-        catch (Exception ex) { await Message.ErrorAsync($"Lỗi: {ex.Message}"); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
         finally { _saving = false; }
     }
 
-    private async Task DeleteCourse(long id)
+    private void Edit(long id) => Nav.NavigateTo($"/admin/quan-li-khoa-hoc/{id}");
+
+    private async Task Delete(long id)
     {
         var confirmed = await Modal.ConfirmAsync(new ConfirmOptions
         {
-            Title = "Xác nhận xoá",
-            Content = "Bạn có chắc chắn muốn xoá khóa học này không?",
-            OkText = "Xoá",
-            CancelText = "Huỷ",
+            Title = "Xóa khóa học?",
+            Content = "Khóa học có dữ liệu học viên sẽ không thể xóa. Khi đó hãy chuyển về bản nháp.",
+            OkText = "Xóa",
+            CancelText = "Hủy",
             OkButtonProps = new ButtonProps { Danger = true }
         });
         if (!confirmed) return;
-
         try
         {
             await CourseService.DeleteAsync(id);
-            await Message.SuccessAsync("Đã xoá khóa học");
-            await LoadCourses();
+            await Message.SuccessAsync("Đã xóa khóa học.");
+            await Load();
         }
-        catch (Exception ex) { await Message.ErrorAsync($"Lỗi xoá: {ex.Message}"); }
-    }
-
-    private IBrowserFile? _pendingThumbnailFile;
-
-    private void OnThumbnailUpload(InputFileChangeEventArgs e)
-    {
-        _pendingThumbnailFile = e.File;
-        StateHasChanged();
-    }
-
-    private async Task<string> SaveUploadedFile(IBrowserFile file, string folder)
-    {
-        var uploadsDir = Path.Combine(Env.WebRootPath, "uploads", folder);
-        Directory.CreateDirectory(uploadsDir);
-        var ext = Path.GetExtension(file.Name);
-        var fileName = $"{Guid.NewGuid()}{ext}";
-        var filePath = Path.Combine(uploadsDir, fileName);
-        await using var fs = File.Create(filePath);
-        await using var stream = file.OpenReadStream(maxAllowedSize: 10 * 1024 * 1024);
-        await stream.CopyToAsync(fs);
-        return $"/uploads/{folder}/{fileName}";
-    }
-
-    private void ToggleSection(long sectionId)
-    {
-        if (!_expandedSections.Remove(sectionId))
-            _expandedSections.Add(sectionId);
-    }
-
-    private void ShowAddSectionForm()
-    {
-        _newSectionTitle = "";
-        _showAddSectionForm = true;
-    }
-
-    private async Task AddSection()
-    {
-        if (string.IsNullOrWhiteSpace(_newSectionTitle)) return;
-        _savingSection = true;
-        try
-        {
-            var nextOrder = _editingCourseView?.Sections.Count + 1 ?? 1;
-            await CourseService.AddSectionAsync(_editingCourse.Id, new CourseSectionEditModel
-            {
-                Title = _newSectionTitle,
-                OrderIndex = nextOrder
-            });
-            _showAddSectionForm = false;
-            _newSectionTitle = "";
-            _editingCourseView = await CourseService.GetByIdAsync(_editingCourse.Id);
-            await LoadCourses();
-        }
-        catch (Exception ex) { await Message.ErrorAsync($"Lỗi thêm chương: {ex.Message}"); }
-        finally { _savingSection = false; }
-    }
-
-    private async Task DeleteSection(long sectionId)
-    {
-        var confirmed = await Modal.ConfirmAsync(new ConfirmOptions
-        {
-            Title = "Xác nhận xoá chương",
-            Content = "Xoá chương sẽ xoá tất cả bài học trong chương. Tiếp tục?",
-            OkText = "Xoá",
-            CancelText = "Huỷ",
-            OkButtonProps = new ButtonProps { Danger = true }
-        });
-        if (!confirmed) return;
-        try
-        {
-            await CourseService.DeleteSectionAsync(sectionId);
-            _expandedSections.Remove(sectionId);
-            _editingCourseView = await CourseService.GetByIdAsync(_editingCourse.Id);
-            await LoadCourses();
-        }
-        catch (Exception ex) { await Message.ErrorAsync($"Lỗi xoá chương: {ex.Message}"); }
-    }
-
-    private void ShowAddLessonForm(long sectionId)
-    {
-        _newLessonTitle = "";
-        _newLessonDuration = 0;
-        _addingLessonSectionId = sectionId;
-        _expandedSections.Add(sectionId);
-    }
-
-    private async Task AddLesson(long sectionId)
-    {
-        if (string.IsNullOrWhiteSpace(_newLessonTitle)) return;
-        _savingLesson = true;
-        try
-        {
-            var sectionVm = _editingCourseView?.Sections.FirstOrDefault(s => s.Id == sectionId);
-            var nextOrder = sectionVm?.LessonCount + 1 ?? 1;
-            await CourseService.AddLessonAsync(sectionId, new CourseLessonEditModel
-            {
-                Title = _newLessonTitle,
-                Duration = _newLessonDuration > 0 ? _newLessonDuration : null,
-                OrderIndex = nextOrder
-            });
-            _addingLessonSectionId = 0;
-            _editingCourseView = await CourseService.GetByIdAsync(_editingCourse.Id);
-            await LoadCourses();
-        }
-        catch (Exception ex) { await Message.ErrorAsync($"Lỗi thêm bài học: {ex.Message}"); }
-        finally { _savingLesson = false; }
-    }
-
-    private async Task DeleteLesson(long lessonId)
-    {
-        try
-        {
-            await CourseService.DeleteLessonAsync(lessonId);
-            _editingCourseView = await CourseService.GetByIdAsync(_editingCourse.Id);
-            await LoadCourses();
-        }
-        catch (Exception ex) { await Message.ErrorAsync($"Lỗi xoá bài học: {ex.Message}"); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
     }
 
     private static string LevelColor(CourseLevel level) => level switch
     {
         CourseLevel.Beginner => "blue",
         CourseLevel.Intermediate => "orange",
-        CourseLevel.Advanced => "red",
-        _ => "default"
+        _ => "red"
     };
 
     private static string LevelLabel(CourseLevel level) => level switch
     {
         CourseLevel.Beginner => "Cơ bản",
         CourseLevel.Intermediate => "Trung cấp",
-        CourseLevel.Advanced => "Nâng cao",
-        _ => level.ToString()
+        _ => "Nâng cao"
     };
-
-    private static string GetYouTubeEmbedUrl(string url)
-    {
-        if (string.IsNullOrEmpty(url)) return "";
-        if (url.Contains("youtube.com/watch?v="))
-        {
-            var videoId = System.Text.RegularExpressions.Regex.Match(url, @"[?&]v=([^&]+)").Groups[1].Value;
-            return $"https://www.youtube.com/embed/{videoId}";
-        }
-        if (url.Contains("youtu.be/"))
-        {
-            var videoId = url.Split('/').Last().Split('?').First();
-            return $"https://www.youtube.com/embed/{videoId}";
-        }
-        return url;
-    }
 }

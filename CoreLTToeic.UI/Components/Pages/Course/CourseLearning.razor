@@ -1,0 +1,229 @@
+@page "/khoa-hoc/{Id:long}/hoc"
+@attribute [Authorize]
+@inject ICourseLearningService CourseLearningService
+@inject MessageService Message
+@inject NavigationManager Nav
+@inject AuthenticationStateProvider AuthStateProvider
+
+<PageTitle>@(_course?.Title ?? "Học khóa học")</PageTitle>
+<div class="container-fluid py-3">
+    @if (_loading) { <Spin Tip="Đang tải khóa học..." /> }
+    else if (_course == null) { <Alert Type="AlertType.Error" Message="Không thể mở khóa học này." /> }
+    else
+    {
+        <div style="display:grid;grid-template-columns:minmax(260px,320px) 1fr;gap:20px">
+            <aside class="card" style="align-self:start">
+                <div class="card-body">
+                    <Button Size="ButtonSize.Small" OnClick="OpenOverview" Icon="arrow-left">Tổng quan</Button>
+                    <h1 class="h5 mt-3">@_course.Title</h1>
+                    @if (_course.IsEnrolled) { <Progress Percent="@_course.ProgressPercent" /> }
+                </div>
+                @foreach (var courseSection in _course.Sections)
+                {
+                    <div class="card-header"><strong>@courseSection.Title</strong></div>
+                    <div class="list-group list-group-flush">
+                        @foreach (var lesson in courseSection.Lessons)
+                        {
+                            <button class="list-group-item list-group-item-action @(lesson.Id == _selected?.Id ? "active" : "")"
+                                    disabled="@(!lesson.CanAccess)" @onclick="() => SelectLesson(lesson)">
+                                @(lesson.IsCompleted ? "✓" : lesson.CanAccess ? "○" : "🔒") @lesson.Title
+                            </button>
+                        }
+                    </div>
+                }
+            </aside>
+            <main>
+                @if (_selected == null)
+                {
+                    <Alert Type="AlertType.Info" Message="Hãy đăng ký khóa học để mở nội dung, hoặc chọn một bài học thử." />
+                }
+                else
+                {
+                    <div class="card"><div class="card-body p-4">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <div><Tag Color="@("blue")">@LessonLabel(_selected.Type)</Tag><h2 class="mt-2">@_selected.Title</h2></div>
+                            @if (_selected.IsCompleted) { <Tag Color="@("success")">Đã hoàn thành</Tag> }
+                        </div>
+                        @if (_selected.Type == LessonType.Text)
+                        {
+                            <div class="course-markdown">@CourseMarkdownRenderer.Render(_selected.Content)</div>
+                        }
+                        else if (_selected.Type == LessonType.Video)
+                        {
+                            <div class="ratio ratio-16x9"><iframe src="@_selected.VideoUrl" title="@_selected.Title" allowfullscreen></iframe></div>
+                            <p class="mt-2"><a href="@_selected.VideoUrl" target="_blank" rel="noopener noreferrer">Mở video trong thẻ mới</a></p>
+                        }
+                        else
+                        {
+                            @if (_selected.QuizQuestions.Count == 0)
+                            {
+                                <Alert Type="AlertType.Warning" Message="Bài kiểm tra chưa có câu hỏi." />
+                            }
+                            @foreach (var question in _selected.QuizQuestions)
+                            {
+                                <div class="border rounded p-3 mb-3">
+                                    <strong>@question.OrderIndex. @question.Question</strong>
+                                    @foreach (var option in question.Options)
+                                    {
+                                        <label style="display:block;margin-top:10px">
+                                            <input type="radio" name="@($"question-{question.Id}")" value="@option.Key"
+                                                   checked="@(_submission.Answers.GetValueOrDefault(question.Id) == option.Key)"
+                                                   @onchange="() => ChooseAnswer(question.Id, option.Key)" />
+                                            <span style="margin-left:8px">@option.Text</span>
+                                        </label>
+                                    }
+                                </div>
+                            }
+                            @if (_course.IsEnrolled)
+                            {
+                                <Button Type="ButtonType.Primary" Loading="_submitting" OnClick="SubmitQuiz">Nộp bài</Button>
+                            }
+                            else
+                            {
+                                <Alert Type="AlertType.Info" Message="Bạn có thể xem bài học thử. Hãy đăng ký miễn phí để nộp bài và lưu tiến độ." />
+                            }
+                            @if (_latestAttempt != null)
+                            {
+                                <div class="alert alert-info mt-3">
+                                    <h3 class="h5">Kết quả: @_latestAttempt.CorrectAnswers/@_latestAttempt.TotalQuestions (@_latestAttempt.ScorePercent%)</h3>
+                                    @foreach (var answer in _latestAttempt.Answers)
+                                    {
+                                        <div class="mt-2">
+                                            <strong>@answer.QuestionText</strong>:
+                                            @(answer.IsCorrect ? "Đúng" : $"Sai — bạn chọn {answer.SelectedOption}, đáp án đúng {answer.CorrectOption}")
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            @if (_attempts.Count > 0)
+                            {
+                                <h3 class="h5 mt-4">Các lần làm trước</h3>
+                                @foreach (var attempt in _attempts)
+                                {
+                                    <div class="border-bottom py-2">Lần @attempt.AttemptNumber · @attempt.ScorePercent% · @attempt.SubmittedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</div>
+                                }
+                            }
+                        }
+                        @if (_selected.Type != LessonType.Quiz && _course.IsEnrolled && !_selected.IsCompleted)
+                        {
+                            <Button Type="ButtonType.Primary" Loading="_completing" OnClick="CompleteLesson" Style="margin-top:20px">Hoàn thành bài học</Button>
+                        }
+                    </div></div>
+                    @if (_course.IsEnrolled)
+                    {
+                        <div class="card mt-3"><div class="card-body">
+                            <h3 class="h5">Đánh giá khóa học</h3>
+                            <select class="ant-input" style="max-width:180px" @bind="_review.Rating">
+                                <option value="1">1 sao</option><option value="2">2 sao</option><option value="3">3 sao</option>
+                                <option value="4">4 sao</option><option value="5">5 sao</option>
+                            </select>
+                            <TextArea @bind-Value="_review.Comment" Rows="3" Placeholder="Chia sẻ cảm nhận..." Style="margin-top:8px" />
+                            <Button OnClick="SaveReview" Loading="_savingReview" Style="margin-top:8px">Lưu đánh giá</Button>
+                        </div></div>
+                    }
+                }
+            </main>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public long Id { get; set; }
+    private CourseDetailViewModel? _course;
+    private CourseLessonLearningViewModel? _selected;
+    private string _userId = "";
+    private bool _loading = true;
+    private bool _completing;
+    private bool _submitting;
+    private bool _savingReview;
+    private QuizSubmissionEditModel _submission = new();
+    private QuizAttemptViewModel? _latestAttempt;
+    private List<QuizAttemptViewModel> _attempts = [];
+    private CourseReviewEditModel _review = new() { Rating = 5 };
+    private void OpenOverview() => Nav.NavigateTo($"/khoa-hoc/{Id}");
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var state = await AuthStateProvider.GetAuthenticationStateAsync();
+        _userId = state.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "";
+        await Reload();
+        _loading = false;
+    }
+
+    private async Task Reload(long? selectedId = null)
+    {
+        try
+        {
+            _course = await CourseLearningService.GetLearningCourseAsync(Id, _userId);
+            if (_course != null)
+            {
+                var lessons = _course.Sections.SelectMany(s => s.Lessons).ToList();
+                _selected = lessons.FirstOrDefault(l => l.Id == selectedId && l.CanAccess) ?? lessons.FirstOrDefault(l => l.CanAccess);
+                var mine = _course.Reviews.FirstOrDefault(r => r.IsCurrentUser);
+                if (mine != null) _review = new() { Rating = mine.Rating, Comment = mine.Comment };
+                if (_selected?.Type == LessonType.Quiz) await LoadAttempts();
+            }
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+    }
+
+    private async Task SelectLesson(CourseLessonLearningViewModel lesson)
+    {
+        if (!lesson.CanAccess) return;
+        _selected = lesson; _submission = new(); _latestAttempt = null; _attempts = [];
+        if (lesson.Type == LessonType.Quiz) await LoadAttempts();
+    }
+    private void ChooseAnswer(long questionId, string key) => _submission.Answers[questionId] = key;
+
+    private async Task CompleteLesson()
+    {
+        if (_selected == null) return;
+        _completing = true;
+        try
+        {
+            var id = _selected.Id;
+            await CourseLearningService.CompleteLessonAsync(Id, id, _userId);
+            await Message.SuccessAsync("Đã lưu tiến độ.");
+            await Reload(id);
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+        finally { _completing = false; }
+    }
+
+    private async Task SubmitQuiz()
+    {
+        if (_selected == null) return;
+        if (_submission.Answers.Count != _selected.QuizQuestions.Count)
+        {
+            await Message.WarningAsync("Vui lòng trả lời tất cả câu hỏi.");
+            return;
+        }
+        _submitting = true;
+        try
+        {
+            var lessonId = _selected.Id;
+            _latestAttempt = await CourseLearningService.SubmitQuizAsync(Id, lessonId, _userId, _submission);
+            await Message.SuccessAsync("Đã nộp bài và hoàn thành bài học.");
+            await Reload(lessonId);
+            await LoadAttempts();
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+        finally { _submitting = false; }
+    }
+
+    private async Task LoadAttempts()
+    {
+        if (_selected == null) return;
+        try { _attempts = await CourseLearningService.GetQuizAttemptsAsync(_selected.Id, _userId); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+    }
+
+    private async Task SaveReview()
+    {
+        _savingReview = true;
+        try { await CourseLearningService.UpsertReviewAsync(Id, _userId, _review); await Message.SuccessAsync("Đã lưu đánh giá."); await Reload(_selected?.Id); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+        finally { _savingReview = false; }
+    }
+    private static string LessonLabel(LessonType type) => type switch { LessonType.Video => "Video", LessonType.Quiz => "Kiểm tra", _ => "Bài đọc" };
+}

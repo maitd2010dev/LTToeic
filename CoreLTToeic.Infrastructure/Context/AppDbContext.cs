@@ -28,5 +28,47 @@ namespace CoreLTToeic.Infrastructure.Context
         public DbSet<LessonCompletion> LessonCompletions { get; set; }
         public DbSet<QuizQuestion> QuizQuestions { get; set; }
         public DbSet<QuizQuestionOption> QuizQuestionOptions { get; set; }
+        public DbSet<QuizAttempt> QuizAttempts { get; set; }
+        public DbSet<QuizAttemptAnswer> QuizAttemptAnswers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<CourseEnrollment>()
+                .HasIndex(e => new { e.UserId, e.CourseId })
+                .IsUnique();
+
+            modelBuilder.Entity<CourseReview>()
+                .HasIndex(r => new { r.UserId, r.CourseId })
+                .IsUnique();
+
+            modelBuilder.Entity<LessonCompletion>()
+                .HasIndex(c => new { c.UserId, c.LessonId })
+                .IsUnique()
+                .HasFilter("[UserId] IS NOT NULL AND [LessonId] IS NOT NULL");
+
+            modelBuilder.Entity<QuizAttempt>()
+                .HasIndex(a => new { a.UserId, a.LessonId, a.AttemptNumber })
+                .IsUnique();
+
+            modelBuilder.Entity<QuizAttempt>()
+                .HasOne(a => a.Lesson)
+                .WithMany(l => l.QuizAttempts)
+                .HasForeignKey(a => a.LessonId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<QuizAttemptAnswer>()
+                .HasOne(a => a.QuizAttempt)
+                .WithMany(a => a.Answers)
+                .HasForeignKey(a => a.QuizAttemptId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<QuizAttemptAnswer>()
+                .HasOne(a => a.QuizQuestion)
+                .WithMany()
+                .HasForeignKey(a => a.QuizQuestionId)
+                .OnDelete(DeleteBehavior.SetNull);
+        }
     }
 }

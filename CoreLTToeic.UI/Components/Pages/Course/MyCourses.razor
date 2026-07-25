@@ -1,0 +1,44 @@
+@page "/khoa-hoc-cua-toi"
+@attribute [Authorize]
+@inject ICourseLearningService CourseLearningService
+@inject MessageService Message
+@inject NavigationManager Nav
+@inject AuthenticationStateProvider AuthStateProvider
+
+<PageTitle>Khóa học của tôi</PageTitle>
+<div class="container py-4">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+        <h1>Khóa học của tôi</h1><Button OnClick="OpenCatalog">Khám phá khóa học</Button>
+    </div>
+    @if (_loading) { <Spin /> }
+    else if (_courses.Count == 0) { <Empty Description="@("Bạn chưa đăng ký khóa học nào")" /> }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var course in _courses)
+            {
+                <div class="col-md-6"><div class="card h-100"><div class="card-body">
+                    <h2 class="h5">@course.Title</h2>
+                    <p>@course.CompletedLessons/@course.TotalLessons bài đã hoàn thành</p>
+                    <Progress Percent="@course.ProgressPercent" Status="@(course.ProgressPercent == 100 ? ProgressStatus.Success : ProgressStatus.Active)" />
+                    <Button Type="ButtonType.Primary" OnClick="() => OpenCourse(course.Id)" Style="margin-top:12px">@(course.ProgressPercent == 100 ? "Ôn lại" : "Tiếp tục học")</Button>
+                </div></div></div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<CourseCatalogItemViewModel> _courses = [];
+    private bool _loading = true;
+    private void OpenCatalog() => Nav.NavigateTo("/khoa-hoc");
+    private void OpenCourse(long id) => Nav.NavigateTo($"/khoa-hoc/{id}/hoc");
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthStateProvider.GetAuthenticationStateAsync();
+        var userId = state.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "";
+        try { _courses = await CourseLearningService.GetMyCoursesAsync(userId); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+        finally { _loading = false; }
+    }
+}

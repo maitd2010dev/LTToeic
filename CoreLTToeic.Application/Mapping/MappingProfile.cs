@@ -56,8 +56,16 @@ namespace CoreLTToeic.Application.Mapping
                 .ForMember(d => d.UserFullName, o => o.MapFrom(s => s.User != null ? s.User.FullName : null))
                 .ForMember(d => d.UserEmail,    o => o.MapFrom(s => s.User != null ? s.User.Email : null));
 
-            CreateMap<CourseLesson, CourseLessonViewModel>();
+            CreateMap<CourseLesson, CourseLessonViewModel>()
+                .ForMember(d => d.QuizQuestions, o => o.MapFrom(s => s.QuizQuestions.OrderBy(q => q.OrderIndex)));
             CreateMap<CourseLessonEditModel, CourseLesson>();
+
+            CreateMap<QuizQuestion, QuizQuestionAdminViewModel>()
+                .ForMember(d => d.OptionText1, o => o.MapFrom(s => s.Option != null ? s.Option.OptionText1 : string.Empty))
+                .ForMember(d => d.OptionText2, o => o.MapFrom(s => s.Option != null ? s.Option.OptionText2 : string.Empty))
+                .ForMember(d => d.OptionText3, o => o.MapFrom(s => s.Option != null ? s.Option.OptionText3 : string.Empty))
+                .ForMember(d => d.OptionText4, o => o.MapFrom(s => s.Option != null ? s.Option.OptionText4 : null))
+                .ForMember(d => d.CorrectOption, o => o.MapFrom(s => s.Option != null ? s.Option.CorrectOption : string.Empty));
 
             CreateMap<CourseSection, CourseSectionViewModel>()
                 .ForMember(d => d.LessonCount, o => o.MapFrom(s => s.Lessons.Count))
@@ -66,6 +74,10 @@ namespace CoreLTToeic.Application.Mapping
 
             CreateMap<Course, CourseViewModel>()
                 .ForMember(d => d.SectionCount, o => o.MapFrom(s => s.Sections.Count))
+                .ForMember(d => d.TotalLessons, o => o.MapFrom(s => s.Sections.SelectMany(sec => sec.Lessons).Count()))
+                .ForMember(d => d.EnrollmentCount, o => o.MapFrom(s => s.Enrollments.Count))
+                .ForMember(d => d.ReviewCount, o => o.MapFrom(s => s.Reviews.Count))
+                .ForMember(d => d.AverageRating, o => o.MapFrom(s => s.Reviews.Count == 0 ? 0 : s.Reviews.Average(r => r.Rating)))
                 .ForMember(d => d.Sections, o => o.MapFrom(s => s.Sections.OrderBy(sec => sec.OrderIndex)));
             CreateMap<CourseEditModel, Course>()
                 .ForMember(d => d.Id, o => o.Ignore())

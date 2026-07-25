@@ -1,0 +1,74 @@
+@page "/khoa-hoc"
+@inject ICourseLearningService CourseLearningService
+@inject MessageService Message
+@inject NavigationManager Nav
+@inject AuthenticationStateProvider AuthStateProvider
+
+<PageTitle>Khóa học TOEIC</PageTitle>
+<div class="container py-4">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+        <div><h1>Khóa học TOEIC</h1><p class="text-muted">Chọn lộ trình phù hợp và học hoàn toàn miễn phí.</p></div>
+        @if (_userId != null) { <Button OnClick="OpenMyCourses">Khóa học của tôi</Button> }
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;margin:20px 0">
+        <Input @bind-Value="_search" Placeholder="Tìm khóa học..." />
+        <select class="ant-input" @bind="_level">
+            <option value="">Tất cả cấp độ</option><option value="Beginner">Cơ bản</option>
+            <option value="Intermediate">Trung cấp</option><option value="Advanced">Nâng cao</option>
+        </select>
+    </div>
+    @if (_loading) { <Spin Tip="Đang tải..." /> }
+    else if (!Filtered.Any()) { <Empty Description="@("Chưa có khóa học phù hợp")" /> }
+    else
+    {
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">
+            @foreach (var course in Filtered)
+            {
+                <div class="card h-100 shadow-sm">
+                    @if (!string.IsNullOrWhiteSpace(course.ThumbnailUrl))
+                    {
+                        <img src="@course.ThumbnailUrl" class="card-img-top" alt="@course.Title" style="height:170px;object-fit:cover" />
+                    }
+                    <div class="card-body">
+                        <Tag Color="@("blue")">@LevelLabel(course.Level)</Tag>
+                        <h3 class="h5 mt-2">@course.Title</h3>
+                        <p class="text-muted">@course.Description</p>
+                        <p>@course.SectionCount chương · @course.TotalLessons bài · @course.TotalDuration phút</p>
+                        <p>★ @course.AverageRating.ToString("0.0") (@course.ReviewCount) · @course.EnrollmentCount học viên</p>
+                        @if (course.IsEnrolled)
+                        {
+                            <Progress Percent="@course.ProgressPercent" Status="ProgressStatus.Active" />
+                        }
+                        <Button Type="ButtonType.Primary" Block OnClick="() => OpenCourse(course.Id)" Style="margin-top:10px">Xem khóa học</Button>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<CourseCatalogItemViewModel> _courses = [];
+    private bool _loading = true;
+    private string _search = "";
+    private string _level = "";
+    private string? _userId;
+    private void OpenMyCourses() => Nav.NavigateTo("/khoa-hoc-cua-toi");
+    private void OpenCourse(long id) => Nav.NavigateTo($"/khoa-hoc/{id}");
+    private IEnumerable<CourseCatalogItemViewModel> Filtered => _courses.Where(c =>
+        (string.IsNullOrWhiteSpace(_search) || c.Title.Contains(_search, StringComparison.OrdinalIgnoreCase)) &&
+        (string.IsNullOrEmpty(_level) || c.Level.ToString() == _level));
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthStateProvider.GetAuthenticationStateAsync();
+        _userId = state.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        try { _courses = await CourseLearningService.GetPublishedCoursesAsync(_userId); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+        finally { _loading = false; }
+    }
+    private static string LevelLabel(CourseLevel level) => level switch
+    {
+        CourseLevel.Beginner => "Cơ bản", CourseLevel.Intermediate => "Trung cấp", _ => "Nâng cao"
+    };
+}

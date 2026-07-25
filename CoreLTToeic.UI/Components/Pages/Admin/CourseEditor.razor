@@ -1,0 +1,396 @@
+@page "/admin/quan-li-khoa-hoc/{Id:long}"
+@layout AdminLayout
+@attribute [Authorize(Roles = "Admin")]
+@inject ICourseService CourseService
+@inject MessageService Message
+@inject ModalService Modal
+@inject NavigationManager Nav
+
+<div class="admin-page-header">
+    <div>
+        <Button OnClick="BackToList" Icon="arrow-left">Danh sách</Button>
+        <h2 class="admin-page-title" style="margin-top:12px">@(_course?.Title ?? "Khóa học")</h2>
+    </div>
+</div>
+
+@if (_loading)
+{
+    <Spin Tip="Đang tải..." />
+}
+else if (_course == null)
+{
+    <Alert Type="AlertType.Error" Message="Không tìm thấy khóa học." />
+}
+else
+{
+    <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+        @foreach (var tab in new[] { ("general", "Thông tin chung"), ("curriculum", "Chương trình"), ("students", "Học viên & tiến độ"), ("reviews", "Đánh giá") })
+        {
+            <Button Type="@(_tab == tab.Item1 ? ButtonType.Primary : ButtonType.Default)" OnClick="() => ChangeTab(tab.Item1)">@tab.Item2</Button>
+        }
+    </div>
+
+    @if (_tab == "general")
+    {
+        <div class="admin-table-card">
+            <Form Model="_courseModel" OnFinish="SaveGeneral" Layout="@FormLayout.Vertical">
+                <FormItem Label="Tên khóa học" Required><Input @bind-Value="_courseModel.Title" /></FormItem>
+                <FormItem Label="Mô tả (Markdown)" Required><TextArea @bind-Value="_courseModel.Description" Rows="5" /></FormItem>
+                <FormItem Label="Mục tiêu (Markdown)"><TextArea @bind-Value="_courseModel.Objective" Rows="5" /></FormItem>
+                <FormItem Label="Ảnh đại diện (URL hoặc đường dẫn)"><Input @bind-Value="_courseModel.ThumbnailUrl" /></FormItem>
+                <FormItem Label="Video giới thiệu (HTTP/HTTPS)"><Input @bind-Value="_courseModel.PreviewVideoUrl" /></FormItem>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                    <FormItem Label="Cấp độ">
+                        <select class="ant-input" @bind="_courseModel.Level">
+                            <option value="@CourseLevel.Beginner">Cơ bản</option>
+                            <option value="@CourseLevel.Intermediate">Trung cấp</option>
+                            <option value="@CourseLevel.Advanced">Nâng cao</option>
+                        </select>
+                    </FormItem>
+                    <FormItem Label="Trạng thái">
+                        <select class="ant-input" @bind="_courseModel.Status">
+                            <option value="@CourseStatus.Draft">Bản nháp</option>
+                            <option value="@CourseStatus.Published">Đã xuất bản</option>
+                        </select>
+                    </FormItem>
+                </div>
+                <Alert Type="AlertType.Info" Message="Mọi khóa học đều miễn phí. Giá luôn được lưu là 0." ShowIcon="true" />
+                <Button Type="ButtonType.Primary" HtmlType="submit" Loading="_saving" Style="margin-top:16px">Lưu thay đổi</Button>
+            </Form>
+        </div>
+    }
+    else if (_tab == "curriculum")
+    {
+        <div class="admin-table-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3>Chương trình học</h3>
+                <Button Type="ButtonType.Primary" Icon="plus" OnClick="NewSection">Thêm chương</Button>
+            </div>
+            @foreach (var section in _course.Sections.OrderBy(s => s.OrderIndex))
+            {
+                <div style="border:1px solid #e5e7eb;border-radius:8px;margin-bottom:14px">
+                    <div style="padding:12px;background:#f8fafc;display:flex;align-items:center;gap:8px">
+                        <strong style="flex:1">@(section.OrderIndex). @(section.Title)</strong>
+                        <Button Size="ButtonSize.Small" Icon="arrow-up" OnClick="() => MoveSection(section.Id, -1)" />
+                        <Button Size="ButtonSize.Small" Icon="arrow-down" OnClick="() => MoveSection(section.Id, 1)" />
+                        <Button Size="ButtonSize.Small" Icon="edit" OnClick="() => EditSection(section)" />
+                        <Button Danger Size="ButtonSize.Small" Icon="delete" OnClick="() => DeleteSection(section.Id)" />
+                    </div>
+                    <div style="padding:12px">
+                        @foreach (var lesson in section.Lessons.OrderBy(l => l.OrderIndex))
+                        {
+                            <div style="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #f1f5f9">
+                                <Tag Color="@LessonColor(lesson.Type)">@LessonLabel(lesson.Type)</Tag>
+                                <span style="flex:1">@(lesson.OrderIndex). @(lesson.Title) @(lesson.IsFree == true ? "(Học thử)" : "")</span>
+                                <Button Size="ButtonSize.Small" Icon="arrow-up" OnClick="() => MoveLesson(lesson.Id, -1)" />
+                                <Button Size="ButtonSize.Small" Icon="arrow-down" OnClick="() => MoveLesson(lesson.Id, 1)" />
+                                @if (lesson.Type == LessonType.Quiz)
+                                {
+                                    <Button Size="ButtonSize.Small" OnClick="() => NewQuestion(lesson.Id)">Câu hỏi (@lesson.QuizQuestions.Count)</Button>
+                                }
+                                <Button Size="ButtonSize.Small" Icon="edit" OnClick="() => EditLesson(lesson)" />
+                                <Button Danger Size="ButtonSize.Small" Icon="delete" OnClick="() => DeleteLesson(lesson.Id)" />
+                            </div>
+                            @if (lesson.Type == LessonType.Quiz && lesson.QuizQuestions.Count > 0)
+                            {
+                                <div style="margin:8px 0 14px 28px">
+                                    @foreach (var question in lesson.QuizQuestions.OrderBy(q => q.OrderIndex))
+                                    {
+                                        <div style="display:flex;gap:8px;align-items:center;margin:5px 0">
+                                            <span style="flex:1">@(question.OrderIndex). @(question.Question)</span>
+                                            <Button Size="ButtonSize.Small" Icon="edit" OnClick="() => EditQuestion(question)" />
+                                            <Button Danger Size="ButtonSize.Small" Icon="delete" OnClick="() => DeleteQuestion(question.Id)" />
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        }
+                        <Button Size="ButtonSize.Small" Icon="plus" OnClick="() => NewLesson(section.Id)" Style="margin-top:10px">Thêm bài học</Button>
+                    </div>
+                </div>
+            }
+            @if (_course.Sections.Count == 0)
+            {
+                <Empty Description="@("Chưa có chương học")" />
+            }
+        </div>
+    }
+    else if (_tab == "students")
+    {
+        <div class="admin-table-card">
+            <Table DataSource="_enrollments" TItem="CourseEnrollmentAdminViewModel" Loading="_loadingTab" Bordered Size="TableSize.Small">
+                <PropertyColumn Property="e => e.FullName" Title="Học viên" />
+                <PropertyColumn Property="e => e.Email" Title="Email" />
+                <ActionColumn Title="Trạng thái"><Tag Color="@(context.Status == EnrollmentStatus.Cancelled ? "error" : "success")">@EnrollmentLabel(context.Status)</Tag></ActionColumn>
+                <ActionColumn Title="Tiến độ">@context.CompletedLessons/@context.TotalLessons (@context.ProgressPercent%)</ActionColumn>
+                <ActionColumn Title="Quiz">@context.QuizAttemptCount lượt · tốt nhất @(context.BestQuizScore?.ToString() ?? "-")%</ActionColumn>
+                <ActionColumn Title="Quản lý">
+                    @if (context.Status == EnrollmentStatus.Cancelled)
+                    {
+                        <Button Size="ButtonSize.Small" OnClick="() => SetEnrollment(context.Id, EnrollmentStatus.Active)">Kích hoạt</Button>
+                    }
+                    else
+                    {
+                        <Button Danger Size="ButtonSize.Small" OnClick="() => SetEnrollment(context.Id, EnrollmentStatus.Cancelled)">Hủy</Button>
+                    }
+                </ActionColumn>
+            </Table>
+            <h3 style="margin-top:22px">Lịch sử làm bài</h3>
+            <Table DataSource="_attempts" TItem="QuizAttemptViewModel" Bordered Size="TableSize.Small">
+                <PropertyColumn Property="a => a.LessonTitle" Title="Bài kiểm tra" />
+                <PropertyColumn Property="a => a.AttemptNumber" Title="Lần" />
+                <ActionColumn Title="Điểm">@context.CorrectAnswers/@context.TotalQuestions (@context.ScorePercent%)</ActionColumn>
+                <ActionColumn Title="Nộp lúc">@context.SubmittedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</ActionColumn>
+            </Table>
+        </div>
+    }
+    else
+    {
+        <div class="admin-table-card">
+            <Table DataSource="_reviews" TItem="CourseReviewViewModel" Loading="_loadingTab" Bordered Size="TableSize.Small">
+                <PropertyColumn Property="r => r.UserDisplayName" Title="Học viên" />
+                <ActionColumn Title="Sao">@context.Rating / 5</ActionColumn>
+                <PropertyColumn Property="r => r.Comment" Title="Nhận xét" />
+                <ActionColumn Title="Ngày">@context.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")</ActionColumn>
+                <ActionColumn Title=""><Button Danger Size="ButtonSize.Small" Icon="delete" OnClick="() => DeleteReview(context.Id)" /></ActionColumn>
+            </Table>
+        </div>
+    }
+}
+
+<Modal Visible="_sectionOpen" Title="@(_sectionModel.Id == 0 ? "Thêm chương" : "Sửa chương")" Footer="null" OnCancel="@(() => _sectionOpen = false)">
+    <Form Model="_sectionModel" OnFinish="SaveSection" Layout="@FormLayout.Vertical">
+        <FormItem Label="Tên chương" Required><Input @bind-Value="_sectionModel.Title" /></FormItem>
+        <Button Type="ButtonType.Primary" HtmlType="submit">Lưu</Button>
+    </Form>
+</Modal>
+
+<Modal Visible="_lessonOpen" Title="@(_lessonModel.Id == 0 ? "Thêm bài học" : "Sửa bài học")" Width="760" Footer="null" OnCancel="@(() => _lessonOpen = false)">
+    <Form Model="_lessonModel" OnFinish="SaveLesson" Layout="@FormLayout.Vertical">
+        <FormItem Label="Tên bài học" Required><Input @bind-Value="_lessonModel.Title" /></FormItem>
+        <FormItem Label="Mô tả"><TextArea @bind-Value="_lessonModel.Description" Rows="2" /></FormItem>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+            <FormItem Label="Loại bài">
+                <select class="ant-input" @bind="_lessonModel.Type">
+                    <option value="@LessonType.Text">Văn bản</option>
+                    <option value="@LessonType.Video">Video</option>
+                    <option value="@LessonType.Quiz">Kiểm tra</option>
+                </select>
+            </FormItem>
+            <FormItem Label="Thời lượng (phút)"><AntDesign.InputNumber @bind-Value="_lessonModel.Duration" Min="0" /></FormItem>
+            <FormItem Label="Học thử"><label><input type="checkbox" @bind="_lessonFree" /> Cho phép</label></FormItem>
+        </div>
+        @if (_lessonModel.Type == LessonType.Text)
+        {
+            <FormItem Label="Nội dung Markdown"><TextArea @bind-Value="_lessonModel.Content" Rows="9" /></FormItem>
+        }
+        else if (_lessonModel.Type == LessonType.Video)
+        {
+            <FormItem Label="URL video HTTP/HTTPS" Required><Input @bind-Value="_lessonModel.VideoUrl" /></FormItem>
+        }
+        else
+        {
+            <Alert Type="AlertType.Info" Message="Lưu bài học trước, sau đó thêm câu hỏi trong danh sách chương trình." />
+        }
+        <Button Type="ButtonType.Primary" HtmlType="submit">Lưu</Button>
+    </Form>
+</Modal>
+
+<Modal Visible="_questionOpen" Title="@(_questionModel.Id == 0 ? "Thêm câu hỏi" : "Sửa câu hỏi")" Width="700" Footer="null" OnCancel="@(() => _questionOpen = false)">
+    <Form Model="_questionModel" OnFinish="SaveQuestion" Layout="@FormLayout.Vertical">
+        <FormItem Label="Câu hỏi" Required><TextArea @bind-Value="_questionModel.Question" Rows="3" /></FormItem>
+        <FormItem Label="Lựa chọn 1" Required><Input @bind-Value="_questionModel.OptionText1" /></FormItem>
+        <FormItem Label="Lựa chọn 2" Required><Input @bind-Value="_questionModel.OptionText2" /></FormItem>
+        <FormItem Label="Lựa chọn 3" Required><Input @bind-Value="_questionModel.OptionText3" /></FormItem>
+        <FormItem Label="Lựa chọn 4 (không bắt buộc)"><Input @bind-Value="_questionModel.OptionText4" /></FormItem>
+        <FormItem Label="Đáp án đúng">
+            <select class="ant-input" @bind="_questionModel.CorrectOption">
+                <option value="1">Lựa chọn 1</option><option value="2">Lựa chọn 2</option>
+                <option value="3">Lựa chọn 3</option><option value="4">Lựa chọn 4</option>
+            </select>
+        </FormItem>
+        <Button Type="ButtonType.Primary" HtmlType="submit">Lưu</Button>
+    </Form>
+</Modal>
+
+@code {
+    [Parameter] public long Id { get; set; }
+    private CourseViewModel? _course;
+    private CourseEditModel _courseModel = new();
+    private bool _loading = true;
+    private bool _loadingTab;
+    private bool _saving;
+    private string _tab = "general";
+    private List<CourseEnrollmentAdminViewModel> _enrollments = [];
+    private List<QuizAttemptViewModel> _attempts = [];
+    private List<CourseReviewViewModel> _reviews = [];
+
+    private bool _sectionOpen;
+    private long _sectionCourseId;
+    private CourseSectionEditModel _sectionModel = new();
+    private bool _lessonOpen;
+    private long _lessonSectionId;
+    private bool _lessonFree;
+    private CourseLessonEditModel _lessonModel = new();
+    private bool _questionOpen;
+    private long _questionLessonId;
+    private QuizQuestionEditModel _questionModel = new();
+    private void BackToList() => Nav.NavigateTo("/admin/quan-li-khoa-hoc");
+
+    protected override async Task OnParametersSetAsync() => await LoadCourse();
+
+    private async Task LoadCourse()
+    {
+        _loading = true;
+        try
+        {
+            _course = await CourseService.GetByIdAsync(Id);
+            if (_course != null)
+                _courseModel = new CourseEditModel
+                {
+                    Id = _course.Id, Title = _course.Title, Description = _course.Description,
+                    Objective = _course.Objective, ThumbnailUrl = _course.ThumbnailUrl,
+                    PreviewVideoUrl = _course.PreviewVideoUrl, Level = _course.Level,
+                    Status = _course.Status, Price = 0
+                };
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+        finally { _loading = false; }
+    }
+
+    private async Task SaveGeneral()
+    {
+        _saving = true;
+        try
+        {
+            _courseModel.Price = 0;
+            _course = await CourseService.UpdateAsync(Id, _courseModel, null);
+            await Message.SuccessAsync("Đã lưu thông tin khóa học.");
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+        finally { _saving = false; }
+    }
+
+    private async Task ChangeTab(string tab)
+    {
+        _tab = tab;
+        _loadingTab = true;
+        try
+        {
+            if (tab == "students")
+            {
+                _enrollments = await CourseService.GetEnrollmentsAsync(Id);
+                _attempts = await CourseService.GetQuizAttemptsAsync(Id);
+            }
+            else if (tab == "reviews")
+                _reviews = await CourseService.GetReviewsAsync(Id);
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+        finally { _loadingTab = false; }
+    }
+
+    private void NewSection() { _sectionCourseId = Id; _sectionModel = new(); _sectionOpen = true; }
+    private void EditSection(CourseSectionViewModel item) { _sectionModel = new() { Id = item.Id, Title = item.Title }; _sectionOpen = true; }
+    private async Task SaveSection()
+    {
+        try
+        {
+            if (_sectionModel.Id == 0) await CourseService.AddSectionAsync(_sectionCourseId, _sectionModel);
+            else await CourseService.UpdateSectionAsync(_sectionModel.Id, _sectionModel);
+            _sectionOpen = false; await LoadCourse();
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+    }
+
+    private async Task MoveSection(long id, int direction) { await RunAndReload(() => CourseService.MoveSectionAsync(id, direction)); }
+    private async Task DeleteSection(long id)
+    {
+        if (await Confirm("Xóa chương và toàn bộ bài học?")) await RunAndReload(() => CourseService.DeleteSectionAsync(id));
+    }
+
+    private void NewLesson(long sectionId)
+    {
+        _lessonSectionId = sectionId; _lessonModel = new() { Type = LessonType.Text }; _lessonFree = false; _lessonOpen = true;
+    }
+    private void EditLesson(CourseLessonViewModel item)
+    {
+        _lessonModel = new()
+        {
+            Id = item.Id, Title = item.Title, Description = item.Description, Type = item.Type,
+            Duration = item.Duration, IsFree = item.IsFree, Content = item.Content, VideoUrl = item.VideoUrl
+        };
+        _lessonFree = item.IsFree ?? false; _lessonOpen = true;
+    }
+    private async Task SaveLesson()
+    {
+        _lessonModel.IsFree = _lessonFree;
+        try
+        {
+            if (_lessonModel.Id == 0) await CourseService.AddLessonAsync(_lessonSectionId, _lessonModel);
+            else await CourseService.UpdateLessonAsync(_lessonModel.Id, _lessonModel);
+            _lessonOpen = false; await LoadCourse();
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+    }
+    private async Task MoveLesson(long id, int direction) { await RunAndReload(() => CourseService.MoveLessonAsync(id, direction)); }
+    private async Task DeleteLesson(long id)
+    {
+        if (await Confirm("Xóa bài học?")) await RunAndReload(() => CourseService.DeleteLessonAsync(id));
+    }
+
+    private void NewQuestion(long lessonId) { _questionLessonId = lessonId; _questionModel = new(); _questionOpen = true; }
+    private void EditQuestion(QuizQuestionAdminViewModel item)
+    {
+        _questionModel = new()
+        {
+            Id = item.Id, Question = item.Question, Type = item.Type, OptionText1 = item.OptionText1,
+            OptionText2 = item.OptionText2, OptionText3 = item.OptionText3, OptionText4 = item.OptionText4,
+            CorrectOption = item.CorrectOption
+        };
+        _questionOpen = true;
+    }
+    private async Task SaveQuestion()
+    {
+        try
+        {
+            if (_questionModel.Id == 0) await CourseService.AddQuizQuestionAsync(_questionLessonId, _questionModel);
+            else await CourseService.UpdateQuizQuestionAsync(_questionModel.Id, _questionModel);
+            _questionOpen = false; await LoadCourse();
+        }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+    }
+    private async Task DeleteQuestion(long id)
+    {
+        if (await Confirm("Xóa câu hỏi?")) await RunAndReload(() => CourseService.DeleteQuizQuestionAsync(id));
+    }
+
+    private async Task SetEnrollment(long id, EnrollmentStatus status)
+    {
+        try { await CourseService.UpdateEnrollmentStatusAsync(id, new() { Status = status }); await ChangeTab("students"); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+    }
+    private async Task DeleteReview(long id)
+    {
+        if (!await Confirm("Xóa đánh giá này?")) return;
+        try { await CourseService.DeleteReviewAsync(id); await ChangeTab("reviews"); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+    }
+
+    private async Task RunAndReload(Func<Task> action)
+    {
+        try { await action(); await LoadCourse(); }
+        catch (Exception ex) { await Message.ErrorAsync(ex.Message); }
+    }
+    private Task<bool> Confirm(string content) => Modal.ConfirmAsync(new ConfirmOptions
+    {
+        Title = "Xác nhận", Content = content, OkText = "Đồng ý", CancelText = "Hủy",
+        OkButtonProps = new ButtonProps { Danger = true }
+    });
+
+    private static string LessonLabel(LessonType? type) => type switch { LessonType.Video => "Video", LessonType.Quiz => "Quiz", _ => "Văn bản" };
+    private static string LessonColor(LessonType? type) => type switch { LessonType.Video => "blue", LessonType.Quiz => "purple", _ => "green" };
+    private static string EnrollmentLabel(EnrollmentStatus status) => status switch
+    {
+        EnrollmentStatus.Active => "Đang học", EnrollmentStatus.Completed => "Hoàn thành", _ => "Đã hủy"
+    };
+}
