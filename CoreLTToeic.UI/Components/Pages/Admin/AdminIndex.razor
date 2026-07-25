@@ -1,7 +1,6 @@
 @page "/admin"
 @layout AdminLayout
 @attribute [Authorize(Roles = "Admin")]
-@using AntDesign.Charts
 @inject IAdminService AdminService
 @inject NavigationManager Nav
 @inject MessageService Message
@@ -22,7 +21,7 @@
 else if (_stats != null)
 {
     <Row Gutter="(16, 16)" Style="margin-bottom:24px;">
-        <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <AntDesign.Col Xs="24" Sm="12" Md="6">
             <Card Bordered Style="border-radius:12px;text-align:center;">
                 <div style="margin-bottom:8px;">
                     <Icon Type="team" Theme="IconThemeType.Outline" Style="font-size:28px;color:#1B527A;" />
@@ -32,7 +31,7 @@ else if (_stats != null)
                            ValueStyle="color:#1B527A;font-weight:700;font-size:2rem;" />
             </Card>
         </AntDesign.Col>
-        <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <AntDesign.Col Xs="24" Sm="12" Md="6">
             <Card Bordered Style="border-radius:12px;text-align:center;">
                 <div style="margin-bottom:8px;">
                     <Icon Type="file-text" Theme="IconThemeType.Outline" Style="font-size:28px;color:#52c41a;" />
@@ -42,7 +41,7 @@ else if (_stats != null)
                            ValueStyle="color:#52c41a;font-weight:700;font-size:2rem;" />
             </Card>
         </AntDesign.Col>
-        <AntDesign.Col Xs="24" Sm="12" Md="8">
+        <AntDesign.Col Xs="24" Sm="12" Md="6">
             <Card Bordered Style="border-radius:12px;text-align:center;">
                 <div style="margin-bottom:8px;">
                     <Icon Type="solution" Theme="IconThemeType.Outline" Style="font-size:28px;color:#fa8c16;" />
@@ -52,18 +51,7 @@ else if (_stats != null)
                            ValueStyle="color:#fa8c16;font-weight:700;font-size:2rem;" />
             </Card>
         </AntDesign.Col>
-        <AntDesign.Col Xs="24" Sm="12" Md="12">
-            <Card Bordered Style="border-radius:12px;text-align:center;">
-                <div style="margin-bottom:8px;">
-                    <Icon Type="trophy" Theme="IconThemeType.Outline" Style="font-size:28px;color:#722ed1;" />
-                </div>
-                <Statistic Title="Điểm trung bình"
-                           Value="@_stats.AverageTotalScore"
-                           Suffix="/ 990"
-                           ValueStyle="color:#722ed1;font-weight:700;font-size:2rem;" />
-            </Card>
-        </AntDesign.Col>
-        <AntDesign.Col Xs="24" Sm="12" Md="12">
+        <AntDesign.Col Xs="24" Sm="12" Md="6">
             <Card Bordered Style="border-radius:12px;text-align:center;">
                 <div style="margin-bottom:8px;">
                     <Icon Type="book" Theme="IconThemeType.Outline" Style="font-size:28px;color:#13c2c2;" />
@@ -74,37 +62,10 @@ else if (_stats != null)
             </Card>
         </AntDesign.Col>
     </Row>
-
-    <Row Gutter="(16, 16)" Style="margin-bottom:24px;">
-        <AntDesign.Col Xs="24" Md="14">
-            <Card Title="Hoạt động 7 ngày gần nhất" Bordered Style="border-radius:12px;">
-                @if (_stats.DailyActivity.Any(d => d.Count > 0))
-                {
-                    <AntDesign.Charts.Column Data="@_dailyChartData" Config="@_columnConfig" />
-                }
-                else
-                {
-                    <Alert Type="@AlertType.Info" Message="Chưa có dữ liệu trong 7 ngày gần đây." ShowIcon="true" />
-                }
-            </Card>
-        </AntDesign.Col>
-        <AntDesign.Col Xs="24" Md="10">
-            <Card Title="Top 5 đề thi được thi nhiều nhất" Bordered Style="border-radius:12px;">
-                @if (_stats.TopTests.Any(t => t.AttemptCount > 0))
-                {
-                    <Bar Data="@_barChartData" Config="@_barConfig" />
-                }
-                else
-                {
-                    <Alert Type="@AlertType.Info" Message="Chưa có dữ liệu kết quả thi." ShowIcon="true" />
-                }
-            </Card>
-        </AntDesign.Col>
-    </Row>
 }
 
 <Row Gutter="(16, 16)" Style="margin-bottom:24px;">
-    <AntDesign.Col Xs="24" Sm="12" Md="6">
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
         <div @onclick='() => Nav.NavigateTo("/admin/quan-li-de-thi")' style="cursor:pointer;">
             <Card Hoverable Bordered Style="border-radius:12px;">
                 <div style="display:flex; align-items:center; gap:16px;">
@@ -119,22 +80,7 @@ else if (_stats != null)
             </Card>
         </div>
     </AntDesign.Col>
-    <AntDesign.Col Xs="24" Sm="12" Md="6">
-        <div @onclick='() => Nav.NavigateTo("/admin/quan-li-danh-muc")' style="cursor:pointer;">
-            <Card Hoverable Bordered Style="border-radius:12px;">
-                <div style="display:flex; align-items:center; gap:16px;">
-                    <div style="width:48px; height:48px; border-radius:10px; background:#f6ffed; display:flex; align-items:center; justify-content:center;">
-                        <Icon Type="appstore" Theme="IconThemeType.Outline" Style="font-size:24px; color:#52c41a;" />
-                    </div>
-                    <div>
-                        <div style="font-size:0.85rem; color:#8c8c8c;">Quản lý</div>
-                        <div style="font-size:1rem; font-weight:600;">Danh mục</div>
-                    </div>
-                </div>
-            </Card>
-        </div>
-    </AntDesign.Col>
-    <AntDesign.Col Xs="24" Sm="12" Md="6">
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
         <div @onclick='() => Nav.NavigateTo("/admin/quan-li-tai-khoan")' style="cursor:pointer;">
             <Card Hoverable Bordered Style="border-radius:12px;">
                 <div style="display:flex; align-items:center; gap:16px;">
@@ -149,7 +95,7 @@ else if (_stats != null)
             </Card>
         </div>
     </AntDesign.Col>
-    <AntDesign.Col Xs="24" Sm="12" Md="6">
+    <AntDesign.Col Xs="24" Sm="12" Md="8">
         <div @onclick='() => Nav.NavigateTo("/admin/quan-li-khoa-hoc")' style="cursor:pointer;">
             <Card Hoverable Bordered Style="border-radius:12px;">
                 <div style="display:flex; align-items:center; gap:16px;">
@@ -201,49 +147,16 @@ else if (_stats != null)
     private AdminDashboardViewModel? _stats;
     private bool _loading = true;
 
-    private object[] _dailyChartData = [];
-    private object[] _barChartData   = [];
-    private ColumnConfig _columnConfig = new();
-    private BarConfig    _barConfig    = new();
-
     protected override async Task OnInitializedAsync()
     {
         try
         {
             _stats = await AdminService.GetDashboardStatsAsync();
-            BuildChartData();
         }
         catch (Exception ex)
         {
             await Message.ErrorAsync($"Lỗi tải thống kê: {ex.Message}");
         }
         finally { _loading = false; }
-    }
-
-    private void BuildChartData()
-    {
-        if (_stats == null) return;
-
-        _dailyChartData = _stats.DailyActivity
-            .Select(d => (object)new { ngay = d.Date, luot = d.Count })
-            .ToArray();
-
-        _columnConfig = new ColumnConfig
-        {
-            XField = "ngay",
-            YField = "luot",
-            Color  = "#1B527A"
-        };
-
-        _barChartData = _stats.TopTests
-            .Select(t => (object)new { deThi = t.TestTitle, luot = t.AttemptCount })
-            .ToArray();
-
-        _barConfig = new BarConfig
-        {
-            XField = "luot",
-            YField = "deThi",
-            Color  = "#2471A3"
-        };
     }
 }

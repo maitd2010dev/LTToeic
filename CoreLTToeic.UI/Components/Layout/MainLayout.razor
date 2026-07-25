@@ -1,12 +1,15 @@
 @inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IAuthRepository AuthRepository
 
 <div class="app-layout">
-    <NavMenu />
+    <NavMenu CanAccessCourses="_canAccessCourses" />
     <main class="main-content">
         <div class="page-wrapper">
             @Body
         </div>
     </main>
+    <SiteFooter IsLoggedIn="_isLoggedIn" CanAccessCourses="_canAccessCourses" />
 </div>
 
 <div id="blazor-error-ui">
@@ -16,3 +19,24 @@
 </div>
 
 <AntDesign.AntContainer />
+
+@code {
+    private bool _isLoggedIn;
+    private bool _canAccessCourses = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthStateProvider.GetAuthenticationStateAsync();
+        _isLoggedIn = state.User.Identity?.IsAuthenticated ?? false;
+        if (!_isLoggedIn)
+            return;
+
+        var userId = state.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var user = string.IsNullOrWhiteSpace(userId)
+            ? null
+            : await AuthRepository.GetByIdAsync(userId);
+
+        _canAccessCourses = user != null &&
+                            !(user.LockoutEnabled && user.LockoutEnd > DateTimeOffset.UtcNow);
+    }
+}

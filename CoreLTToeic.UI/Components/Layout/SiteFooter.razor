@@ -1,0 +1,51 @@
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-grid">
+            <section class="site-footer-brand">
+                <a class="site-footer-logo" href="/">LTToeic</a>
+                <p>
+                    Nền tảng luyện thi TOEIC trực tuyến giúp bạn học đúng trọng tâm,
+                    luyện tập theo chuẩn 7 Parts và theo dõi tiến bộ mỗi ngày.
+                </p>
+            </section>
+
+            <nav class="site-footer-column" aria-label="Liên kết nhanh">
+                <h2>Khám phá</h2>
+                <NavLink href="/" Match="NavLinkMatch.All">Trang chủ</NavLink>
+                <NavLink href="/luyen-thi">Đề thi Online</NavLink>
+                @if (CanAccessCourses)
+                {
+                    <NavLink href="/khoa-hoc">Khóa học</NavLink>
+                }
+            </nav>
+
+            <nav class="site-footer-column" aria-label="Tài khoản">
+                <h2>Tài khoản</h2>
+                @if (IsLoggedIn)
+                {
+                    <NavLink href="/tong-quan">Tổng quan</NavLink>
+                    @if (CanAccessCourses)
+                    {
+                        <NavLink href="/khoa-hoc-cua-toi">Khóa học của tôi</NavLink>
+                    }
+                    <a href="/api/auth/signout">Đăng xuất</a>
+                }
+                else
+                {
+                    <NavLink href="/login">Đăng nhập</NavLink>
+                    <NavLink href="/register">Đăng ký</NavLink>
+                }
+            </nav>
+        </div>
+
+        <div class="site-footer-bottom">
+            <span>© @DateTime.Now.Year LTToeic. Bảo lưu mọi quyền.</span>
+            <span>Listening · Reading · 7 Parts</span>
+        </div>
+    </div>
+</footer>
+
+@code {
+    [Parameter] public bool IsLoggedIn { get; set; }
+    [Parameter] public bool CanAccessCourses { get; set; } = true;
+}

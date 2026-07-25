@@ -15,7 +15,7 @@
         {
             <NavLink href="/tong-quan">Tổng quan</NavLink>
         }
-        @if (_canAccessCourses)
+        @if (CanAccessCourses)
         {
             <NavLink href="/khoa-hoc">Khóa học</NavLink>
         }
@@ -125,8 +125,9 @@
 
     @code {
 
+    [Parameter] public bool CanAccessCourses { get; set; } = true;
+
     private bool _isLoggedIn;
-    private bool _canAccessCourses = true;
     private string _displayName = "";
     private string _userId = "";
 
@@ -150,9 +151,6 @@
                            ?? state.User.Identity?.Name
                            ?? "Người dùng";
             _userId = state.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "";
-            var user = await AuthRepository.GetByIdAsync(_userId);
-            _canAccessCourses = user != null &&
-                                !(user.LockoutEnabled && user.LockoutEnd > DateTimeOffset.UtcNow);
         }
     }
 

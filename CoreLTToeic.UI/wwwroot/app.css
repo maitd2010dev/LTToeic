@@ -148,6 +148,121 @@ html, body {
     padding: 40px 32px;
 }
 
+/* ── Shared Footer ── */
+.site-footer {
+    background: #102f46;
+    color: rgba(255,255,255,0.72);
+}
+
+.site-footer-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px 24px;
+}
+
+.site-footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) repeat(2, minmax(150px, 1fr));
+    gap: 56px;
+    padding-bottom: 36px;
+}
+
+.site-footer-brand {
+    max-width: 460px;
+}
+
+.site-footer-logo {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #fff;
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+}
+
+.site-footer-logo:hover {
+    color: #fff;
+}
+
+.site-footer-brand p {
+    max-width: 440px;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.75;
+}
+
+.site-footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.site-footer-column h2 {
+    margin: 0 0 6px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.site-footer-column a {
+    color: rgba(255,255,255,0.72);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.15s, transform 0.15s;
+}
+
+.site-footer-column a:hover,
+.site-footer-column a.active {
+    color: #fff;
+    transform: translateX(2px);
+}
+
+.site-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.52);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 767px) {
+    .site-footer-inner {
+        padding: 36px 20px 20px;
+    }
+
+    .site-footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 24px;
+        padding-bottom: 28px;
+    }
+
+    .site-footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .site-footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 420px) {
+    .site-footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site-footer-brand {
+        grid-column: auto;
+    }
+}
+
 /* ── Test Library Page (/luyen-thi) ── */
 .library-heading {
     font-size: 1.9rem;
