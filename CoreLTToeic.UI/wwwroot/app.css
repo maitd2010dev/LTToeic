@@ -435,6 +435,78 @@ html, body {
     border-color: var(--primary-dark) !important;
 }
 
+.test-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.test-pagination-summary {
+    color: var(--text-muted);
+    font-size: 0.84rem;
+}
+
+.test-pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.test-page-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--text-primary);
+    font-size: 0.84rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.test-page-button:hover:not(:disabled),
+.test-page-button.active {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.test-page-button.active {
+    background: var(--primary-light);
+    font-weight: 700;
+}
+
+.test-page-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.test-page-direction {
+    padding: 0;
+}
+
+.test-pagination-ellipsis {
+    min-width: 24px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+@media (max-width: 620px) {
+    .test-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .test-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
 /* ── Loading / Empty ── */
 .loading-center {
     display: flex;
@@ -675,12 +747,32 @@ html, body {
     text-align: center;
 }
 
+.admin-category-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 18px;
+    border-top: 1px solid var(--border);
+    background: #fafbfd;
+}
+
+.admin-category-pagination > span {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
 @media (max-width: 620px) {
     .admin-category-grid {
         grid-template-columns: 1fr;
     }
 
     .admin-category-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-category-pagination {
         align-items: flex-start;
         flex-direction: column;
     }

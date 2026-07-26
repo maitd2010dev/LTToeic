@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "sourceCourseTitle": "[Complete TOEIC] Lộ trình 450–800+",
+  "source": "CoreLTToeic.Infrastructure/Data/Seeders/CourseToeicSeeder.cs",
+  "courses": [
+    {
+      "title": "TOEIC Starter: Nền tảng 0–350",
+      "description": "<p>Khóa nhập môn dành cho người mới bắt đầu, giúp hiểu cấu trúc đề thi và xây dựng nền tảng từ vựng, ngữ pháp TOEIC.</p>",
+      "objective": "<ul><li>Hiểu cấu trúc 7 Parts.</li><li>Xây dựng vốn từ vựng công sở cơ bản.</li><li>Nắm các chủ điểm ngữ pháp nền tảng.</li></ul>",
+      "thumbnailUrl": "/images/courses/complete-toeic-cover.jpg",
+      "previewVideoUrl": "https://www.youtube.com/embed/VPL358kfdQ4",
+      "price": 0,
+      "level": "Beginner",
+      "status": "Published",
+      "sectionTitles": [
+        "Khởi động và lộ trình học",
+        "Từ vựng TOEIC",
+        "Ngữ pháp TOEIC"
+      ]
+    },
+    {
+      "title": "Từ vựng TOEIC theo chủ đề cho người mới",
+      "description": "<p>Học từ vựng TOEIC theo các chủ đề văn phòng, kinh doanh, du lịch, nhà hàng và khách sạn.</p>",
+      "objective": "<ul><li>Ghi nhớ từ vựng trong ngữ cảnh.</li><li>Nhận diện collocation thường gặp.</li><li>Vận dụng từ vựng vào Listening và Reading.</li></ul>",
+      "thumbnailUrl": "/images/courses/complete-toeic-cover.jpg",
+      "previewVideoUrl": "https://www.youtube.com/embed/VPL358kfdQ4",
+      "price": 0,
+      "level": "Beginner",
+      "status": "Published",
+      "sectionTitles": [
+        "Từ vựng TOEIC"
+      ]
+    },
+    {
+      "title": "Ngữ pháp TOEIC căn bản",
+      "description": "<p>Hệ thống lại từ loại, thì động từ, câu bị động, mệnh đề và liên từ thường gặp trong TOEIC Reading.</p>",
+      "objective": "<ul><li>Phân biệt các loại từ.</li><li>Chia động từ chính xác.</li><li>Giải nhanh các câu ngữ pháp Part 5 và Part 6.</li></ul>",
+      "thumbnailUrl": "/images/courses/complete-toeic-cover.jpg",
+      "previewVideoUrl": "https://www.youtube.com/embed/VPL358kfdQ4",
+      "price": 0,
+      "level": "Beginner",
+      "status": "Published",
+      "sectionTitles": [
+        "Ngữ pháp TOEIC"
+      ]
+    },
+    {
+      "title": "TOEIC Listening 450–650",
+      "description": "<p>Khóa Listening trình độ khá, tập trung kỹ thuật nghe, nhận diện từ khóa và chiến lược Part 1–4.</p>",
+      "objective": "<ul><li>Nghe đúng trọng âm và từ khóa.</li><li>Xử lý từng dạng câu hỏi Part 1–4.</li><li>Cải thiện kỹ năng dictation và shadowing.</li></ul>",
+      "thumbnailUrl": "/images/courses/complete-toeic-cover.jpg",
+      "previewVideoUrl": "https://www.youtube.com/embed/VPL358kfdQ4",
+      "price": 0,
+      "level": "Intermediate",
+      "status": "Published",
+      "sectionTitles": [
+        "Chiến lược TOEIC Listening"
+      ]
+    },
+    {
+      "title": "TOEIC Reading 450–650",
+      "description": "<p>Củng cố ngữ pháp và áp dụng chiến lược làm bài cho Part 5, Part 6 và Part 7.</p>",
+      "objective": "<ul><li>Ổn định độ chính xác Part 5.</li><li>Hiểu mạch văn Part 6.</li><li>Tìm thông tin và paraphrase trong Part 7.</li></ul>",
+      "thumbnailUrl": "/images/courses/complete-toeic-cover.jpg",
+      "previewVideoUrl": "https://www.youtube.com/embed/VPL358kfdQ4",
+      "price": 0,
+      "level": "Intermediate",
+      "status": "Published",
+      "sectionTitles": [
+        "Ngữ pháp TOEIC",
+        "Chiến lược TOEIC Reading"
+      ]
+    },
+    {
+      "title": "TOEIC Listening chuyên sâu 700+",
+      "description": "<p>Luyện nghe tốc độ cao, paraphrase và suy luận trong hội thoại, bài nói TOEIC dành cho mục tiêu 700+.</p>",
+      "objective": "<ul><li>Nhận diện bẫy và cách diễn đạt lại.</li><li>Theo dõi hội thoại dài.</li><li>Tăng độ chính xác Part 3 và Part 4.</li></ul>",
+      "thumbnailUrl": "/images/courses/complete-toeic-cover.jpg",
+      "previewVideoUrl": "https://www.youtube.com/embed/VPL358kfdQ4",
+      "price": 0,
+      "level": "Advanced",
+      "status": "Published",
+      "sectionTitles": [
+        "Chiến lược TOEIC Listening"
+      ]
+    },
+    {
+      "title": "TOEIC Reading Part 5–7 chuyên sâu 700+",
+      "description": "<p>Khóa Reading nâng cao về tốc độ xử lý, câu suy luận, paraphrase và bài đọc ghép.</p>",
+      "objective": "<ul><li>Rút ngắn thời gian Part 5 và 6.</li><li>Xử lý câu suy luận Part 7.</li><li>Phân bổ 75 phút Reading hiệu quả.</li></ul>",
+      "thumbnailUrl": "/images/courses/complete-toeic-cover.jpg",
+      "previewVideoUrl": "https://www.youtube.com/embed/VPL358kfdQ4",
+      "price": 0,
+      "level": "Advanced",
+      "status": "Published",
+      "sectionTitles": [
+        "Ngữ pháp TOEIC",
+        "Chiến lược TOEIC Reading"
+      ]
+    },
+    {
+      "title": "TOEIC Intensive 800+: Chiến lược toàn diện",
+      "description": "<p>Lộ trình tăng tốc cho mục tiêu 800+, kết hợp chiến lược Listening và Reading cùng hệ thống quiz theo từng kỹ năng.</p>",
+      "objective": "<ul><li>Hoàn thiện chiến thuật cả 7 Parts.</li><li>Tăng tốc độ và khả năng suy luận.</li><li>Phát hiện lỗi sai qua quiz theo từng chặng.</li></ul>",
+      "thumbnailUrl": "/images/courses/complete-toeic-cover.jpg",
+      "previewVideoUrl": "https://www.youtube.com/embed/VPL358kfdQ4",
+      "price": 0,
+      "level": "Advanced",
+      "status": "Published",
+      "sectionTitles": [
+        "Chiến lược TOEIC Listening",
+        "Chiến lược TOEIC Reading"
+      ]
+    }
+  ]
+}

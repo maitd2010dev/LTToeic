@@ -49,9 +49,16 @@ public class ListeningTestSeeder
         if (existing != null)
         {
             var storedQuestionCount = await context.Questions.CountAsync(q => q.TestId == existing.Id);
-            if (storedQuestionCount == 100)
+            var storedListeningQuestionCount = await context.Questions.CountAsync(q =>
+                q.TestId == existing.Id &&
+                q.Part != null &&
+                q.Part.PartNum >= ToeicLRPart.Part1 &&
+                q.Part.PartNum <= ToeicLRPart.Part4);
+            if (storedListeningQuestionCount == 100)
             {
-                _logger.LogInformation("{title} already contains 100 questions, skipping.", data.Title);
+                _logger.LogInformation(
+                    "{title} already contains 100 Listening questions, skipping.",
+                    data.Title);
                 return;
             }
 

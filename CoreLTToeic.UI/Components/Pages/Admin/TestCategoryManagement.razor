@@ -54,7 +54,7 @@
                     else
                     {
                         <div class="admin-category-test-list">
-                            @foreach (var test in category.Tests)
+                            @foreach (var test in GetPagedCategoryTests(category))
                             {
                                 <div class="admin-category-test-item">
                                     <div>
@@ -67,6 +67,42 @@
                                 </div>
                             }
                         </div>
+
+                        @if (GetCategoryPageCount(category) > 1)
+                        {
+                            <nav class="admin-category-pagination"
+                                 aria-label="@($"Phân trang danh mục {category.Name}")">
+                                <span>
+                                    Trang @GetCategoryPage(category.Id)/@GetCategoryPageCount(category)
+                                </span>
+                                <div class="test-pagination-controls">
+                                    <button type="button"
+                                            class="test-page-button test-page-direction"
+                                            disabled="@(GetCategoryPage(category.Id) == 1)"
+                                            aria-label="Trang trước"
+                                            @onclick="() => ChangeCategoryPage(category, -1)">
+                                        <Icon Type="left" />
+                                    </button>
+                                    @for (var page = 1; page <= GetCategoryPageCount(category); page++)
+                                    {
+                                        var targetPage = page;
+                                        <button type="button"
+                                                class="@GetCategoryPageButtonClass(category.Id, targetPage)"
+                                                aria-current="@(GetCategoryPage(category.Id) == targetPage ? "page" : null)"
+                                                @onclick="() => SetCategoryPage(category.Id, targetPage)">
+                                            @(targetPage)
+                                        </button>
+                                    }
+                                    <button type="button"
+                                            class="test-page-button test-page-direction"
+                                            disabled="@(GetCategoryPage(category.Id) == GetCategoryPageCount(category))"
+                                            aria-label="Trang sau"
+                                            @onclick="() => ChangeCategoryPage(category, 1)">
+                                        <Icon Type="right" />
+                                    </button>
+                                </div>
+                            </nav>
+                        }
                     }
                 </section>
             }
@@ -90,7 +126,9 @@
 </Modal>
 
 @code {
+    private const int CategoryPageSize = 5;
     private List<TestCategoryViewModel> _categories = [];
+    private readonly Dictionary<long, int> _categoryPages = [];
     private TestCategoryEditModel _editingCategory = new();
     private bool _loading = true;
     private bool _saving;
@@ -107,6 +145,18 @@
         try
         {
             _categories = (await TestService.GetCategoriesAsync()).ToList();
+            var categoryIds = _categories.Select(category => category.Id).ToHashSet();
+            foreach (var removedId in _categoryPages.Keys.Where(id => !categoryIds.Contains(id)).ToList())
+                _categoryPages.Remove(removedId);
+
+            foreach (var category in _categories)
+            {
+                var currentPage = GetCategoryPage(category.Id);
+                _categoryPages[category.Id] = Math.Clamp(
+                    currentPage,
+                    1,
+                    GetCategoryPageCount(category));
+            }
         }
         catch (Exception ex)
         {
@@ -127,6 +177,31 @@
     }
 
     private void CloseCategoryModal() => _categoryModalOpen = false;
+
+    private int GetCategoryPage(long categoryId) =>
+        _categoryPages.GetValueOrDefault(categoryId, 1);
+
+    private int GetCategoryPageCount(TestCategoryViewModel category) =>
+        Math.Max(1, (int)Math.Ceiling(category.Tests.Count / (double)CategoryPageSize));
+
+    private IEnumerable<TestViewModel> GetPagedCategoryTests(TestCategoryViewModel category) =>
+        category.Tests
+            .Skip((GetCategoryPage(category.Id) - 1) * CategoryPageSize)
+            .Take(CategoryPageSize);
+
+    private string GetCategoryPageButtonClass(long categoryId, int page) =>
+        GetCategoryPage(categoryId) == page
+            ? "test-page-button active"
+            : "test-page-button";
+
+    private void SetCategoryPage(long categoryId, int page)
+    {
+        var category = _categories.First(item => item.Id == categoryId);
+        _categoryPages[categoryId] = Math.Clamp(page, 1, GetCategoryPageCount(category));
+    }
+
+    private void ChangeCategoryPage(TestCategoryViewModel category, int offset) =>
+        SetCategoryPage(category.Id, GetCategoryPage(category.Id) + offset);
 
     private async Task SaveCategory()
     {

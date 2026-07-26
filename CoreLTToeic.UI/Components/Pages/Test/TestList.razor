@@ -48,8 +48,8 @@ else if (_filtered.Count == 0)
 }
 else
 {
-    <div class="test-grid">
-        @foreach (var test in _filtered)
+    <div id="test-results" class="test-grid">
+        @foreach (var test in PagedTests)
         {
             <div class="test-card">
                 <div class="test-card-info">
@@ -70,15 +70,90 @@ else
             </div>
         }
     </div>
+
+    @if (TotalPages > 1)
+    {
+        <nav class="test-pagination" aria-label="Phân trang đề thi">
+            <span class="test-pagination-summary">
+                Hiển thị @FirstVisibleItem–@LastVisibleItem trong @_filtered.Count đề
+            </span>
+            <div class="test-pagination-controls">
+                <button type="button"
+                        class="test-page-button test-page-direction"
+                        disabled="@(_currentPage == 1)"
+                        aria-label="Trang trước"
+                        @onclick="() => SetPage(_currentPage - 1)">
+                    <Icon Type="left" />
+                </button>
+
+                @foreach (var item in PaginationItems)
+                {
+                    @if (item.HasValue)
+                    {
+                        var page = item.Value;
+                        <button type="button"
+                                class="@GetPageButtonClass(page)"
+                                aria-current="@(page == _currentPage ? "page" : null)"
+                                @onclick="() => SetPage(page)">
+                            @(page)
+                        </button>
+                    }
+                    else
+                    {
+                        <span class="test-pagination-ellipsis" aria-hidden="true">…</span>
+                    }
+                }
+
+                <button type="button"
+                        class="test-page-button test-page-direction"
+                        disabled="@(_currentPage == TotalPages)"
+                        aria-label="Trang sau"
+                        @onclick="() => SetPage(_currentPage + 1)">
+                    <Icon Type="right" />
+                </button>
+            </div>
+        </nav>
+    }
 }
 
 @code {
+    private const int PageSize = 8;
     private List<TestViewModel> _all = [];
     private List<TestViewModel> _filtered = [];
     private List<TestCategoryViewModel> _categories = [];
     private string _searchText = "";
     private long? _selectedCategoryId;
     private bool _loading = true;
+    private int _currentPage = 1;
+
+    private int TotalPages => Math.Max(1, (int)Math.Ceiling(_filtered.Count / (double)PageSize));
+    private int FirstVisibleItem => _filtered.Count == 0 ? 0 : ((_currentPage - 1) * PageSize) + 1;
+    private int LastVisibleItem => Math.Min(_currentPage * PageSize, _filtered.Count);
+    private IEnumerable<TestViewModel> PagedTests =>
+        _filtered.Skip((_currentPage - 1) * PageSize).Take(PageSize);
+
+    private IEnumerable<int?> PaginationItems
+    {
+        get
+        {
+            var pages = new SortedSet<int> { 1, TotalPages };
+            for (var page = _currentPage - 2; page <= _currentPage + 2; page++)
+            {
+                if (page >= 1 && page <= TotalPages)
+                    pages.Add(page);
+            }
+
+            var previous = 0;
+            foreach (var page in pages)
+            {
+                if (previous > 0 && page - previous > 1)
+                    yield return null;
+
+                yield return page;
+                previous = page;
+            }
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -115,6 +190,7 @@ else
             query = query.Where(t => t.Title.Contains(_searchText.Trim(), StringComparison.OrdinalIgnoreCase));
 
         _filtered = query.ToList();
+        _currentPage = 1;
     }
 
     private void SelectCategory(long? categoryId)
@@ -125,6 +201,14 @@ else
 
     private string GetCategoryButtonClass(long? categoryId) =>
         _selectedCategoryId == categoryId ? "test-category-chip active" : "test-category-chip";
+
+    private string GetPageButtonClass(int page) =>
+        page == _currentPage ? "test-page-button active" : "test-page-button";
+
+    private void SetPage(int page)
+    {
+        _currentPage = Math.Clamp(page, 1, TotalPages);
+    }
 
     private void OnSearchKeyUp(KeyboardEventArgs e)
     {

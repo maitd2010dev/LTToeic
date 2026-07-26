@@ -170,14 +170,36 @@ using (var scope = app.Services.CreateScope())
     await seeder.SeedAsync(Path.Combine(contentRoot, "SeedData", "toeic_test_1.json"));
 
     var listeningSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.ListeningTestSeeder>();
-    var listeningSeedDirectory = Path.Combine(contentRoot, "SeedData");
-    if (Directory.Exists(listeningSeedDirectory))
+    var seedDirectory = Path.Combine(contentRoot, "SeedData");
+    if (Directory.Exists(seedDirectory))
     {
         foreach (var seedFile in Directory
-                     .EnumerateFiles(listeningSeedDirectory, "toeic_listening_*.json")
+                     .EnumerateFiles(seedDirectory, "toeic_listening_*.json")
                      .OrderBy(path => path, StringComparer.OrdinalIgnoreCase))
         {
             await listeningSeeder.SeedAsync(seedFile);
+        }
+    }
+
+    var readingSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.ReadingTestSeeder>();
+    if (Directory.Exists(seedDirectory))
+    {
+        foreach (var seedFile in Directory
+                     .EnumerateFiles(seedDirectory, "toeic_reading_*.json")
+                     .OrderBy(path => path, StringComparer.OrdinalIgnoreCase))
+        {
+            await readingSeeder.SeedAsync(seedFile);
+        }
+    }
+
+    var variantSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.ToeicTestVariantSeeder>();
+    if (Directory.Exists(seedDirectory))
+    {
+        foreach (var seedFile in Directory
+                     .EnumerateFiles(seedDirectory, "toeic_variants_*.json")
+                     .OrderBy(path => path, StringComparer.OrdinalIgnoreCase))
+        {
+            await variantSeeder.SeedAsync(seedFile);
         }
     }
 
@@ -189,6 +211,17 @@ using (var scope = app.Services.CreateScope())
 
     var courseToeicSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.CourseToeicSeeder>();
     await courseToeicSeeder.SeedAsync();
+
+    var courseCatalogSeeder = scope.ServiceProvider.GetRequiredService<CoreLTToeic.Infrastructure.Data.Seeders.CourseCatalogSeeder>();
+    if (Directory.Exists(seedDirectory))
+    {
+        foreach (var seedFile in Directory
+                     .EnumerateFiles(seedDirectory, "course_catalog_*.json")
+                     .OrderBy(path => path, StringComparer.OrdinalIgnoreCase))
+        {
+            await courseCatalogSeeder.SeedAsync(seedFile);
+        }
+    }
 }
 
 if (seedOnly)

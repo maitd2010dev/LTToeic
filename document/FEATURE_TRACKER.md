@@ -62,7 +62,7 @@
 | 4.7 | Upload ảnh cho câu hỏi | ✅ Hoàn thành | |
 | 4.8 | Preview câu hỏi realtime | ✅ Hoàn thành | `QuestionPreviewCard.razor`, `QuestionGroupPreviewCard.razor` |
 | 4.9 | Quản lý danh mục đề thi | ➖ Không triển khai UI riêng | Đã xóa tab/ô “Danh mục” khỏi giao diện Admin; danh mục vẫn được dùng nội bộ để phân loại đề thi — 2026-07-25 |
-| 4.10 | Import đề thi từ JSON/file | ✅ Seeder/CLI | Tự quét `SeedData/toeic_listening_*.json`; chạy trực tiếp DB bằng `--seed-only`; hướng dẫn tại `document/LISTENING_TEST_SEEDING.md` — 2026-07-25 |
+| 4.10 | Import đề thi từ JSON/file | ✅ Seeder/CLI | Tự quét `toeic_listening_*.json`, `toeic_reading_*.json` và `toeic_variants_*.json`; hỗ trợ nối Reading 101–200 và clone an toàn đề 200 câu theo category; chạy trực tiếp DB bằng `--seed-only`; hướng dẫn trong thư mục `document` — 2026-07-26 |
 | 4.11 | Phân quyền admin (bảo vệ route) | ✅ Hoàn thành | `[Authorize(Roles="Admin")]` trên `AdminLayout`, `ExamManagementList`, `CourseManagement`, `AdminIndex`; `AuthorizeRouteView` trong `Routes.razor` — 2026-05-17 |
 
 ---
@@ -75,7 +75,7 @@
 | 5.2 | Thêm / Sửa / Xoá khóa học | ✅ Hoàn thành | |
 | 5.3 | Quản lý chương học (Section) | ✅ Hoàn thành | |
 | 5.4 | Quản lý bài học (Lesson) | ✅ Hoàn thành | |
-| 5.5 | Upload thumbnail khóa học | ✅ Hoàn thành | Hỗ trợ thumbnail, ảnh trong bài học và video nhúng; seed khóa học có dữ liệu/media minh họa |
+| 5.5 | Upload thumbnail khóa học | ✅ Hoàn thành | Hỗ trợ thumbnail, ảnh trong bài học và video nhúng; catalog seed JSON có 10 khóa Published ở ba cấp độ, clone section/lesson/quiz nhưng không clone dữ liệu học viên — 2026-07-26 |
 | 5.6 | Trang danh sách khóa học (user) | ✅ Hoàn thành | `CourseCatalog.razor` `/khoa-hoc`; tìm kiếm, lọc cấp độ Cơ bản/Khá/Nâng cao và hiển thị tiến độ |
 | 5.7 | Trang chi tiết khóa học (user) | ✅ Hoàn thành | `CourseDetails.razor` `/khoa-hoc/{Id}`; mô tả, mục tiêu, chương trình học, video giới thiệu và đánh giá |
 | 5.8 | Đăng ký khóa học | ✅ Hoàn thành | Đăng ký miễn phí, quản lý trạng thái enrollment và trang `/khoa-hoc-cua-toi` |

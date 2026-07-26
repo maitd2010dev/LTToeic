@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "sourceTestTitle": "TOEIC Listening Actual Test 02 (2023)",
+  "source": {
+    "listening": "CoreLTToeic.UI/SeedData/toeic_listening_actual_test_02.json",
+    "reading": "CoreLTToeic.UI/SeedData/toeic_reading_actual_test_02_2023.json"
+  },
+  "variants": [
+    {
+      "title": "TOEIC Full Practice Test 01 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 02 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 03 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 04 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 05 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 06 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 07 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 08 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 09 (2025)",
+      "category": "2025",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 01 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 02 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 03 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 04 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 05 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 06 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 07 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 08 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 09 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    },
+    {
+      "title": "TOEIC Full Practice Test 10 (2026)",
+      "category": "2026",
+      "duration": 120,
+      "status": "Active"
+    }
+  ]
+}

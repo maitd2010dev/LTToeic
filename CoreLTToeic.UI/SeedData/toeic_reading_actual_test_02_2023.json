@@ -1,0 +1,1384 @@
+{
+  "schemaVersion": 1,
+  "targetTestTitle": "TOEIC Listening Actual Test 02 (2023)",
+  "category": "2023",
+  "duration": 120,
+  "source": {
+    "questions": "document/feed-html/Practice toeic reading test 2023 with answer - Actual test 02 - Practice Toeic Tests.html"
+  },
+  "parts": [
+    {
+      "partNum": 5,
+      "directions": "Directions: A word or phrase is missing in each of the sentences below. Four answer choices are given below each sentence. Select the best answer to complete the sentence. Then mark the letter (A), (B), (C), or (D) on your answer sheet.",
+      "questions": [
+        {
+          "orderNumber": 101,
+          "content": "Ms. Swinton will return from vacation tomorrow, but the project-planning committee will not meet with ——- until next week.",
+          "answer1": "she",
+          "answer2": "her",
+          "answer3": "hers",
+          "answer4": "herself",
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 102,
+          "content": "When it comes to purchases, Topfield Electronics assures its customers that they will receive their items ——- two business days.",
+          "answer1": "through",
+          "answer2": "within",
+          "answer3": "around",
+          "answer4": "behind",
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 103,
+          "content": "Anyone who wants to ——- in the upcoming seminar should fill out a registration card.",
+          "answer1": "complete",
+          "answer2": "attend",
+          "answer3": "participate",
+          "answer4": "release",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 104,
+          "content": "The owner of Sophie Amalie Repair strives to provide the best possible service to ——- customers.",
+          "answer1": "he",
+          "answer2": "his",
+          "answer3": "him",
+          "answer4": "himself",
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 105,
+          "content": "If Charlie Cox Designers does not deliver your items ——- Friday, we will take 10 percent off the purchasing cost.",
+          "answer1": "by",
+          "answer2": "in",
+          "answer3": "at",
+          "answer4": "to",
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 106,
+          "content": "The senior manager, Mr. Redmayne, ——- all of the statistics that were needed for the report.",
+          "answer1": "provided",
+          "answer2": "provide",
+          "answer3": "to provide",
+          "answer4": "providing",
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 107,
+          "content": "Unlike other local dining establishments, Maxine’s has succeeded in ——- several restaurants outside this region.",
+          "answer1": "open",
+          "answer2": "opening",
+          "answer3": "opened",
+          "answer4": "opens",
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 108,
+          "content": "Full-time researchers at Healthy Food Laboratory are required to submit a report on their research ——- six months.",
+          "answer1": "some",
+          "answer2": "several",
+          "answer3": "every",
+          "answer4": "most",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 109,
+          "content": "Generally speaking, doctors need written ——- in order to release a patient’s medical records.",
+          "answer1": "authorized",
+          "answer2": "authorizes",
+          "answer3": "authorization",
+          "answer4": "authorize",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 110,
+          "content": "Many ——- economists ventured to solve this puzzle and, in the process, developed some new economic theories.",
+          "answer1": "definite",
+          "answer2": "customary",
+          "answer3": "elaborate",
+          "answer4": "notable",
+          "correctAnswer": "D",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 111,
+          "content": "From 11 P.M. on May 3 to 8:00 A.M. on May 4, the online purchasing system ——- while we complete maintenance for the launch of the updated version.",
+          "answer1": "will be suspended",
+          "answer2": "was suspended",
+          "answer3": "is suspended",
+          "answer4": "to suspend",
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 112,
+          "content": "Job seekers are advised to have a well written cover letter that can be customized ——- actively seeking new employment.",
+          "answer1": "just as",
+          "answer2": "yet",
+          "answer3": "before",
+          "answer4": "so that",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 113,
+          "content": "Consumer advocacy groups in Australia have ——- their concerns about some newly proposed regulations on Internet shopping.",
+          "answer1": "focused",
+          "answer2": "appeared",
+          "answer3": "applied",
+          "answer4": "expressed",
+          "correctAnswer": "D",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 114,
+          "content": "The budget meeting began on time ——- several participants were late because of heavy morning traffic.",
+          "answer1": "whether",
+          "answer2": "despite",
+          "answer3": "due to",
+          "answer4": "though",
+          "correctAnswer": "D",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 115,
+          "content": "The long-awaited rebuilding project in the business district is expected to ——- on October 13.",
+          "answer1": "revolve",
+          "answer2": "transmit",
+          "answer3": "prolong",
+          "answer4": "commence",
+          "correctAnswer": "D",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 116,
+          "content": "Dr. Egerton recently coordinated an ——- evaluation of the new medication.",
+          "answer1": "extensive",
+          "answer2": "extent",
+          "answer3": "extensively",
+          "answer4": "extension",
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 117,
+          "content": "Executives at Morgan Furniture commended Ms. Torresani on how——- she designed the new line of dining furniture.",
+          "answer1": "scarcely",
+          "answer2": "likely",
+          "answer3": "hardly",
+          "answer4": "skillfully",
+          "correctAnswer": "D",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 118,
+          "content": "The Warner Insurance Company takes steps to ensure that personal information provided by its clients is kept ——- at all times.",
+          "answer1": "imperative",
+          "answer2": "confident",
+          "answer3": "secure",
+          "answer4": "notable",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 119,
+          "content": "Charlie’s Flower Shop is ——- walking distance of the Grosvenor Cafe.",
+          "answer1": "across",
+          "answer2": "within",
+          "answer3": "in front of",
+          "answer4": "nearby",
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 120,
+          "content": "McCarten Bank updated its website to increase the amount of information available to customers ——- in investment options.",
+          "answer1": "interest",
+          "answer2": "interests",
+          "answer3": "interested",
+          "answer4": "interesting",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 121,
+          "content": "Dr. Torreton’s research shows that his new treatment could lessen patient ——- on costly medicines.",
+          "answer1": "reliance",
+          "answer2": "relies",
+          "answer3": "reliant",
+          "answer4": "relied",
+          "correctAnswer": "A",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 122,
+          "content": "——- the extraordinary success of the publication Town & Around, the company’s total revenue rose 7 percent last quarter.",
+          "answer1": "According to",
+          "answer2": "Similarly",
+          "answer3": "Unless",
+          "answer4": "Due to",
+          "correctAnswer": "D",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 123,
+          "content": "Walters Management Systems ——- new policies on its hiring process last month.",
+          "answer1": "performed",
+          "answer2": "implemented",
+          "answer3": "achieved",
+          "answer4": "convinced",
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 124,
+          "content": "Unfortunately, Meyers’ X23 air conditioning unit failed to meet the government’s new energy-efficiency standards, and ——- did the company’s X24 model.",
+          "answer1": "same",
+          "answer2": "either",
+          "answer3": "so",
+          "answer4": "rather",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 125,
+          "content": "Meflin Information System is——- of your interest in our services to update your company’s computer network.",
+          "answer1": "willing",
+          "answer2": "appreciative",
+          "answer3": "fulfilled",
+          "answer4": "decisive",
+          "correctAnswer": "B",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 126,
+          "content": "Dr. Zischler has ——- about conducting the new research because of budget cuts in his department.",
+          "answer1": "specializations",
+          "answer2": "indications",
+          "answer3": "reservations",
+          "answer4": "reductions",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 127,
+          "content": "——- reserve tickets for Sunday’s dance performance, you must call the Eidinger Theater box office before noon on Friday.",
+          "answer1": "As to",
+          "answer2": "Furthermore",
+          "answer3": "In order to",
+          "answer4": "As a result of",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 128,
+          "content": "Worsdale System’s ——- Web browser has been praised by users and reviewers worldwide.",
+          "answer1": "frequent",
+          "answer2": "estimated",
+          "answer3": "innovative",
+          "answer4": "reluctant",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 129,
+          "content": "——- the conference on organizational effectiveness, the keynote speaker discussed the merits of mentoring programs for new employees.",
+          "answer1": "Although",
+          "answer2": "When",
+          "answer3": "During",
+          "answer4": "Afterward",
+          "correctAnswer": "C",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        },
+        {
+          "orderNumber": 130,
+          "content": "Before General Mills was named one of the best small businesses in the region, the company ——- expanding its operations nationwide.",
+          "answer1": "does not consider",
+          "answer2": "were not considered",
+          "answer3": "will not consider",
+          "answer4": "had not considered",
+          "correctAnswer": "D",
+          "image": null,
+          "audio": null,
+          "transcript": null
+        }
+      ],
+      "groups": []
+    },
+    {
+      "partNum": 6,
+      "directions": "Directions: Read the texts that follow. A word, phrase, or sentence is missing in parts of each text. Four answer choices for each question are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D) on your answer sheet.",
+      "questions": [],
+      "groups": [
+        {
+          "name": "Questions 131-134 refer to the following memo.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\">From: Elizabeth Manning<br></span><span style=\"font-size: large;\">Subject: Promotion<br></span><span style=\"font-size: large;\">Date: April 21</span></p>\n<p><span style=\"font-size: large;\">Dear Robert,</span></p>\n<p><span style=\"font-size: large;\">This is Elizabeth Manning from the Human Resources Department. I would like to inform you that your promotion has been —<strong>131.</strong>—- by our department.</span></p>\n<p><span style=\"font-size: large;\">Effective on May 1, your new title will be the Director of Sales, and you will be transferred to our headquarters in Salt Lake City. —<strong>132.</strong>—-. 1will send you an e-mail with an attached file which will include the official description of your new—<strong>133.</strong>—- as Director of Sales.</span></p>\n<p><span style=\"font-size: large;\">I will be more than happy to answer any questions you may have, so please don’t hesitate to contact me.</span></p>\n<p><span style=\"font-size: large;\">We look forward to the additional —<strong>134.</strong>—- you will be making for our company.</span></p>\n<p><span style=\"font-size: large;\">Sincerely,</span></p>\n<p><span style=\"font-size: large;\">Elizabeth Manning<br></span><span style=\"font-size: large;\">Director, Human Resources</span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 131,
+              "content": "Choose the best answer for blank 131.",
+              "answer1": "notified",
+              "answer2": "applied",
+              "answer3": "approved",
+              "answer4": "cited",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 132,
+              "content": "Choose the best answer for blank 132.",
+              "answer1": "Our disappointment in your work is not only due to your poor sales record.",
+              "answer2": "The correction will be reflected in your June credit statement, which was sent to you today.",
+              "answer3": "Beginning on May 25, your paycheck will reflect a 15-percent pay increase.",
+              "answer4": "Hoping that termination could be avoided, we invested in additional training for you.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 133,
+              "content": "Choose the best answer for blank 133.",
+              "answer1": "examples",
+              "answer2": "responsibilities",
+              "answer3": "foundation",
+              "answer4": "knowledge",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 134,
+              "content": "Choose the best answer for blank 134.",
+              "answer1": "contributions",
+              "answer2": "contributors",
+              "answer3": "contributed",
+              "answer4": "contributes",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 135-138 refer to the following e-mail.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\">To: Ruth Noble &lt;ruth@quickerway.com&gt;</span><br><span style=\"font-size: large;\">From: Sue Lightfoot &lt;slight@quickerway.com&gt;</span><br><span style=\"font-size: large;\">Subject: Expense Report</span><br><span style=\"font-size: large;\">Date: June 15</span></p>\n<p><span style=\"font-size: large;\">Dear Mr. Noble,</span></p>\n<p><span style=\"font-size: large;\">Thank you for submitting your expense report for your business trip to Osaka in May. However, I am afraid that I have to remind you of a few —<strong>135.</strong>—- that you must follow when you write an expense report.</span></p>\n<p><span style=\"font-size: large;\">First, please note that you should not have signed the report on your own. —<strong>136.</strong>—-, your immediate supervisor must sign the paper in order for the approval of reimbursements to be processed.</span></p>\n<p><span style=\"font-size: large;\">—<strong>137.</strong>—-.</span></p>\n<p><span style=\"font-size: large;\">If you wish to receive the —<strong>138.</strong>—- amount of reimbursement, please make sure to include all receipts to prove the actual amount you’ve claimed during your trip.</span></p>\n<p><span style=\"font-size: large;\">I kindly ask you to make the necessary changes and to resubmit the report no later than June 18.</span></p>\n<p><span style=\"font-size: large;\">Thank you in advance for your cooperation.</span></p>\n<p><span style=\"font-size: large;\">Sincerely,</span><br><span style=\"font-size: large;\">Sue Lightfoot</span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 135,
+              "content": "Choose the best answer for blank 135.",
+              "answer1": "charges",
+              "answer2": "propositions",
+              "answer3": "contradictions",
+              "answer4": "policies",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 136,
+              "content": "Choose the best answer for blank 136.",
+              "answer1": "Instead",
+              "answer2": "Likewise",
+              "answer3": "Unless",
+              "answer4": "Whereas",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 137,
+              "content": "Choose the best answer for blank 137.",
+              "answer1": "When you hand in your reimbursement requests, please list your car rental expenses.",
+              "answer2": "Also, you must submit expense reports within 30 days of returning from our trip.",
+              "answer3": "Besides, you submitted all receipts for travel expenses reimbursed.",
+              "answer4": "In addition, your report is missing the receipt for a taxi fare listed on May 13.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 138,
+              "content": "Choose the best answer for blank 138.",
+              "answer1": "full",
+              "answer2": "fuller",
+              "answer3": "fills",
+              "answer4": "filling",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 139-142 refer to the following passage.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p><span style=\"font-size: large;\">The Gerald Motor Company —<strong>139.</strong>—- the leader in its industry with its innovative models and designs.</span></p>\n<p><span style=\"font-size: large;\">It has been creating cars with advanced technology unimaginable to many in the industry. The Gerald Motor Company is not only the leader in car production but also has one of the best employee relations programs. With its employee appreciation program, it has increased the —<strong>140.</strong>—- of its workers by 67%. —<strong>141.</strong>—-.</span></p>\n<p><span style=\"font-size: large;\">After a thorough analysis of the company, I am —<strong>142.</strong>—- that the Gerald Motor Company will remain the leader in the auto industry for years to come.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 139,
+              "content": "Choose the best answer for blank 139.",
+              "answer1": "been",
+              "answer2": "be",
+              "answer3": "has been",
+              "answer4": "would be",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 140,
+              "content": "Choose the best answer for blank 140.",
+              "answer1": "effect",
+              "answer2": "settlement",
+              "answer3": "implement",
+              "answer4": "efficiency",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 141,
+              "content": "Choose the best answer for blank 141.",
+              "answer1": "This leads to a reduction in the choice of the customer.",
+              "answer2": "This leads to more car production and higher profits.",
+              "answer3": "This leads to the significant drop in car sales.",
+              "answer4": "This leads to low morale of our employees and the reduced production.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 142,
+              "content": "Choose the best answer for blank 142.",
+              "answer1": "confidence",
+              "answer2": "confident",
+              "answer3": "confide",
+              "answer4": "confidential",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 143-146 refer to the following advertisement.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: large;\"><strong>JOB</strong> <strong>WANTED</strong></span></p>\n<p><span style=\"font-size: large;\">Job Title: Software Engineer</span><br><span style=\"font-size: large;\">Company: M2M Solutions</span><br><span style=\"font-size: large;\">Location: San Jose</span><br><span style=\"font-size: large;\">Salary: $60,000 +</span></p>\n<p><span style=\"font-size: large;\">M2M Solutions is a growing company which has already built a —<strong>143.</strong>—- for creating imaginative and effective solutions for a variety of customers’ computer needs.</span></p>\n<p><span style=\"font-size: large;\">We are currently looking for talented computer professionals to join our team. Candidates should have 3 to 6 years of experience in the engineering or programming field and must have a working knowledge of C++ and Unix. We are looking for people with imagination who can work on a team but who also have the self-confidence to act on their own —<strong>144.</strong>—-.</span></p>\n<p><span style=\"font-size: large;\">—<strong>145.</strong>—-. Furthermore, every employee is —<strong>146.</strong>—- to an annual profit sharing bonus after their first year of employment.</span></p>\n<p><span style=\"font-size: large;\">Please e-mail your resume to our personnel manager, Minka Jenkins, at minkaj@m2msolution. net. She will contact you to arrange an interview.</span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 143,
+              "content": "Choose the best answer for blank 143.",
+              "answer1": "excellence",
+              "answer2": "character",
+              "answer3": "value",
+              "answer4": "reputation",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 144,
+              "content": "Choose the best answer for blank 144.",
+              "answer1": "initial",
+              "answer2": "initiation",
+              "answer3": "initiative",
+              "answer4": "initially",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 145,
+              "content": "Choose the best answer for blank 145.",
+              "answer1": "The benefits program is designed to help employees stay healthy.",
+              "answer2": "Benefits include 12 days paid holiday, a company car, and relocation expenses.",
+              "answer3": "Please refer to the attachment for more information on current job openings.",
+              "answer4": "Please forward your applications to minkaj@m2msolutions.net at the earliest.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 146,
+              "content": "Choose the best answer for blank 146.",
+              "answer1": "enabled",
+              "answer2": "encouraged",
+              "answer3": "enlarged",
+              "answer4": "entitled",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partNum": 7,
+      "directions": "Directions: In this part you will read a selection of texts, such as magazine and newspaper articles, e-mails, and instant messages. Each text or set of texts is followed by several questions. Select the best answer for each question and mark the letter (A), (B), (C), or (D) on your answer sheet.",
+      "questions": [],
+      "groups": [
+        {
+          "name": "Questions 147-148 refer to the following document.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>MISSION STATEMENT</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Vortec’s mission is to deliver electricity and natural gas in a reliable, efficient, affordable, and environmentally sound manner. We aim to be the best in the public utilities industry and are committed to achieving operational excellence, superb customer satisfaction and strong financial performance for our shareholders.</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Vortec Incorporated</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 147,
+              "content": "What is Vortec Incorporated?",
+              "answer1": "An Investment Bank",
+              "answer2": "A Law Firm",
+              "answer3": "A Utility Company",
+              "answer4": "An Accounting Firm",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 148,
+              "content": "What is NOT indicated as a goal of Vortec Incorporated?",
+              "answer1": "Making money for its investors",
+              "answer2": "Expanding its business internationally",
+              "answer3": "Making customers happy",
+              "answer4": "Being environmentally conscious",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 149-150 refer to the following text message chain.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Gregory</strong></span></p>\n<p><span style=\"font-size: large;\">I need a help.</span></p>\n<p><span style=\"font-size: large;\">5:35</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Sigapore Airline</strong></span></p>\n<p><span style=\"font-size: large;\">Good afternoon, sir. How can I help you?</span></p>\n<p><span style=\"font-size: large;\">5:35</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Gregory</strong></span></p>\n<p><span style=\"font-size: large;\">I have reserved a flight ticket for Germany for this Friday, but I’d like to change it to Tuesday or Wednesday.</span></p>\n<p><span style=\"font-size: large;\">5:38</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Sigapore Airline</strong></span></p>\n<p><span style=\"font-size: large;\">Well, I need to see if there are any available seats left, but you know, it’s already Sunday. Even if the seat is available this week, it will cost you.</span></p>\n<p><span style=\"font-size: large;\">5:40</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Sigapore Airline</strong></span></p>\n<p><span style=\"font-size: large;\">Oh, we have a seat on Wednesday early in the morning, but it’s business class. Will that be alright with you?</span></p>\n<p><span style=\"font-size: large;\">5:45</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Gregory</strong></span></p>\n<p><span style=\"font-size: large;\">That’s good! I’ll do whatever it takes. I have an urgent business contract to sign on Wednesday afternoon.</span></p>\n<p><span style=\"font-size: large;\">5:47</span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 149,
+              "content": "What problem does the Wednesday ticket have?",
+              "answer1": "Gregory has to pay more.",
+              "answer2": "Gregory has to use economy class.",
+              "answer3": "The flight time is in the afternoon.",
+              "answer4": "Gregory cannot return on the designated day.",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 150,
+              "content": "At 5:47, what does Gregory mean when he writes, “I’ll do whatever it takes”?",
+              "answer1": "He can give a hand to her.",
+              "answer2": "He must take a seat for an upcoming event.",
+              "answer3": "He never has to change the reservation.",
+              "answer4": "He want to have a seat upgraded.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 151-152 refer to the following advertisement.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>You’re too busy to cook!</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>Let Stella’s do it for you!</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Stella’s Bistro has opened a new restaurant in Winchester,</span><br><span style=\"font-size: large;\">Located across the street from the Federal Courthouse.</span><br><span style=\"font-size: large;\">Mention this ad at Stella’s and receive 10 % off your total purchase!</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>Visit us today!</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>Offer good only at the Winchester location.</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Stella’s Bistro</span><br><span style=\"font-size: large;\">1404 West First Street</span><br><span style=\"font-size: large;\">Winchester, TX 76839</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 151,
+              "content": "What is indicated about Stella’s Bistro?",
+              "answer1": "It has more than one location.",
+              "answer2": "It is next door to a courthouse.",
+              "answer3": "It requires reservations.",
+              "answer4": "It has a brand new menu.",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 152,
+              "content": "What will customers receive?",
+              "answer1": "A coupon for free delivery",
+              "answer2": "A half price entree",
+              "answer3": "A discount on food",
+              "answer4": "A complimentary dessert",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 153-155 refer to the following e-mail.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p><span style=\"font-size: large;\">To: Michael Whitfield &lt;mwhitfield@alcova.com&gt;</span></p>\n<p><span style=\"font-size: large;\">From: Gregory Lee &lt;glee@alcova.com&gt;</span></p>\n<p><span style=\"font-size: large;\">Subject: Travel Plans</span></p>\n<p><span style=\"font-size: large;\">Date: April 4</span></p>\n<p><span style=\"font-size: large;\"></span></p>\n<p><span style=\"font-size: large;\">Michael,</span></p>\n<p><span style=\"font-size: large;\">Thanks again for hosting that training session last week. –[1] –. Anyway, I was wondering when you are arriving in Philadelphia for the National Sales Awards. — [2] –. I was planning to arrive on May 11, but Nancy Bonner, our account manager for Vivatech, has asked me to accompany her to Boston to assist her with a presentation on our new products that are coming out next month. — [3] –. I wouldn’t miss the possibility of seeing you winning Sales Manager of the year! I look forward to seeing you there. — [4] –.</span></p>\n<p><span style=\"font-size: large;\">Regards,</span></p>\n<p><span style=\"font-size: large;\">Gregory Lee</span><br><span style=\"font-size: large;\">Alcova, Inc.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 153,
+              "content": "Who is Nancy Bonner?",
+              "answer1": "An employee at Alcova, Inc.",
+              "answer2": "A manager at Vivatech",
+              "answer3": "A travel agent for Mr. Lee",
+              "answer4": "A presenter at an awards ceremony",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 154,
+              "content": "What is the purpose of Mr. Whitfield’s trip to Philadelphia?",
+              "answer1": "He is visiting a client.",
+              "answer2": "He is relocating to a different office.",
+              "answer3": "He is attending an awards banquet.",
+              "answer4": "He is making a presentation.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 155,
+              "content": "In which of the positions marked [1]. [2]. [3] and [4] does the following sentence best belong? “Therefore, I will not be arriving until the morning of the 12th.”",
+              "answer1": "[1]",
+              "answer2": "[2]",
+              "answer3": "[3]",
+              "answer4": "[4]",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 156-157 refer to the following e-mail.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p><span style=\"font-size: large;\">To: &nbsp;Roberto Garcia</span></p>\n<p><span style=\"font-size: large;\">From: &nbsp;&nbsp;Linda Silverman</span></p>\n<p><span style=\"font-size: large;\">Subject: &nbsp;&nbsp;Internship Position at Synergy Financial</span></p>\n<p><span style=\"font-size: large;\">&nbsp;</span></p>\n<p><span style=\"font-size: large;\">Thank you for attending the Career Fair at Whitehall University last week. After reviewing all of the resumes we collected, we have placed you on our list of potential candidates for the Summer Internship Program at Synergy Financial. We have tentatively scheduled you for an interview this Friday, January 7th at 10:00 A.M. at our new 9th Street location.</span><br><span style=\"font-size: large;\">Please bring a copy of your academic records.</span></p>\n<p><span style=\"font-size: large;\">Below are the directions to our office on the 9th Street. If you have any questions or need to reschedule this meeting, feel free to call me at 714-869-8080.</span></p>\n<p><span style=\"font-size: large;\">Linda Silverman</span><br><span style=\"font-size: large;\">District Manager</span><br><span style=\"font-size: large;\">Synergy Financial, Inc.</span></p>\n<p><span style=\"font-size: large;\">Directions to Synergy Financial : Take Interstate 80 south to Exit 14, Washington St. Stay in the right lane and turn right at the first light onto Lincoln Ave. Go 4 blocks and turn left onto Adams St. (You will see the post office on the corner). Proceed 2 kilometers, passing the police station on the left and turn right onto Grant Ave. Go straight 2 more blocks to the Riverfront Tower. Enter the parking garage of the Tower and park in visitor’s parking area. Take the elevator to the 5th floor.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 156,
+              "content": "Why is Ms. Silverman writing to Mr. Garcia?",
+              "answer1": "To apply for an internship",
+              "answer2": "To invite him for a job interview",
+              "answer3": "To ask him to send his resume",
+              "answer4": "To invite him to a career fair",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 157,
+              "content": "What is NOT mentioned in the directions?",
+              "answer1": "A post office",
+              "answer2": "A police office",
+              "answer3": "A gas station",
+              "answer4": "A parking garage",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 158-160 refer to the following brochure.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>Sterling Securities</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Special offer for Employees!</span></p>\n<p><span style=\"font-size: large;\">To be successful in the ever changing global marketplace, one must keep up with the latest business news and trends around the world. Fortunately, employees of Sterling Securities are eligible to subscribe to some of the most informative business magazines and top journals for business professionals at a discounted price. The reduced priced publications are listed below. To place an order, email your choices to Stephanie McCormick at smccormick@sterlingsec.com with the subject, “Magazine Order.” She will be submitting our collective order on July 1st. After this date, you can still place an order on your own, but you will need to contact Ms. McCormick to obtain an order form and the company code needed for the discount. We encourage you to take advantage of this excellent opportunity.</span></p>\n<table>\n<tbody>\n<tr>\n<td width=\"202\">\n<p><span style=\"font-size: large;\">&nbsp;</span></p>\n</td>\n<td width=\"116\">\n<p><span style=\"font-size: large;\"><strong>Regular Price</strong></span></p>\n</td>\n<td width=\"132\">\n<p><span style=\"font-size: large;\"><strong>Discounted Price</strong></span></p>\n</td>\n</tr>\n<tr>\n<td width=\"202\">\n<p><span style=\"font-size: large;\">International Business Weekly</span></p>\n</td>\n<td width=\"116\">\n<p><span style=\"font-size: large;\">$125 / year</span></p>\n</td>\n<td width=\"132\">\n<p><span style=\"font-size: large;\">$105 / year</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"202\">\n<p><span style=\"font-size: large;\">Wallace Financial Times</span></p>\n</td>\n<td width=\"116\">\n<p><span style=\"font-size: large;\">$117 / year</span></p>\n</td>\n<td width=\"132\">\n<p><span style=\"font-size: large;\">$99 / year</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"202\">\n<p><span style=\"font-size: large;\">Business Today</span></p>\n</td>\n<td width=\"116\">\n<p><span style=\"font-size: large;\">$84 / year</span></p>\n</td>\n<td width=\"132\">\n<p><span style=\"font-size: large;\">$72 / year</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"202\">\n<p><span style=\"font-size: large;\">Smart Stocks</span></p>\n</td>\n<td width=\"116\">\n<p><span style=\"font-size: large;\">$65 / year</span></p>\n</td>\n<td width=\"132\">\n<p><span style=\"font-size: large;\">$53 / year</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"202\">\n<p><span style=\"font-size: large;\">Investment Adviser</span></p>\n</td>\n<td width=\"116\">\n<p><span style=\"font-size: large;\">$57 / year</span></p>\n</td>\n<td width=\"132\">\n<p><span style=\"font-size: large;\">$38 / year</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"202\">\n<p><span style=\"font-size: large;\">Wealth Magazine</span></p>\n</td>\n<td width=\"116\">\n<p><span style=\"font-size: large;\">$43 / year</span></p>\n</td>\n<td width=\"132\">\n<p><span style=\"font-size: large;\">$27 / year</span></p>\n</td>\n</tr>\n</tbody>\n</table>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 158,
+              "content": "What is the purpose of the notice?",
+              "answer1": "To announce a global business workshop",
+              "answer2": "To extend an offer to employees",
+              "answer3": "To remind employees of required reading",
+              "answer4": "To inform employees of investment opportunities",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 159,
+              "content": "How can an employee receive a discount on an order not placed with the group?",
+              "answer1": "By obtaining the company code",
+              "answer2": "By visiting the publisher’s website",
+              "answer3": "By ordering more than one item from the list",
+              "answer4": "By placing an order online",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 160,
+              "content": "How much will an employee of Sterling Securities most likely pay for a subscription to Business today?",
+              "answer1": "$53",
+              "answer2": "$72",
+              "answer3": "$84",
+              "answer4": "$105",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Question 161-163 refer to the following article.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>Business Travel News</strong></span></p>\n<p><span style=\"font-size: large;\">Business travelers and their companies are concerned about hotel room rate increases. Rooms have risen 12% in New York from a year ago to an average of $199 a night. Similar trends can be seen in Detroit, up 15%; Los Angeles, up 7%; Houston, up 6%. With the business climate improving, hotels are charging higher prices, but companies that spend millions on business travel are developing new strategies :</span></p>\n<p><span style=\"font-size: large;\">– Less Luxury – A health sciences company says they encourage employees to stay at limited- service hotels, rather than pricier four-star properties.</span></p>\n<p><span style=\"font-size: large;\">– Discounts – One manufacturer believes that employees should use member discounts from auto club, credit card, senior status, etc.</span></p>\n<p><span style=\"font-size: large;\">– Corporate Apartments – A US branch of a Tokyo firm says a corporate apartment can save as much as 40% over a hotel room.</span></p>\n<p><span style=\"font-size: large;\">Hotels that continue to increase rates will most likely lose business to budget hotels, corporate apartments, etc. Business was bad for hotels after the terrorism wave, but it has been rebounding. So, to make up for their economic damage in the past, most major hotels are now proposing double-digit increases. Because of such a trend, even some relatively modest hotels have raised rates.</span></p>\n<p><span style=\"font-size: large;\">Paying ending $450 a night for a simple room in Manhattan stands out on a corporate expense report, ending up more costly than airfare in some cases. Airlines long to raise their rates, but increased capacity and severe competition prevents them from doing so. Hotels, on the other hand, can’t expand capacity easily, so increased demand tends to drive prices up.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 161,
+              "content": "In what city has the least change occurred?",
+              "answer1": "New York",
+              "answer2": "Detroit",
+              "answer3": "Los Angeles",
+              "answer4": "Houston",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 162,
+              "content": "What is NOT stated as a strategy of companies in response to the change?",
+              "answer1": "Getting company apartments for employees",
+              "answer2": "Turning to limited-service hotels",
+              "answer3": "Negotiating volume discounts directly with hotels",
+              "answer4": "Using discounts offered through memberships",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 163,
+              "content": "The word “rebounding” in paragraph 3, line 3, is closest in meaning to",
+              "answer1": "remaining",
+              "answer2": "recovering",
+              "answer3": "reconciling",
+              "answer4": "relocating",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 164-167 refer to the online chat discussion.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Clark Simson</strong></span></p>\n<p><span style=\"font-size: large;\">This is Clark Simpson from National Publishing Association. We’ll host a book fair next month and invite some publishing companies from Japan. We’d like to have some documents translated into Japanese. I am writing to ask if you are available to do this.</span></p>\n<p><span style=\"font-size: large;\">9:45</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Nancy Lee</strong></span></p>\n<p><span style=\"font-size: large;\">Oh, thank you for considering me. Unfortunately, I’m going to Tokyo tomorrow because I’m supposed to interpret at an international forum. So I won’t be able to start the job until next week. Will that be alright?</span></p>\n<p><span style=\"font-size: large;\">9:48</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Clark Simson</strong></span></p>\n<p><span style=\"font-size: large;\">No, I’m sorry. There’s no time to lose. We will send an invitation letter and related documents next Monday, so we really need to have them translated before then.</span></p>\n<p><span style=\"font-size: large;\">9:55</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong>Nancy Lee</strong></span></p>\n<p><span style=\"font-size: large;\">Well, I do have a colleague I can recommend. And he specializes in the publishing industry. If you give me your phone number, I will have him contact you soon.</span></p>\n<p><span style=\"font-size: large;\">9:57</span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 164,
+              "content": "What will the National Publishing Association do next month?",
+              "answer1": "Open a poetry reading",
+              "answer2": "Relocate to Japan",
+              "answer3": "Join an international forum",
+              "answer4": "Hold a book fair",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 165,
+              "content": "What is the main purpose of the chat?",
+              "answer1": "To invite a guest speaker",
+              "answer2": "To assign a task",
+              "answer3": "To advertise a service",
+              "answer4": "To announce work shifts",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 166,
+              "content": "What does Ms. Lee offer to do?",
+              "answer1": "Order more books",
+              "answer2": "Refer a colleague",
+              "answer3": "Deliver some documents",
+              "answer4": "Review a proposal",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 167,
+              "content": "At 9:55, what does Mr. Simson mean when he writes, “There’s no time to lose”?",
+              "answer1": "There is no time to participate in the international event.",
+              "answer2": "He has to fly to Tokyo tomorrow.",
+              "answer3": "Some papers need to be prepared before next Monday.",
+              "answer4": "Another specialist is recommended at once.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 168-171 refer to the following memo.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p><span style=\"font-size: large;\">To: &nbsp;Simpson Homes Construction Supervisors</span><br><span style=\"font-size: large;\">From: &nbsp;Greg Joyce, District Manager</span><br><span style=\"font-size: large;\">Date: &nbsp;June 10</span></p>\n<p><span style=\"font-size: large;\">Due to several recent accidents, I have rewritten a portion of the company safety standards to clarify a few points about construction site safety. –[1] –. The updated guidelines are listed below. — [2] –. I will distribute a final copy to each of you by the end of the week. — [3] –.</span></p>\n<p><span style=\"font-size: large;\">It is imperative that you strictly enforce these guidelines as preventing accidents is better than dealing with the problems caused by negligence. — [4] –.</span></p>\n<p><span style=\"font-size: large;\">– Hard hats must be worn on job sites at all times. No exceptions!</span></p>\n<p><span style=\"font-size: large;\">– Safety rails must be put up immediately following the installation of the stairs. Some contractors are waiting a few days, which is unacceptable.</span></p>\n<p><span style=\"font-size: large;\">– Portable propane heaters may be used to help dry the sheetrock but the gas tanks must be outside the house.</span></p>\n<p><span style=\"font-size: large;\">– No one is allowed to work on the roof if it is raining. If it starts to rain, you must check each house under construction to make sure no one is on the roof.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 168,
+              "content": "Why was the memo sent?",
+              "answer1": "To congratulate employees on a good safety record",
+              "answer2": "To recommend a course on safety procedures",
+              "answer3": "To detail the revised company safety guidelines",
+              "answer4": "To schedule a meeting",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 169,
+              "content": "What safety practice is mentioned?",
+              "answer1": "Wearing steel toed boots",
+              "answer2": "Installing safety rails a few days after stairs are put in",
+              "answer3": "Staying off the roof during rain",
+              "answer4": "Not allowing propane heaters",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 170,
+              "content": "What is expected of the construction supervisors?",
+              "answer1": "To conduct safety audits",
+              "answer2": "To enforce the safety regulations",
+              "answer3": "To file a lawsuit",
+              "answer4": "To rewrite the safety standards",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 171,
+              "content": "In which of the positions marked [1], [2], [3] and [4] does the following sentence best belong? “I will also be conducting unannounced safety audits to ensure that all safety procedures are being followed correctly.”",
+              "answer1": "[1]",
+              "answer2": "[2]",
+              "answer3": "[3]",
+              "answer4": "[4]",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 172-175 refer to the following information.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>Heritage Country Club</strong></span></p>\n<p><span style=\"font-size: large;\"></span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong><span style=\"font-size: x-large;\">♦</span> Membership information</strong></span></p>\n<p><span style=\"font-size: large;\">Welcome to the Heritage Country Club. This pamphlet will give an overview of the club facilities and hours.</span></p>\n<p><span style=\"font-size: large;\">HCC is a private country club offering members exclusive privileges on our four tennis courts, one beautiful golf course, and one indoor swimming pool.</span></p>\n<p><span style=\"font-size: large;\">We aim to provide our members with a peaceful and relaxing place to enjoy their favorite outdoor activities.</span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"><strong><span style=\"font-size: x-large;\">♦</span>&nbsp;General information</strong></span></p>\n<p><span style=\"font-size: large;\">• <em><u>Pool Hours</u></em></span></p>\n<p><span style=\"font-size: large;\">&nbsp; &nbsp;Monday- Saturday 10 A.M. – 8 P.M.</span></p>\n<p><span style=\"font-size: large;\">&nbsp; &nbsp;Sunday 12 P.M. – 6 P.M.</span></p>\n<p><span style=\"font-size: large;\">• <em><u>Tennis Court Hours</u></em></span></p>\n<p><span style=\"font-size: large;\">&nbsp; &nbsp;8 A.M. – 10 P.M. Seven days a week</span></p>\n<p><span style=\"font-size: large;\">• <em><u>Club Phone Numbers</u></em></span></p>\n<p><span style=\"font-size: large;\">&nbsp; &nbsp;744-2001 for the club office</span></p>\n<p><span style=\"font-size: large;\">&nbsp; &nbsp;744-2002 to schedule tee times</span></p>\n<p><span style=\"font-size: large;\">&nbsp; &nbsp;744-2003 to reserve tennis courts</span></p>\n<p><span style=\"font-size: large;\">&nbsp;744-2004 for inclement weather information</span></p>\n<p><span style=\"font-size: large;\">HCC offers private swimming, tennis, and golf lessons to our members. Both adult and child lessons are available.</span></p>\n<p><span style=\"font-size: large;\">Call the club office for more information.</span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 172,
+              "content": "For whom is the document intended?",
+              "answer1": "Former members",
+              "answer2": "Tennis instructors",
+              "answer3": "Club employees",
+              "answer4": "New members",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 173,
+              "content": "What number should individuals call to inquire about private lessons?",
+              "answer1": "744-2004",
+              "answer2": "744-2001",
+              "answer3": "744-2002",
+              "answer4": "744-2003",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 174,
+              "content": "The word “aim” in paragraph 3, line 1, is closest in meaning to",
+              "answer1": "acquire",
+              "answer2": "charge",
+              "answer3": "direct",
+              "answer4": "intend",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 175,
+              "content": "What is NOT mentioned about the club in the pamphlet?",
+              "answer1": "The club offers private tennis lessons.",
+              "answer2": "The pool is open seven days a week.",
+              "answer3": "The golf lessons are only available to adults.",
+              "answer4": "The club is private.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 176-180 refer to the following advertisement and catalog pages.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>Watson’s Nursery</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">786 New Castle Rd. Huntington, WV</span><br><span style=\"font-size: large;\">304-737-7142</span></p>\n<p><span style=\"font-size: large;\">Watson’s Nursery has a perfect idea for your new year’s resolution! Why not plant a vegetable garden at your home? Gardening is a great source of exercise, provides healthy food to eat, and saves you money! Watson’s is adding a farmer’s garden section to our spring catalog. If you’d like to start growing your own fresh ingredients for your salads, you’ll love our selection of vegetable seeds and plants including cucumbers, tomatoes, and carrots. If you’d like to grow a big juicy watermelon or cantaloupe, we have a nice selection of fruit seeds as well. To get you started, we’re offering an early bird special on all products that are listed on page 1 of our latest catalog. These items will be offered at a ten percent discount for the first three months after they become available at the store on January 1st.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: large;\">WATSON’S NURSERY</span><br><span style=\"font-size: large;\">FARMER’S GARDEN CATALOG</span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: large;\"><strong><em>Vegetables</em></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Cucumbers</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Tomatoes</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Squash</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Carrots</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Green Beans</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Corn</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Egg Plants</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Sweet Potatoes</span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: large;\"></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Page 1</span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: large;\">WATSON’S NURSERY</span><br><span style=\"font-size: large;\">FARMER’S GARDEN CATALOG</span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: large;\"><strong><em>Fruits</em></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Watermelons</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Cantaloupes</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Strawberries</span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: large;\"><strong><em>Herbs</em></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Dill</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Rosemary</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Sage</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Thyme</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Basil</span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: large;\">Page 2</span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 176,
+              "content": "What is mentioned in this advertisement?",
+              "answer1": "Vegetarian Restaurant",
+              "answer2": "Planting a garden",
+              "answer3": "Buying gardening tools",
+              "answer4": "Landscape maintenance",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 177,
+              "content": "Which is NOT indicated as a benefit of gardening?",
+              "answer1": "Financial benefit",
+              "answer2": "Health benefit",
+              "answer3": "Dietary benefit",
+              "answer4": "Environmental benefit",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 178,
+              "content": "What is suggested about Watson’s previous spring catalog?",
+              "answer1": "It had a farmer’s garden section.",
+              "answer2": "It included exercise equipment.",
+              "answer3": "It did not include fruits and vegetables.",
+              "answer4": "It only had fruits and vegetables.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 179,
+              "content": "What will be offered at a discount?",
+              "answer1": "Watermelon",
+              "answer2": "Basil",
+              "answer3": "Squash",
+              "answer4": "Broccoli",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 180,
+              "content": "What is indicated about the items in the catalog?",
+              "answer1": "Some of them are not yet in stock in the store.",
+              "answer2": "They must be planted in the first three months of the year.",
+              "answer3": "They are discontinued items.",
+              "answer4": "They can only be ordered in large quantities.",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 181-185 refer to the following letter and information.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\"></span></p>\n<p><span style=\"font-size: large;\">Dear Ms. Chapman:</span></p>\n<p><span style=\"font-size: large;\">Your former colleague, Ralph Pietras, suggested that I contact you in regard to an exhibit that we are putting together at the Hollywood Film Museum. As you probably know, Ralph is now a curator at the museum. We are currently working together on a special exhibit that will display award winning costume designs of historical films.</span></p>\n<p><span style=\"font-size: large;\">I am writing to request your permission to use the costume worn by one of the actors in the movie Renaissance, which was released by Gold Pictures in 1985 and won that year’s award for the best costume design at the American Screen Actors Awards. I will arrange for a courier to pick up and return the costume, ensuring that it is displayed under proper conditions and so that it is cleaned by a costume preservation expert before it is returned to you. Thank you for your consideration.</span></p>\n<p><span style=\"font-size: large;\"></span></p>\n<p><span style=\"font-size: large;\">Sincerely,</span></p>\n<p><span style=\"font-size: large;\">&nbsp;</span></p>\n<p><span style=\"font-size: large;\">Frederick Mathews</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\">Film Journal: award winning costumes.</span><br><span style=\"font-size: large;\">p 14</span></p>\n<p><span style=\"font-size: large;\">The costume pictured was worn by the British actress Kate Briggs, who was nominated for the Academy Award for her portrayal of Anna York in the 1985 hit film <em>Renaissance</em>. The costume was hand made by Julia Chapman, who designed costumes for Gold Pictures for many years. She continues to work as a costume designer for the company today. This costume was critically acclaimed for its combination of stunning beauty and accurate depiction of 15th century Europe.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 181,
+              "content": "Why was the letter written?",
+              "answer1": "To promote new exhibitions at the museum",
+              "answer2": "To describe a film from the 1980’s",
+              "answer3": "To nominate a film for an award",
+              "answer4": "To ask to borrow an item for exhibition",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 182,
+              "content": "Who is working with Mr. Mathews to arrange the exhibition?",
+              "answer1": "Kate Briggs",
+              "answer2": "Ralph Pietras",
+              "answer3": "Julia Chapman",
+              "answer4": "Anna York",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 183,
+              "content": "What does Mr. Mathews offer to do?",
+              "answer1": "Provide additional details about the exhibition",
+              "answer2": "Pay for a costume to be replicated",
+              "answer3": "Ensure that the costume is cleaned carefully",
+              "answer4": "Arrange for Ms. Chapman to travel to Hollywood",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 184,
+              "content": "What is NOT indicated about the movie “Renaissance”?",
+              "answer1": "It was made in England.",
+              "answer2": "It was made by Gold Pictures.",
+              "answer3": "The costume was shown in the film.",
+              "answer4": "The costume was designed by Ms. Chapman.",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 185,
+              "content": "What is mentioned about Ms. Chapman?",
+              "answer1": "She has had a long career at Gold Pictures.",
+              "answer2": "She owns Gold Pictures.",
+              "answer3": "She is a curator at the Hollywood Film Museum.",
+              "answer4": "She appeared in the film “Renaissance”.",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 186-190 refer to the following advertisement, schedule, and e-mail.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p><span style=\"font-size: large;\">Gloria’s Bookstore</span><br><span style=\"font-size: large;\">1326 Everett Avenue; Louisville, Kentucky</span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>“A CONVERSATION WITH AUTHORS” IN JUNE!</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: large;\">Gloria’s Bookstore will hold a series of events for meeting five best-selling authors in June. Stop by, get your books signed, and ask questions during the events. All books can be purchased onsite. All of the meetings are open to the public. Light refreshments will be served by the Gloria Book Cafe. The event, ‘A Conversation with Authors’, began three years ago and is getting more popular each year. Don’t miss this unique opportunity to meet the great authors.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: x-large;\"><strong><u></u></strong></span></p>\n<p><span style=\"font-size: x-large;\"><strong><u>Schedule for June</u></strong></span></p>\n<p><span style=\"font-size: large;\">JUSTIN MORRISON ……………….. FRIDAY, JUNE 12, 2015 – 7:00 P.M. TO 8:30 P.M.</span></p>\n<p><span style=\"font-size: large;\">MARTIN OLIVER ……………… SATURDAY, JUNE 13, 2015 – 6:00 P.M. TO 7:00 P.M.</span></p>\n<p><span style=\"font-size: large;\">LORETTA PAGE ………………….. TUESDAY, JUNE 16, 2015 – 2:00 P.M. TO 3:30 P.M.</span></p>\n<p><span style=\"font-size: large;\">MONICA SIMPSON ……….. WEDNESDAY, JUNE 17, 2015 – 6:00 P.M. TO 7:00 P.M.</span></p>\n<p><span style=\"font-size: large;\">SHANNON WAGNER ………… THURSDAY, JUNE 18, 2015 – 6:00 P.M. TO 7:00 P.M.</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>\n<div class=\"reading-passage-block\"><p><span style=\"font-size: large;\">From:&nbsp; &nbsp;kstanley@gloriabooks.com</span></p>\n<p><span style=\"font-size: large;\">To: &nbsp;&nbsp;shannonw@kmail.net</span></p>\n<p><span style=\"font-size: large;\">Date: &nbsp;&nbsp;June 8</span></p>\n<p><span style=\"font-size: large;\">Subject: June’s schedule</span></p>\n<p><span style=\"font-size: large;\">&nbsp;</span></p>\n<p><span style=\"font-size: large;\">Dear Ms. Wagner,</span></p>\n<p><span style=\"font-size: large;\">Thanks for your message last night. When receiving it, I contacted Mr. Oliver immediately, and he said that he is willing to exchange the date with you for our upcoming series of events.</span></p>\n<p><span style=\"font-size: large;\">I regret that you are unable to join the last day of our discussion.</span></p>\n<p><span style=\"font-size: large;\">Anyway, I’m pleased that you will make an appearance on the earlier date and still be able to depart on June 18 for the awards ceremony in the City of New York. I think it is well deserved for you to receive the Book of the Year Award.</span></p>\n<p><span style=\"font-size: large;\">Kristin Stanley</span></p>\n<p><span style=\"font-size: large;\">Coordinator</span><br><span style=\"font-size: large;\">Gloria’s Bookstore</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 186,
+              "content": "According to the advertisement, what will happen in Louisville in June?",
+              "answer1": "A charitable event will be held.",
+              "answer2": "Books will be autographed by their authors.",
+              "answer3": "A store will have a clearance sale for its inventory.",
+              "answer4": "A local business will celebrate its anniversary.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 187,
+              "content": "What is NOT suggested about the event?",
+              "answer1": "It will provide some snacks for attendees.",
+              "answer2": "It has been held for about three years.",
+              "answer3": "It has attracted more people each year.",
+              "answer4": "It requires attendees to purchase merchandise.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 188,
+              "content": "When will Mr. Oliver most likely make an appearance?",
+              "answer1": "On Wednesday",
+              "answer2": "On Thursday",
+              "answer3": "On Friday",
+              "answer4": "On Saturday",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 189,
+              "content": "Why does Ms. Stanley send the e-mail?",
+              "answer1": "To respond to a request",
+              "answer2": "To confirm her travel date",
+              "answer3": "To ask Ms. Wagner to speak to Mr. Oliver",
+              "answer4": "To notify an author about a book conference",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 190,
+              "content": "What will take place in the City of New York?",
+              "answer1": "A new location will open.",
+              "answer2": "A magazine will interview Ms. Wagner.",
+              "answer3": "Ms. Wagner will meet with Ms. Stanley.",
+              "answer4": "An author’s work will be recognized.",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 191-195 refer to the notice, information, and e-mail.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p><span style=\"font-size: x-large;\"></span></p>\n<p><span style=\"font-size: x-large;\">Dear Washington University Freshman Students,</span></p>\n<p><span style=\"font-size: large;\">Although you are a freshman in college, things you do NOW will affect your success when it’s time to leave WU. Because of this, I offer some advice on how to get the job or attend the professional school you want after graduation:</span><br><span style=\"font-size: large;\">There are lots of resources at WU that will help you succeed both academically and personally. Your residence hall mentors, your professors, your academic advisors, and all the other support staff at WU can help you and want you to be successful. Make sure you use your support network to the fullest, and enjoy your first year at WU!</span></p>\n<p><span style=\"font-size: large;\">For any other information, please contact the student resource center and you can take a related booklet here.</span></p>\n<p><span style=\"font-size: large;\">Dr. John Roses</span><br><span style=\"font-size: large;\">Professor in WU</span><br><span style=\"font-size: large;\"><u>Roses@wu.edu</u></span></p>\n<p><span style=\"font-size: large;\"></span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>INTRODUCTION</strong></span></p>\n<p><span style=\"font-size: large;\">1. GRADES ARE IMPORTANT. Employers and graduate programs use grades as a screening tool for interviews and applications. Get off to a strong start on your first year by working on your study skills.</span></p>\n<p><span style=\"font-size: large;\">2. IT’S NEVER TOO EARLY TO START PLANNING. Begin exploring your options for the future now. Visit the Natural Science Career Web at http://www.ns.wu.edu/acrc/careexploration/index.asp to learn more about career options. There will be many career events this semester. You can find the list at http://events.csp.wu.edu/</span></p>\n<p><span style=\"font-size: large;\">3. DEVELOP YOUR WRITING AND SPEAKING SKILLS. Good communication skills are the number one personal trait desired these days, according to the National Association of Collegiate Employers. The Writing Center (http://writing.wu.edu) can help you with writing assignments or even creating a PowerPoint presentation.</span></p>\n<p><span style=\"font-size: large;\">Dr. John Roses</span><br><span style=\"font-size: large;\">Professor in WU</span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p><span style=\"font-size: large;\">To: &nbsp;&nbsp;Roses@wu.edu</span></p>\n<p><span style=\"font-size: large;\">From: &nbsp;&nbsp;TS0330@wu.edu</span></p>\n<p><span style=\"font-size: large;\">Sub: &nbsp;&nbsp;Dr. Roses, where can I apply for scholarships?</span></p>\n<p><span style=\"font-size: large;\">&nbsp;</span></p>\n<p><span style=\"font-size: large;\">Dear Dr. Roses,</span></p>\n<p><span style=\"font-size: large;\">As I was reading your writing, I thought that you would also be glad to help me with my financial situation. Right now, I desperately need scholarships to pay for my tuition, and I was wondering if you could direct me to where I can find and apply for the scholarships I need.</span></p>\n<p><span style=\"font-size: large;\">I greatly appreciate your advice. I want to study hard and later be able to give back what Washington University has given me.</span></p>\n<p><span style=\"font-size: large;\">Thank you very much.</span></p>\n<p><span style=\"font-size: large;\">Sincerely,</span><br><span style=\"font-size: large;\">Tomas</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 191,
+              "content": "To whom is Dr. Roses addressing?",
+              "answer1": "Students who are about to graduate",
+              "answer2": "Students who are looking for careers",
+              "answer3": "Students who have done academically well",
+              "answer4": "Students who are first years in college",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 192,
+              "content": "What is one thing Dr. Roses do NOT advise?",
+              "answer1": "Read lots of books to gain knowledge in every aspect",
+              "answer2": "Obtain good grades",
+              "answer3": "Start preparing for your future now",
+              "answer4": "Be able to write and speak well",
+              "correctAnswer": "A",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 193,
+              "content": "According to the notice, who can help freshman students?",
+              "answer1": "Roommate",
+              "answer2": "Residence hall mentors",
+              "answer3": "Upper class students",
+              "answer4": "Teacher’s assistants",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 194,
+              "content": "What is the purpose of the e-mail?",
+              "answer1": "To ask for Dr. Roses’ phone number",
+              "answer2": "To find out where he can find a service",
+              "answer3": "To inquire what types of scholarships being available",
+              "answer4": "To check the deadlines for the scholarships",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 195,
+              "content": "Where should Tomas check to solve his problem?",
+              "answer1": "His dormitory",
+              "answer2": "The library",
+              "answer3": "The school website",
+              "answer4": "The student resource center",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        },
+        {
+          "name": "Questions 196-200 refer to the letter, bill, and e-mail.",
+          "audio": null,
+          "content": "<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>The Wyndham Hotel</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">565 Kings Avenue</span><br><span style=\"font-size: large;\">New York, NY 40876</span><br><span style=\"font-size: large;\">Tel: 914-555-6655</span></p>\n<p><span style=\"font-size: large;\">Dear, Carl Jackson,</span></p>\n<p><span style=\"font-size: large;\">You can find an attachment with this letter which includes an itemized list of the expenses you incurred while staying at our hotel. The total will be charged to the credit card you used when you checked in. Thanks for using our express checkout service and your continued patronage of The Wyndham Hotel. We look forward to your next stay.</span></p>\n<p><span style=\"font-size: large;\">Attachment : a list of hotel expenses</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong>The Wyndham Hotel</strong></span></p>\n<p style=\"text-align: center;\"><span style=\"font-size: large;\">Tel: 914-555-6655</span></p>\n<p><span style=\"font-size: large;\">Guest name: Carl Jackson</span></p>\n<p><span style=\"font-size: large;\">Dates of stay: Arrival: January 12th&nbsp; &nbsp;Check-out : January 15th</span></p>\n<table>\n<tbody>\n<tr>\n<td width=\"331\">\n<p><span style=\"font-size: large;\">Standard room: 3 nights, $145 per night&nbsp;</span></p>\n</td>\n<td width=\"70\">\n<p><span style=\"font-size: large;\">$435.00</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"331\">\n<p><span style=\"font-size: large;\">Room Service: 2 meals</span></p>\n</td>\n<td width=\"70\">\n<p><span style=\"font-size: large;\">$55.00</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"331\">\n<p><span style=\"font-size: large;\">Dry Cleaning&nbsp;</span></p>\n</td>\n<td width=\"70\">\n<p><span style=\"font-size: large;\">$25.00</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"331\">\n<p><span style=\"font-size: large;\">Hotel shuttle: airport-hotel round trip&nbsp;</span></p>\n</td>\n<td width=\"70\">\n<p><span style=\"font-size: large;\">$30.00</span></p>\n</td>\n</tr>\n<tr>\n<td width=\"331\">\n<p><span style=\"font-size: large;\">Total&nbsp;</span></p>\n</td>\n<td width=\"70\">\n<p><span style=\"font-size: large;\">$545.00</span></p>\n</td>\n</tr>\n</tbody>\n</table>\n<p><span style=\"font-size: large;\"></span></p>\n<p><span style=\"font-size: large;\">If you have any questions, e-mail us without a moment’s hesitation. Thank you.</span></p>\n<p><span style=\"font-size: large;\">E-mail: customerservice@wyndhamhotel.com</span>&nbsp;</p>\n<p><span style=\"font-size: large;\"></span></p></div>\n<div class=\"reading-passage-block\"><p style=\"text-align: center;\"><span style=\"font-size: x-large;\"><strong></strong></span></p>\n<p><span style=\"font-size: large;\">To:&nbsp; &nbsp;&lt;customerservice@wyndhamhotel.com&gt;</span></p>\n<p><span style=\"font-size: large;\">From: &nbsp;&nbsp;Carl Jackson &lt;cjackson@unet.com&gt;</span></p>\n<p><span style=\"font-size: large;\">Date: &nbsp;&nbsp;January 18</span></p>\n<p><span style=\"font-size: large;\">Subject: &nbsp;&nbsp;Inaccurate Hotel Bill</span></p>\n<p><span style=\"font-size: large;\">&nbsp;</span></p>\n<p><span style=\"font-size: large;\">To Whom It May Concern:</span></p>\n<p><span style=\"font-size: large;\">I stayed at the Wyndham Hotel from January 12th to 15th. Because I was in a hurry to catch the 7 A.M. airport shuttle, I used the in-room express check-out on the television. At the time, I didn’t carefully review the charges. However, after receiving the itemized bill via mail at my office, I noticed an inaccurate charge.</span></p>\n<p><span style=\"font-size: large;\">At the time I made my reservation online, there was a promotion for online reservation for free shuttle service to and from the airport. However, my bill shows that I was charged for a round trip on the shuttle. Therefore, I would like the overcharged amount credited back to my company credit card.</span></p>\n<p><span style=\"font-size: large;\">As always, I had a pleasant stay at the Wyndham Hotel. I am sure this mistake was just an oversight. I appreciate your attention to this matter and I’m confident it will be resolved in a timely fashion.</span></p>\n<p><span style=\"font-size: large;\">Sincerely,</span><br><span style=\"font-size: large;\">Carl Jackson</span></p>\n<p><span style=\"font-size: large;\"></span></p></div>",
+          "images": [],
+          "questions": [
+            {
+              "orderNumber": 196,
+              "content": "What is the charge with which Mr. Jackson doesn’t agree?",
+              "answer1": "$25",
+              "answer2": "$30",
+              "answer3": "$55",
+              "answer4": "$435",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 197,
+              "content": "What is Mr. Jackson not charged on the itemized bill?",
+              "answer1": "Meals",
+              "answer2": "Transportation",
+              "answer3": "Laundry service",
+              "answer4": "Pay-per-view television",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 198,
+              "content": "What does Mr. Jackson request in his e-mail?",
+              "answer1": "An apology",
+              "answer2": "A free night’s stay at the hotel",
+              "answer3": "A complimentary meal",
+              "answer4": "A refund",
+              "correctAnswer": "D",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 199,
+              "content": "What is implied about Mr. Jackson?",
+              "answer1": "He was not happy with the dry cleaning service.",
+              "answer2": "He has stayed at the Wyndham Hotel on more than one occasion.",
+              "answer3": "He missed his flight home from New York.",
+              "answer4": "He does not plan to stay at the Wyndham Hotel in the future.",
+              "correctAnswer": "B",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            },
+            {
+              "orderNumber": 200,
+              "content": "What is implied about the Wyndham Hotel?",
+              "answer1": "The hotel doesn’t offer room service.",
+              "answer2": "The hotel is located very close to the airport.",
+              "answer3": "The hotel offered a special promotion for booking online.",
+              "answer4": "The hotel had only standard rooms available from January 12th to 15th.",
+              "correctAnswer": "C",
+              "image": null,
+              "audio": null,
+              "transcript": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

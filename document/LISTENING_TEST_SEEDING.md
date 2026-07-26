@@ -21,6 +21,7 @@ Tài liệu này là handoff cho các session sau. Quy trình chuẩn là:
 | Đăng ký dependency | `CoreLTToeic.Infrastructure/Helper/BuildServices.cs` |
 | Tự quét JSON và chạy seeder | `CoreLTToeic.UI/Program.cs` |
 | Sửa điểm 0 và dữ liệu lịch sử | `document/sql/fix-zero-toeic-scores.sql` |
+| Nối thêm Reading để thành đề 200 câu | `document/READING_TEST_SEEDING.md` |
 
 Ứng dụng tự quét tất cả file có tên:
 
@@ -226,7 +227,8 @@ dotnet run --project CoreLTToeic.UI/CoreLTToeic.UI.csproj
 Seeder dùng `title` làm khóa nhận diện.
 
 - Chưa có title: tạo đề mới.
-- Đã có title và đủ 100 câu: bỏ qua.
+- Đã có title và đủ 100 câu Listening thuộc Part 1–4: bỏ qua, kể cả khi đề
+  đã được nối thêm 100 câu Reading.
 - Đã có title, thiếu câu và chưa có kết quả người dùng: seeder xóa bản lỗi rồi tạo lại.
 - Đã có title, thiếu câu nhưng đã có kết quả người dùng: không xóa; ghi warning.
 
@@ -257,7 +259,9 @@ WHERE t.Title = @Title
 GROUP BY t.Id, t.Title, c.Name, t.TotalQuestions;
 ```
 
-Kết quả mong đợi: `TotalQuestions = 100`, `ActualQuestions = 100`.
+Kết quả mong đợi với đề Listening-only: `TotalQuestions = 100`,
+`ActualQuestions = 100`. Nếu đã append Reading theo
+`document/READING_TEST_SEEDING.md`, cả hai giá trị là `200`.
 
 ### Kiểm tra số câu từng Part
 
@@ -340,4 +344,3 @@ CoreLTToeic.Application/Business/UserResultService.cs
 - [ ] Kiểm tra transcript bị ẩn trước khi nộp.
 - [ ] Kiểm tra audio và transcript ở trang kết quả.
 - [ ] Kiểm tra bài trắng là `0/495`.
-
