@@ -61,13 +61,22 @@
         }
     </div>
 
-    @if (!string.IsNullOrEmpty(Answer.Transcript))
+    @if (!string.IsNullOrWhiteSpace(Answer.Transcript))
     {
-        <Collapse Style="margin-top:12px;" Bordered="false">
-            <Panel Header="Transcript" Key="transcript">
+        <div class="question-review-transcript">
+            <button type="button"
+                    class="question-review-transcript-toggle"
+                    aria-expanded="@_transcriptOpen"
+                    @onclick="ToggleTranscript">
+                <Icon Type="@(_transcriptOpen ? "up" : "down")"
+                      Theme="@IconThemeType.Outline" />
+                <span>Transcript</span>
+            </button>
+            @if (_transcriptOpen)
+            {
                 <div style="color:#434343;">@((MarkupString)(Answer.Transcript ?? ""))</div>
-            </Panel>
-        </Collapse>
+            }
+        </div>
     }
 
     @if (!string.IsNullOrEmpty(Answer.Explanation))
@@ -80,9 +89,55 @@
     }
 </Card>
 
+<style>
+    .question-review-transcript {
+        margin-top: 12px;
+        border-top: 1px solid #f0f0f0;
+        background: #fafafa;
+    }
+
+    .question-review-transcript-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 12px 16px;
+        border: 0;
+        background: transparent;
+        color: #262626;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .question-review-transcript-toggle:hover {
+        color: #1677ff;
+    }
+
+    .question-review-transcript > div {
+        padding: 0 16px 14px 40px;
+        line-height: 1.7;
+    }
+</style>
+
 @code {
     [Parameter, EditorRequired] public UserAnswerViewModel Answer { get; set; } = null!;
     [Parameter] public int QuestionNumber { get; set; }
+    [Parameter] public bool ExpandTranscript { get; set; }
+    [Parameter] public int ExpandTranscriptVersion { get; set; }
+
+    private bool _transcriptOpen;
+    private int _appliedExpansionVersion = -1;
+
+    protected override void OnParametersSet()
+    {
+        if (_appliedExpansionVersion == ExpandTranscriptVersion)
+            return;
+
+        _transcriptOpen = ExpandTranscript;
+        _appliedExpansionVersion = ExpandTranscriptVersion;
+    }
+
+    private void ToggleTranscript() => _transcriptOpen = !_transcriptOpen;
 
     private IEnumerable<KeyValuePair<string, string?>> Options =>
     [

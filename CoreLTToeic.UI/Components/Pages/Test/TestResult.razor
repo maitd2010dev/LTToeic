@@ -64,6 +64,28 @@ else
             <strong style="font-size:1.1rem;">Xem lại đáp án</strong>
         </Divider>
 
+        @if (_result.Answers.Any(answer => !string.IsNullOrWhiteSpace(answer.Transcript)))
+        {
+            <div class="tr-review-actions">
+                <span>
+                    <Icon Type="file-text" Theme="@IconThemeType.Outline" />
+                    Transcript
+                </span>
+                <div>
+                    <Button Size="@ButtonSize.Small"
+                            Icon="down"
+                            OnClick="() => SetAllTranscripts(true)">
+                        Mở tất cả
+                    </Button>
+                    <Button Size="@ButtonSize.Small"
+                            Icon="up"
+                            OnClick="() => SetAllTranscripts(false)">
+                        Thu gọn tất cả
+                    </Button>
+                </div>
+            </div>
+        }
+
         <div class="tr-review-root" id="toeic-result-review">
             <div class="tr-review-sticky">
                 <div class="tr-part-tabs">
@@ -110,7 +132,11 @@ else
                             {
                                 var questionNumber = _questionNumberById[answer.QuestionId];
                                 <div id="result-question-@questionNumber" class="tr-question-anchor">
-                                    <QuestionReviewItem Answer="answer" QuestionNumber="questionNumber" />
+                                    <QuestionReviewItem Answer="answer"
+                                                        QuestionNumber="questionNumber"
+                                                        ExpandTranscript="_expandAllTranscripts"
+                                                        ExpandTranscriptVersion="_transcriptExpansionVersion"
+                                                        @key="answer.QuestionId" />
                                 </div>
                             }
                         </section>
@@ -170,6 +196,32 @@ else
         position: relative;
         width: calc(50vw + 50% - 16px);
         margin-left: 0;
+    }
+
+    .tr-review-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+        padding: 10px 12px;
+        border: 1px solid #d6e4ff;
+        border-radius: 8px;
+        background: #f8fbff;
+    }
+
+    .tr-review-actions > span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #1B527A;
+        font-weight: 700;
+    }
+
+    .tr-review-actions > div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
     }
 
     .tr-review-sticky {
@@ -429,6 +481,8 @@ else
     private Dictionary<long, int> _questionNumberById = [];
     private Dictionary<int, string?> _partAudioByPart = [];
     private int _activePartNum;
+    private bool _expandAllTranscripts;
+    private int _transcriptExpansionVersion;
     private bool _reviewNavigationInitialized;
     private DotNetObjectReference<TestResult>? _reviewNavigationReference;
 
@@ -515,6 +569,12 @@ else
         await JS.InvokeVoidAsync(
             "eval",
             $"document.getElementById('result-question-{questionNumber}')?.scrollIntoView({{behavior:'smooth',block:'start'}})");
+    }
+
+    private void SetAllTranscripts(bool expanded)
+    {
+        _expandAllTranscripts = expanded;
+        _transcriptExpansionVersion++;
     }
 
     [JSInvokable]

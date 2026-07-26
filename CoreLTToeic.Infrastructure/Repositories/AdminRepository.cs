@@ -29,6 +29,9 @@ public class AdminRepository : IAdminRepository
     {
         using var ctx = await _factory.CreateDbContextAsync();
         var cutoff = DateTime.Today.AddDays(-6);
+        var currentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+        var firstMonth = currentMonth.AddMonths(-11);
+        var nextMonth = currentMonth.AddMonths(1);
 
         var totalUsers     = await ctx.AppUser.CountAsync();
         var totalTests     = await ctx.Tests.CountAsync();
@@ -43,6 +46,24 @@ public class AdminRepository : IAdminRepository
             .GroupBy(r => r.CompletedAt!.Value.Date)
             .Select(g => new { Date = g.Key, Count = g.Count() })
             .OrderBy(x => x.Date)
+            .ToListAsync();
+
+        var monthlyParticipantsRaw = await ctx.UserResults
+            .Where(r => r.AttemptStatus == AttemptStatus.Completed
+                && r.CompletedAt.HasValue
+                && r.CompletedAt.Value >= firstMonth
+                && r.CompletedAt.Value < nextMonth)
+            .GroupBy(r => new
+            {
+                r.CompletedAt!.Value.Year,
+                r.CompletedAt.Value.Month
+            })
+            .Select(g => new
+            {
+                g.Key.Year,
+                g.Key.Month,
+                Count = g.Select(r => r.UserId).Distinct().Count()
+            })
             .ToListAsync();
 
         var topTestsRaw = await ctx.Tests
@@ -61,6 +82,20 @@ public class AdminRepository : IAdminRepository
             })
             .ToList();
 
+        var monthlyParticipantDict = monthlyParticipantsRaw.ToDictionary(
+            x => (x.Year, x.Month),
+            x => x.Count);
+        var monthlyParticipantSeries = Enumerable.Range(0, 12)
+            .Select(i => firstMonth.AddMonths(i))
+            .Select(month => new MonthlyExamParticipantViewModel
+            {
+                Month = month.ToString("MM/yyyy"),
+                ParticipantCount = monthlyParticipantDict.GetValueOrDefault(
+                    (month.Year, month.Month),
+                    0)
+            })
+            .ToList();
+
         return new AdminDashboardViewModel
         {
             TotalUsers            = totalUsers,
@@ -69,6 +104,7 @@ public class AdminRepository : IAdminRepository
             AverageTotalScore     = (int)Math.Round(avgScore ?? 0),
             TotalCourses          = totalCourses,
             DailyActivity         = dailySeries,
+            MonthlyExamParticipants = monthlyParticipantSeries,
             TopTests              = topTestsRaw
                 .Select(t => new TopTestViewModel
                 {

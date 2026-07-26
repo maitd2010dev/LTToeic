@@ -19,18 +19,24 @@
         {
             <NavLink href="/khoa-hoc">Khóa học</NavLink>
         }
-        <span class="nav-link-disabled">Tài liệu</span>
     </nav>
     <div class="nav-user">
         @if (_isLoggedIn)
         {
-            <Dropdown Trigger="@(new[] { Trigger.Click })" Placement="Placement.BottomRight">
+            <Dropdown Trigger="@(new[] { Trigger.Hover })" Placement="Placement.BottomRight">
                 <Overlay>
                     <Menu>
                         <MenuItem Key="profile" OnClick="@(async () => await OpenProfileDrawer())">
                             <Icon Type="user" Theme="IconThemeType.Outline" />
                             <span>Thiết lập hồ sơ</span>
                         </MenuItem>
+                        @if (CanAccessCourses)
+                        {
+                            <MenuItem Key="my-courses" OnClick="@(() => Nav.NavigateTo("/khoa-hoc-cua-toi"))">
+                                <Icon Type="book" Theme="IconThemeType.Outline" />
+                                <span>Khóa học của tôi</span>
+                            </MenuItem>
+                        }
                         <MenuItem Key="history" OnClick="@(async () => await OpenHistoryDrawer())">
                             <Icon Type="history" Theme="IconThemeType.Outline" />
                             <span>Lịch sử thi</span>
@@ -108,7 +114,7 @@
 
 <Drawer Visible="_historyDrawerOpen"
         Title="@("Lịch sử thi")"
-        Width="1400"
+        Width="100vw"
         MaskClosable="false"
         OnClose="CloseDrawers">
     @if (_historyLoading)

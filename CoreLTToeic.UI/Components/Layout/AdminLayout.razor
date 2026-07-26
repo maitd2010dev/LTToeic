@@ -62,17 +62,10 @@
                 </ChildContent>
             </SubMenu>
 
-            <SubMenu Key="course">
-                <TitleTemplate>
-                    <Icon Type="book" Theme="IconThemeType.Outline" />
-                    <span>Khóa học</span>
-                </TitleTemplate>
-                <ChildContent>
-                    <MenuItem Key="course-list" OnClick="@(() => Nav.NavigateTo("/admin/quan-li-khoa-hoc"))">
-                        Khóa học
-                    </MenuItem>
-                </ChildContent>
-            </SubMenu>
+            <MenuItem Key="course" OnClick="@(() => Nav.NavigateTo("/admin/quan-li-khoa-hoc"))">
+                <Icon Type="book" Theme="IconThemeType.Outline" />
+                <span>Khóa học</span>
+            </MenuItem>
 
         </Menu>
 

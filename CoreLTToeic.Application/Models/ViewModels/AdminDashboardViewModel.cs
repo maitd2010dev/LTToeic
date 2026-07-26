@@ -8,6 +8,7 @@ public class AdminDashboardViewModel
     public int AverageTotalScore { get; set; }
     public int TotalCourses { get; set; }
     public List<DailyActivityViewModel> DailyActivity { get; set; } = [];
+    public List<MonthlyExamParticipantViewModel> MonthlyExamParticipants { get; set; } = [];
     public List<TopTestViewModel> TopTests { get; set; } = [];
 }
 
@@ -21,4 +22,10 @@ public class TopTestViewModel
 {
     public string TestTitle { get; set; } = string.Empty;
     public int AttemptCount { get; set; }
+}
+
+public class MonthlyExamParticipantViewModel
+{
+    public string Month { get; set; } = string.Empty;
+    public int ParticipantCount { get; set; }
 }
