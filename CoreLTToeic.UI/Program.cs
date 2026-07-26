@@ -116,6 +116,7 @@ app.MapPost("/api/auth/signin", async (
     var form = await request.ReadFormAsync();
     var username = form["username"].ToString();
     var password = form["password"].ToString();
+    var rememberMe = bool.TryParse(form["rememberMe"], out var shouldRemember) && shouldRemember;
 
     static string Err(string msg) => "/login?error=" + Uri.EscapeDataString(msg);
 
@@ -129,7 +130,7 @@ app.MapPost("/api/auth/signin", async (
     if (userManager.Options.SignIn.RequireConfirmedEmail && !await userManager.IsEmailConfirmedAsync(user))
         return Results.Redirect(Err("Email chưa được xác nhận, vui lòng kiểm tra hộp thư"));
 
-    var result = await signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
+    var result = await signInManager.PasswordSignInAsync(user, password, isPersistent: rememberMe, lockoutOnFailure: false);
     if (result.IsLockedOut)
         return Results.Redirect(Err("Tài khoản đã bị khóa. Vui lòng liên hệ quản trị viên."));
 

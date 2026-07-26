@@ -16,5 +16,7 @@ namespace CoreLTToeic.Application.Models.EditModels
 
         [Required(ErrorMessage = MessageConstants.FIELD_REQUIRED)]
         public string Password { get; set; }
+
+        public bool RememberMe { get; set; }
     }
 }

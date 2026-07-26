@@ -6,8 +6,9 @@
 
 @* Hidden form POST đến minimal API để tạo auth cookie đúng cách trong Blazor Server *@
 <form id="signin-form" method="post" action="/api/auth/signin" style="display:none">
-    <input id="signin-username" name="username" />
-    <input id="signin-password" name="password" />
+    <input id="signin-username" name="username" autocomplete="username" />
+    <input id="signin-password" name="password" type="password" autocomplete="current-password" />
+    <input id="signin-remember" name="rememberMe" type="hidden" value="false" />
 </form>
 
 <div class="auth-page">
@@ -33,6 +34,12 @@
             <FormItem Label="Mật khẩu" Required>
                 <InputPassword @bind-Value="_model.Password" Placeholder="Nhập mật khẩu" Size="@InputSize.Large" />
             </FormItem>
+            <div class="auth-remember">
+                <label>
+                    <input type="checkbox" @bind="_model.RememberMe" />
+                    <span>Ghi nhớ đăng nhập</span>
+                </label>
+            </div>
             <FormItem Style="margin-bottom:0">
                 <Button Type="ButtonType.Primary" HtmlType="submit" Block Size="@AntDesign.ButtonSize.Large"
                         Style="background:#1B527A;border-color:#1B527A;font-weight:600;height:44px">
@@ -73,6 +80,7 @@
         await JS.InvokeVoidAsync("eval",
             $"document.getElementById('signin-username').value={System.Text.Json.JsonSerializer.Serialize(_model.UserName)};" +
             $"document.getElementById('signin-password').value={System.Text.Json.JsonSerializer.Serialize(_model.Password)};" +
+            $"document.getElementById('signin-remember').value={System.Text.Json.JsonSerializer.Serialize(_model.RememberMe)};" +
             "document.getElementById('signin-form').submit();");
     }
 }
