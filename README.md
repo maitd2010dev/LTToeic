@@ -1,1 +1,1 @@
-Link demo ttps://lttoeic-htfcexatgmd9hqar.southeastasia-01.azurewebsites.net/
+Link demo https://lttoeic-htfcexatgmd9hqar.southeastasia-01.azurewebsites.net/
